@@ -12,7 +12,7 @@ const chain = {
   name: process.env.WEB3_NAME || "Ganache",
   currency: process.env.WEB3_CURRENCY || "ETH", // Ether is the currency on Ganache by default
   explorerUrl: process.env.WEB3_EXPLORER_URL || "", // No explorer for local Ganache network
-  rpcUrl: process.env.WEB3_RPC_URL || "HTTP://127.0.0.1:7545", // Default RPC URL for Ganache
+  rpcUrl: process.env.WEB3_RPC_URL || 'http://3.109.120.65:8545', // Default RPC URL for Ganache
 };
 
 // 3. Create modal

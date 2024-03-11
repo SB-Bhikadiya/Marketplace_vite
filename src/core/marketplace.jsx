@@ -66,7 +66,10 @@ export const MarketplaceProvider = ({ children }) => {
   }
 
   async function provideNFTFactory() {
+    console.log('up');
+    
     if (walletProvider) {
+      console.log('here');
       const ethersProvider = new BrowserProvider(walletProvider);
       contextValue.signer = await ethersProvider.getSigner();
       contextValue.factory = NFTFactoryContract.connect(contextValue.signer);

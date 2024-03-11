@@ -1,10 +1,9 @@
 import React, { useContext, useState } from "react";
 import { createGlobalStyle } from "styled-components";
-import Clock from "../components/Clock";
-import Footer from "../components/footer";
-import { pinFileToIPFS } from "../../core/nft/pinata";
-import { MarketplaceContext } from "../../core/marketplace";
 import { ADDRESS_KEY } from "../../constants/keys";
+import { MarketplaceContext } from "../../core/marketplace";
+import { pinFileToIPFS } from "../../core/nft/pinata";
+import Footer from "../components/footer";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -58,12 +57,13 @@ const CreateCollection = () => {
     item_image: "",
   });
   const createCollection = async () => {
-    const factory= provideNFTFactory();
+    const factory= await provideNFTFactory();
+    console.log(factory);
     if (factory) {
-      const tx =await factory.createNFTCollection(data.item_name,data.item_symbol,data.item_image,data.item_royalties,localStorage.getItem(ADDRESS_KEY));
-      await tx.wait();
+      const tx =await factory.createNFTCollection(data.item_name,data.item_symbol,data.item_image,parseInt(data.item_royalties)*1000,localStorage.getItem(ADDRESS_KEY));
+      const receipt = await tx.wait();
+      console.log(receipt);
     }
-    console.log(data);
   };
   const onChangeName = (e) => {
     setData({ ...data, item_name: e.target.value });
@@ -174,7 +174,7 @@ const CreateCollection = () => {
                   name="item_royalties"
                   id="item_royalties"
                   className="form-control"
-                  placeholder="suggested: 0, 10%, 20%, 30%. Maximum is 70%"
+                  placeholder="suggested: 0, 1%, 2%, 3%. Maximum is 9%"
                 />
 
                 <div className="spacer-10"></div>
