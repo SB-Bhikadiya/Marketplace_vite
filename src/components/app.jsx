@@ -61,6 +61,7 @@ import { createGlobalStyle } from "styled-components";
 import { PAGE_ROUTES } from "../constants/routes";
 import { MarketplaceProvider } from "../core/marketplace";
 import Web3ModalProvider from "../core/modal";
+import CreateCollection from "./pages/CreateCollection";
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -131,6 +132,8 @@ const App = () => {
               <News path={PAGE_ROUTES.NEWS_PATH} />
               <NewsSingle path={PAGE_ROUTES.NEWS_SINGLE_PATH} />
               <Create path={PAGE_ROUTES.CREATE_PATH} />
+              <CreateCollection path={PAGE_ROUTES.CREATE_COLLECTION_PATH} />
+
               <Creategrey path={PAGE_ROUTES.CREATE_GREY_PATH} />
               <Create2 path={PAGE_ROUTES.CREATE_2_PATH} />
               <Create3 path={PAGE_ROUTES.CREATE_3_PATH} />

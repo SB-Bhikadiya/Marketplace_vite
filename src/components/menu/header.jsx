@@ -578,6 +578,9 @@ const Header = function () {
                             <NavLink to={PAGE_ROUTES.CREATE_PATH}>
                               Create
                             </NavLink>
+                            <NavLink to={PAGE_ROUTES.CREATE_COLLECTION_PATH}>
+                              Create Collection
+                            </NavLink>
                             <NavLink to={PAGE_ROUTES.CREATE_GREY_PATH}>
                               Create Grey
                             </NavLink>

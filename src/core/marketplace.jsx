@@ -19,6 +19,7 @@ export const MarketplaceProvider = ({ children }) => {
     localStorage.setItem(ADDRESS_KEY, address);
     localStorage.setItem(CHAIN_ID_KEY, `${chainId}`);
     localStorage.setItem(CONNECTION_KEY, `${isConnected}`);
+    
     return () => {};
   }, [address, chainId, isConnected]);
 

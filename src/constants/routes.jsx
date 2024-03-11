@@ -51,6 +51,7 @@ export const PAGE_ROUTES = {
   GET_NEWS_SINGLE_PATH: (id) => `/news/${id}`,
 
   CREATE_PATH: "/create",
+  CREATE_COLLECTION_PATH:"/create-collection",
   CREATE_GREY_PATH: "/create-grey",
   CREATE_2_PATH: "/create2",
   CREATE_3_PATH: "/create3",
