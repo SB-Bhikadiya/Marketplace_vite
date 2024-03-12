@@ -1,6 +1,8 @@
+import { navigate } from "@reach/router";
 import React, { useContext, useState } from "react";
 import { createGlobalStyle } from "styled-components";
 import { ADDRESS_KEY } from "../../constants/keys";
+import { PAGE_ROUTES } from "../../constants/routes";
 import { MarketplaceContext } from "../../core/marketplace";
 import { pinFileToIPFS } from "../../core/nft/pinata";
 import Footer from "../components/footer";
@@ -49,7 +51,7 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const CreateCollection = () => {
-  const {provideNFTFactory} = useContext(MarketplaceContext);
+  const { provideNFTFactory } = useContext(MarketplaceContext);
   const [data, setData] = useState({
     item_name: "",
     item_symbol: "",
@@ -57,12 +59,18 @@ const CreateCollection = () => {
     item_image: "",
   });
   const createCollection = async () => {
-    const factory= await provideNFTFactory();
-    console.log(factory);
+    const factory = await provideNFTFactory();
     if (factory) {
-      const tx =await factory.createNFTCollection(data.item_name,data.item_symbol,data.item_image,parseInt(data.item_royalties)*1000,localStorage.getItem(ADDRESS_KEY));
+      const tx = await factory.createNFTCollection(
+        data.item_name,
+        data.item_symbol,
+        data.item_image,
+        parseInt(data.item_royalties) * 1000,
+        localStorage.getItem(ADDRESS_KEY)
+      );
       const receipt = await tx.wait();
       console.log(receipt);
+      navigate(PAGE_ROUTES.CREATE_PATH);
     }
   };
   const onChangeName = (e) => {
@@ -123,7 +131,7 @@ const CreateCollection = () => {
                 <h5>Upload file</h5>
                 <div className="d-create-file">
                   <p id="file_name">PNG, JPG, GIF, WEBP or MP4. Max 200mb.</p>
-                  
+
                   <div className="browse">
                     <input
                       type="button"
@@ -191,23 +199,38 @@ const CreateCollection = () => {
           </div>
 
           <div className="col-lg-3 col-sm-6 col-xs-12">
-          <div className='itm' >
-      <div className="nft_coll">
-          <div className="nft_wrap">
-              <span>{data.item_image && <img src={data.item_image} className="lazy img-fluid" alt=""/>}</span>
-          </div>
-          <div className="nft_coll_pp">
-              <span ><img className="lazy" src={'./img/author/author-1.jpg'} alt=""/></span>
-              <i className="fa fa-check"></i>
-          </div>
-          <div className="nft_coll_info">
-              <span ><h4>{ data.item_name }</h4></span>
-              <span>{ data.item_symbol }</span>
-              <span>{ data.item_royalties  || 0 } %</span>
-
-          </div>
-      </div>
-    </div>
+            <div className="itm">
+              <div className="nft_coll">
+                <div className="nft_wrap">
+                  <span>
+                    {data.item_image && (
+                      <img
+                        src={data.item_image}
+                        className="lazy img-fluid"
+                        alt=""
+                      />
+                    )}
+                  </span>
+                </div>
+                <div className="nft_coll_pp">
+                  <span>
+                    <img
+                      className="lazy"
+                      src={"./img/author/author-1.jpg"}
+                      alt=""
+                    />
+                  </span>
+                  <i className="fa fa-check"></i>
+                </div>
+                <div className="nft_coll_info">
+                  <span>
+                    <h4>{data.item_name}</h4>
+                  </span>
+                  <span>{data.item_symbol}</span>
+                  <span>{data.item_royalties || 0} %</span>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </section>

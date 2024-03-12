@@ -1,6 +1,11 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Slider from "react-slick";
 import { createGlobalStyle } from "styled-components";
-import Clock from "../components/Clock";
+import { settings } from "../../constants";
+import { COLLECTION_ENDPOINT } from "../../constants/endpoints";
+import { ADDRESS_KEY } from "../../constants/keys";
+import { AxiosInstance } from "../../core/axios";
+import { pinFileToIPFS } from "../../core/nft/pinata";
 import Footer from "../components/footer";
 
 const GlobalStyles = createGlobalStyle`
@@ -47,13 +52,76 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const Createpage = () => {
-  const [files, setFiles] = useState([]);
+  const [metadata, setMetadata] = useState({
+    name: "",
+    description: "",
+    image: "",
+    external_url: "",
+    attributes: [],
+    animation_url: "",
+    background_color: "",
+    collection_address: "",
+    collection_name: "",
+  });
+  const [collections, setCollections] = useState([]);
 
-  const onChange = (e) => {
-    var files = e.target.files;
-    var filesArr = Array.prototype.slice.call(files);
-    document.getElementById("file_name").style.display = "none";
-    setFiles([...filesArr]);
+  useEffect(() => {
+    const getUsersCollections = () => {
+      AxiosInstance.get(COLLECTION_ENDPOINT, {
+        params: { creator: localStorage.getItem(ADDRESS_KEY) },
+      }).then((response) => {
+        setCollections(response.data || []);
+      });
+    };
+    getUsersCollections();
+  }, []);
+
+  const handleChange = (e, index) => {
+    const { name, value } = e.target;
+    if (name === "trait_type" || name === "value") {
+      const updatedAttributes = [...metadata.attributes];
+      updatedAttributes[index][name] = value;
+      setMetadata({ ...metadata, attributes: updatedAttributes });
+    } else {
+      setMetadata({ ...metadata, [name]: value });
+    }
+  };
+  const onChangeImage = async (e) => {
+    try {
+      const formData = new FormData();
+
+      // Get the selected file from the file input
+      const file = e.target.files[0];
+      const pinataOptions = JSON.stringify({
+        cidVersion: 0,
+      });
+
+      formData.append("file", file);
+      formData.append("pinataOptions", pinataOptions);
+
+      const response = await pinFileToIPFS(formData);
+      setMetadata({ ...metadata, image: response.pinataUrl });
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const handleAddAttribute = () => {
+    setMetadata({
+      ...metadata,
+      attributes: [...metadata.attributes, { trait_type: "", value: "" }],
+    });
+  };
+
+  const handleRemoveAttribute = (index) => {
+    const updatedAttributes = [...metadata.attributes];
+    updatedAttributes.splice(index, 1);
+    setMetadata({ ...metadata, attributes: updatedAttributes });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log("Form submitted:", metadata);
   };
 
   return (
@@ -77,16 +145,13 @@ const Createpage = () => {
       <section className="container">
         <div className="row">
           <div className="col-lg-7 offset-lg-1 mb-5">
-            <form id="form-create-item" className="form-border" action="#">
+            <form onSubmit={handleSubmit}>
+              {/* Metadata fields */}
               <div className="field-set">
                 <h5>Upload file</h5>
                 <div className="d-create-file">
                   <p id="file_name">PNG, JPG, GIF, WEBP or MP4. Max 200mb.</p>
-                  {files.map((x, index) => (
-                    <p key={index}>
-                      PNG, JPG, GIF, WEBP or MP4. Max 200mb. {x.name}
-                    </p>
-                  ))}
+
                   <div className="browse">
                     <input
                       type="button"
@@ -98,73 +163,161 @@ const Createpage = () => {
                       id="upload_file"
                       type="file"
                       multiple
-                      onChange={onChange}
+                      onChange={onChangeImage}
                     />
                   </div>
                 </div>
-
-                <div className="spacer-single"></div>
-
-                <h5>Title</h5>
+                <div className="spacer-10"></div>
+              </div>
+              <div className="form-group">
+                <h5>Name</h5>
                 <input
+                  className="form-control"
                   type="text"
-                  name="item_title"
-                  id="item_title"
-                  className="form-control"
-                  placeholder="e.g. 'Crypto Funk"
-                />
-
-                <div className="spacer-10"></div>
-
-                <h5>Description</h5>
-                <textarea
-                  data-autoresize
-                  name="item_desc"
-                  id="item_desc"
-                  className="form-control"
-                  placeholder="e.g. 'This is very limited item'"
-                ></textarea>
-
-                <div className="spacer-10"></div>
-
-                <h5>Price</h5>
-                <input
-                  type="text"
-                  name="item_price"
-                  id="item_price"
-                  className="form-control"
-                  placeholder="enter price for one item (ETH)"
-                />
-
-                <div className="spacer-10"></div>
-
-                <h5>Royalties</h5>
-                <input
-                  type="text"
-                  name="item_royalties"
-                  id="item_royalties"
-                  className="form-control"
-                  placeholder="suggested: 0, 10%, 20%, 30%. Maximum is 70%"
-                />
-
-                <div className="spacer-10"></div>
-
-                <input
-                  type="button"
-                  id="submit"
-                  className="btn-main"
-                  value="Create Item"
+                  name="name"
+                  value={metadata.name}
+                  onChange={handleChange}
                 />
               </div>
+              <div className="form-group">
+                <h5>Description</h5>
+                <textarea
+                  className="form-control"
+                  name="description"
+                  value={metadata.description}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <h5>Image</h5>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="image"
+                  value={metadata.image}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <h5>External URL</h5>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="external_url"
+                  value={metadata.external_url}
+                  onChange={handleChange}
+                />
+              </div>
+              {/* Attribute fields */}
+              {metadata.attributes.map((attribute, index) => (
+                <div key={index}>
+                  <div className="form-group">
+                    <h5>Trait Type</h5>
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="trait_type"
+                      value={attribute.trait_type}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                  </div>
+                  <div className="form-group">
+                    <h5>Trait Value</h5>
+                    <input
+                      className="form-control"
+                      type="text"
+                      name="value"
+                      value={attribute.value}
+                      onChange={(e) => handleChange(e, index)}
+                    />
+                  </div>
+                  <button
+                    className="btn-main m-2"
+                    type="button"
+                    onClick={() => handleRemoveAttribute(index)}
+                  >
+                    <i className="fa fa-trash"></i>
+                  </button>
+                </div>
+              ))}
+              <button
+                className="btn-main m-2"
+                type="button"
+                onClick={handleAddAttribute}
+              >
+                <i className="fa fa-plus"></i>
+              </button>
+              {/* Other fields */}
+              <div className="form-group">
+                <h5>Animation URL</h5>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="animation_url"
+                  value={metadata.animation_url}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="form-group">
+                <h5>Background Color</h5>
+                <input
+                  className="form-control"
+                  type="color"
+                  name="background_color"
+                  value={metadata.background_color}
+                  onChange={handleChange}
+                />
+              </div>
+              <div className="nft">
+                <Slider {...settings}>
+                  {collections &&
+                    collections.map((collection, index) => {
+                      return (
+                        <div className="itm" key={index}>
+                          <div className="nft_coll">
+                            <div className="nft_wrap">
+                              <span>
+                                <img
+                                  src={collection.image}
+                                  className="lazy img-fluid"
+                                  alt=""
+                                />
+                              </span>
+                            </div>
+                            <div className="nft_coll_info py-2">
+                              <span onClick={() => {}}>
+                                <h4>{collection.name}</h4>
+                              </span>
+                              <span>{collection.symbol}</span>
+                            </div>
+                          </div>
+                        </div>
+                      );
+                    })}
+                </Slider>
+              </div>
+
+              <button className="btn-main" type="submit">
+                Create NFT
+              </button>
             </form>
           </div>
 
           <div className="col-lg-3 col-sm-6 col-xs-12">
             <h5>Preview item</h5>
-            <div className="nft__item m-0">
+            <div
+              className="nft__item m-0"
+              style={
+                metadata.background_color
+                  ? { backgroundColor: metadata.background_color }
+                  : {}
+              }
+            >
+              {/* 
               <div className="de_countdown">
                 <Clock deadline="December, 30, 2021" />
               </div>
+               */}
               <div className="author_list_pp">
                 <span>
                   <img
@@ -177,17 +330,19 @@ const Createpage = () => {
               </div>
               <div className="nft__item_wrap">
                 <span>
-                  <img
-                    src="./img/collections/coll-item-3.jpg"
-                    id="get_file_2"
-                    className="lazy nft__item_preview"
-                    alt=""
-                  />
+                  {metadata.image && (
+                    <img
+                      src={metadata.image}
+                      id="get_file_2"
+                      className="lazy nft__item_preview"
+                      alt=""
+                    />
+                  )}
                 </span>
               </div>
               <div className="nft__item_info">
                 <span>
-                  <h4>Pinky Ocean</h4>
+                  <h4>{metadata.name}</h4>
                 </span>
                 <div className="nft__item_price">
                   0.08 ETH<span>1/20</span>
@@ -198,6 +353,17 @@ const Createpage = () => {
                 <div className="nft__item_like">
                   <i className="fa fa-heart"></i>
                   <span>50</span>
+                </div>
+
+                <div className="row mt-5">
+                  {metadata.attributes.map((attribute, index) => (
+                    <div className="col-lg-4 col-md-6 col-sm-6" key={index}>
+                      <div className="nft_attr">
+                        <h5>{attribute.trait_type}</h5>
+                        <h4>{attribute.value}</h4>
+                      </div>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
