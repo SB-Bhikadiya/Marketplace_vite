@@ -1,11 +1,26 @@
 import { navigate } from "@reach/router";
-import React, { useContext, useState } from "react";
+import  { useContext } from "react";
 import { createGlobalStyle } from "styled-components";
 import { ADDRESS_KEY } from "../../constants/keys";
 import { PAGE_ROUTES } from "../../constants/routes";
 import { MarketplaceContext } from "../../core/marketplace";
 import { pinFileToIPFS } from "../../core/nft/pinata";
 import Footer from "../components/footer";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
+
+import useAlert from "../components/Alert";
+
+
+const validationSchema = Yup.object().shape({
+  item_name: Yup.string().required('Collection Name is required'),
+  item_symbol: Yup.string().required('Collection Symbol is required'),
+  item_royalties: Yup.number()
+    .required('Royalties is required')
+    .min(0, 'Royalties must be at least 0')
+    .max(9, 'Maximum royalties allowed is 9'),
+  item_image: Yup.string().required('File is required'),
+});
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -52,54 +67,61 @@ const GlobalStyles = createGlobalStyle`
 
 const CreateCollection = () => {
   const { provideNFTFactory } = useContext(MarketplaceContext);
-  const [data, setData] = useState({
-    item_name: "",
-    item_symbol: "",
-    item_royalties: "",
-    item_image: "",
-  });
+  const { showAlert, AlertComponent ,hideAlert} = useAlert();
+
   const createCollection = async () => {
-    const factory = await provideNFTFactory();
-    if (factory) {
-      const tx = await factory.createNFTCollection(
-        data.item_name,
-        data.item_symbol,
-        data.item_image,
-        parseInt(data.item_royalties) * 1000,
-        localStorage.getItem(ADDRESS_KEY)
-      );
-      const receipt = await tx.wait();
-      console.log(receipt);
-      navigate(PAGE_ROUTES.CREATE_PATH);
+    try {
+      const factory = await provideNFTFactory();
+      if (factory) {
+        const tx = await factory.createNFTCollection(
+          formik.values.item_name,
+          formik.values.item_symbol,
+          formik.values.item_image,
+          parseInt(formik.values.item_royalties) * 1000,
+          localStorage.getItem(ADDRESS_KEY)
+        );
+        const receipt = await tx.wait();
+        console.log(receipt);
+        navigate(PAGE_ROUTES.CREATE_PATH);
+      }
+    } catch (error) {
+      console.log(error);
     }
   };
-  const onChangeName = (e) => {
-    setData({ ...data, item_name: e.target.value });
-  };
 
-  const onChangeSymbol = (e) => {
-    setData({ ...data, item_symbol: e.target.value });
-  };
 
-  const onChangeRoyalty = (e) => {
-    setData({ ...data, item_royalties: e.target.value });
-  };
+  const allowedTypes = ['image/png', 'image/jpeg', 'image/gif', 'image/webp', 'video/mp4'];
+  const maxSizeInBytes = 20 * 1024 * 1024; // 200 MB
+  const formik = useFormik({
+    initialValues: {
+      item_name: '',
+      item_symbol: '',
+      item_royalties: '',
+      item_image: '',
+    },
+    validationSchema,
+    onSubmit: createCollection,
+  });
 
   const onChangeImage = async (e) => {
     try {
-      const formData = new FormData();
+      if (allowedTypes.includes(e.target.files[0].type)  && e.target.files[0].size < maxSizeInBytes) {
+        hideAlert();
+        const formData = new FormData();
+        const file = e.target.files[0];
+        formData.append("file", file);
 
-      // Get the selected file from the file input
-      const file = e.target.files[0];
-      formData.append("file", file);
+        const pinataOptions = JSON.stringify({
+          cidVersion: 0,
+        });
+        formData.append("pinataOptions", pinataOptions);
 
-      const pinataOptions = JSON.stringify({
-        cidVersion: 0,
-      });
-      formData.append("pinataOptions", pinataOptions);
-
-      const response = await pinFileToIPFS(formData);
-      setData({ ...data, item_image: response.pinataUrl });
+        const response = await pinFileToIPFS(formData);
+        formik.setFieldValue('item_image', response.pinataUrl);
+      } else {
+        console.log('ere');
+        showAlert('danger', 'File should be PNG, JPG, GIF, WEBP or MP4. Max 20mb.');
+      }
     } catch (error) {
       console.log(error);
     }
@@ -107,6 +129,7 @@ const CreateCollection = () => {
 
   return (
     <div>
+   
       <GlobalStyles />
       <section
         className="jumbotron breadcumb no-bg"
@@ -116,7 +139,7 @@ const CreateCollection = () => {
           <div className="container">
             <div className="row m-10-hor">
               <div className="col-12">
-                <h1 className="text-center">Create</h1>
+                <h1 className="text-center">Create Collection</h1>
               </div>
             </div>
           </div>
@@ -124,78 +147,88 @@ const CreateCollection = () => {
       </section>
 
       <section className="container">
+
         <div className="row">
           <div className="col-lg-7 offset-lg-1 mb-5">
-            <form id="form-create-item" className="form-border" action="#">
-              <div className="field-set">
-                <h5>Upload file</h5>
-                <div className="d-create-file">
-                  <p id="file_name">PNG, JPG, GIF, WEBP or MP4. Max 200mb.</p>
+          <form id="form-create-item" className="form-border" onSubmit={formik.handleSubmit}>
+        <h5>Upload file</h5>
+        <div className="d-create-file">
+          <p id="file_name">PNG, JPG, GIF, WEBP or MP4. Max 20mb.</p>
+          <div className="browse">
+            <input
+              type="button"
+              id="get_file"
+              className="btn-main"
+              value="Browse"
+            />
+            <input
+              id="upload_file"
+              type="file"
+              multiple
+              onChange={onChangeImage}
+            />
+          </div>
+        </div>
+        {AlertComponent && <AlertComponent />}
 
-                  <div className="browse">
-                    <input
-                      type="button"
-                      id="get_file"
-                      className="btn-main"
-                      value="Browse"
-                    />
-                    <input
-                      id="upload_file"
-                      type="file"
-                      multiple
-                      onChange={onChangeImage}
-                    />
-                  </div>
-                </div>
-                <div className="spacer-10"></div>
+        {formik.touched.item_image && formik.errors.item_image && (
+          <div className="error-message">{formik.errors.item_image}</div>
+        )}
+        <div className="spacer-10"></div>
 
-                <h5>Name</h5>
-                <input
-                  type="text"
-                  name="item_name"
-                  value={data.item_name}
-                  onChange={onChangeName}
-                  id="item_name"
-                  className="form-control"
-                  placeholder="Enter Your Collection Name"
-                />
-                <div className="spacer-10"></div>
+        <h5>Name</h5>
+        <input
+          type="text"
+          name="item_name"
+          value={formik.values.item_name}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          className="form-control"
+          placeholder="Enter Your Collection Name"
+        />
+        {formik.touched.item_name && formik.errors.item_name && (
+          <div className="error-message">{formik.errors.item_name}</div>
+        )}
+        <div className="spacer-10"></div>
 
-                <h5>Symbol</h5>
-                <input
-                  value={data.item_symbol}
-                  onChange={onChangeSymbol}
-                  type="text"
-                  name="item_symbol"
-                  id="item_symbol"
-                  className="form-control"
-                  placeholder="Enter your collection symbol"
-                />
+        <h5>Symbol</h5>
+        <input
+          value={formik.values.item_symbol}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          type="text"
+          name="item_symbol"
+          className="form-control"
+          placeholder="Enter your collection symbol"
+        />
+        {formik.touched.item_symbol && formik.errors.item_symbol && (
+          <div className="error-message">{formik.errors.item_symbol}</div>
+        )}
+        <div className="spacer-10"></div>
 
-                <div className="spacer-10"></div>
+        <h5>Royalties</h5>
+        <input
+          value={formik.values.item_royalties}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          type="text"
+          name="item_royalties"
+          className="form-control"
+          placeholder="suggested: 0, 1%, 2%, 3%. Maximum is 9%"
+        />
+        {formik.touched.item_royalties && formik.errors.item_royalties && (
+          <div className="error-message">{formik.errors.item_royalties}</div>
+        )}
+        <div className="spacer-10"></div>
 
-                <h5>Royalties</h5>
-                <input
-                  value={data.item_royalties}
-                  onChange={onChangeRoyalty}
-                  type="text"
-                  name="item_royalties"
-                  id="item_royalties"
-                  className="form-control"
-                  placeholder="suggested: 0, 1%, 2%, 3%. Maximum is 9%"
-                />
-
-                <div className="spacer-10"></div>
-
-                <input
-                  type="button"
-                  id="submit"
-                  className="btn-main"
-                  onClick={createCollection}
-                  value="Create Collection"
-                />
-              </div>
-            </form>
+        <input
+          type="button"
+          id="submit"
+          className="btn-main"
+          onClick={formik.handleSubmit}
+          value="Create Collection"
+        />
+      </form>
           </div>
 
           <div className="col-lg-3 col-sm-6 col-xs-12">
@@ -203,9 +236,9 @@ const CreateCollection = () => {
               <div className="nft_coll">
                 <div className="nft_wrap">
                   <span>
-                    {data.item_image && (
+                    {formik.values.item_image && (
                       <img
-                        src={data.item_image}
+                        src={formik.values.item_image}
                         className="lazy img-fluid"
                         alt=""
                       />
@@ -224,10 +257,10 @@ const CreateCollection = () => {
                 </div>
                 <div className="nft_coll_info">
                   <span>
-                    <h4>{data.item_name}</h4>
+                    <h4>{formik.values.item_name}</h4>
                   </span>
-                  <span>{data.item_symbol}</span>
-                  <span>{data.item_royalties || 0} %</span>
+                  <span className="me-3">{formik.values.item_symbol}</span>
+                  <span>{formik.values.item_royalties || 0} %</span>
                 </div>
               </div>
             </div>
