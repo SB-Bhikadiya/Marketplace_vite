@@ -53,7 +53,7 @@ const CarouselNewRedux = () => {
                       <img
                         className="lazy"
                         src={api.baseUrl + nft.author.avatar}
-                        alt=""
+                        alt={api.baseUrl + nft.author.avatar}
                       />
                       <i className="fa fa-check"></i>
                     </span>
@@ -65,10 +65,10 @@ const CarouselNewRedux = () => {
                     <Outer>
                       <span>
                         <img
-                          src={api.baseUrl + nft.preview_image.url}
+                          src={api.baseUrl + nft.preview_image}
                           className="lazy nft__item_preview"
                           onLoad={onImgLoad}
-                          alt=""
+                          alt={api.baseUrl + nft.preview_image}
                         />
                       </span>
                     </Outer>

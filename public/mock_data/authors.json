@@ -59,70 +59,7 @@
         "published_at": "2021-11-04T13:34:54.734Z",
         "created_at": "2021-11-04T13:34:10.002Z",
         "updated_at": "2021-11-30T15:42:09.579Z",
-        "preview_image": {
-          "id": 41,
-          "name": "big-1.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 1920,
-          "height": 1920,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_big-1.jpg",
-              "hash": "thumbnail_big_1_5e0d3a105a",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 156,
-              "height": 156,
-              "size": 10.23,
-              "path": null,
-              "url": "/uploads/thumbnail_big_1_5e0d3a105a.jpg"
-            },
-            "large": {
-              "name": "large_big-1.jpg",
-              "hash": "large_big_1_5e0d3a105a",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 1000,
-              "height": 1000,
-              "size": 235.77,
-              "path": null,
-              "url": "/uploads/large_big_1_5e0d3a105a.jpg"
-            },
-            "medium": {
-              "name": "medium_big-1.jpg",
-              "hash": "medium_big_1_5e0d3a105a",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 750,
-              "height": 750,
-              "size": 143.9,
-              "path": null,
-              "url": "/uploads/medium_big_1_5e0d3a105a.jpg"
-            },
-            "small": {
-              "name": "small_big-1.jpg",
-              "hash": "small_big_1_5e0d3a105a",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 500,
-              "height": 500,
-              "size": 75.02,
-              "path": null,
-              "url": "/uploads/small_big_1_5e0d3a105a.jpg"
-            }
-          },
-          "hash": "big_1_5e0d3a105a",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 511.06,
-          "url": "/uploads/big_1_5e0d3a105a.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:50.521Z",
-          "updated_at": "2021-11-02T15:12:50.539Z"
-        }
+        "preview_image": "/uploads/big_1_5e0d3a105a.jpg"
       },
       {
         "id": 16,
@@ -147,59 +84,7 @@
         "published_at": "2021-11-06T20:58:50.186Z",
         "created_at": "2021-11-06T20:58:32.152Z",
         "updated_at": "2021-11-30T15:42:09.579Z",
-        "preview_image": {
-          "id": 55,
-          "name": "crs-4.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 1000,
-          "height": 1000,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_crs-4.jpg",
-              "hash": "thumbnail_crs_4_697e6e1a08",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 156,
-              "height": 156,
-              "size": 6.92,
-              "path": null,
-              "url": "/uploads/thumbnail_crs_4_697e6e1a08.jpg"
-            },
-            "medium": {
-              "name": "medium_crs-4.jpg",
-              "hash": "medium_crs_4_697e6e1a08",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 750,
-              "height": 750,
-              "size": 152.99,
-              "path": null,
-              "url": "/uploads/medium_crs_4_697e6e1a08.jpg"
-            },
-            "small": {
-              "name": "small_crs-4.jpg",
-              "hash": "small_crs_4_697e6e1a08",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 500,
-              "height": 500,
-              "size": 66.84,
-              "path": null,
-              "url": "/uploads/small_crs_4_697e6e1a08.jpg"
-            }
-          },
-          "hash": "crs_4_697e6e1a08",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 287.36,
-          "url": "/uploads/crs_4_697e6e1a08.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:53.933Z",
-          "updated_at": "2021-11-02T15:12:53.957Z"
-        }
+        "preview_image": "/uploads/crs_4_697e6e1a08.jpg"
       }
     ],
     "hot_collections": [
@@ -211,48 +96,7 @@
         "published_at": "2021-11-06T20:46:50.375Z",
         "created_at": "2021-11-06T20:40:13.013Z",
         "updated_at": "2021-11-30T15:42:09.581Z",
-        "banner": {
-          "id": 39,
-          "name": "coll-1.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 600,
-          "height": 338,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_coll-1.jpg",
-              "hash": "thumbnail_coll_1_a126dd2884",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 245,
-              "height": 138,
-              "size": 11.5,
-              "path": null,
-              "url": "/uploads/thumbnail_coll_1_a126dd2884.jpg"
-            },
-            "small": {
-              "name": "small_coll-1.jpg",
-              "hash": "small_coll_1_a126dd2884",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 500,
-              "height": 282,
-              "size": 36.32,
-              "path": null,
-              "url": "/uploads/small_coll_1_a126dd2884.jpg"
-            }
-          },
-          "hash": "coll_1_a126dd2884",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 48.54,
-          "url": "/uploads/coll_1_a126dd2884.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:50.234Z",
-          "updated_at": "2021-11-02T15:12:50.252Z"
-        }
+        "banner": "/uploads/coll_1_a126dd2884.jpg"
       }
     ]
   },
@@ -316,48 +160,7 @@
         "published_at": "2021-11-04T16:15:29.613Z",
         "created_at": "2021-11-04T16:15:06.574Z",
         "updated_at": "2021-11-30T15:42:05.002Z",
-        "preview_image": {
-          "id": 82,
-          "name": "static-2.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 600,
-          "height": 400,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_static-2.jpg",
-              "hash": "thumbnail_static_2_c9a727abe8",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 234,
-              "height": 156,
-              "size": 14.32,
-              "path": null,
-              "url": "/uploads/thumbnail_static_2_c9a727abe8.jpg"
-            },
-            "small": {
-              "name": "small_static-2.jpg",
-              "hash": "small_static_2_c9a727abe8",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 500,
-              "height": 333,
-              "size": 50.19,
-              "path": null,
-              "url": "/uploads/small_static_2_c9a727abe8.jpg"
-            }
-          },
-          "hash": "static_2_c9a727abe8",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 64.72,
-          "url": "/uploads/static_2_c9a727abe8.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:13:02.475Z",
-          "updated_at": "2021-11-02T15:13:02.490Z"
-        }
+        "preview_image": "/uploads/static_2_c9a727abe8.jpg"
       }
     ],
     "hot_collections": [
@@ -369,48 +172,7 @@
         "published_at": "2021-11-06T20:46:56.348Z",
         "created_at": "2021-11-06T20:40:48.929Z",
         "updated_at": "2021-11-30T15:42:05.000Z",
-        "banner": {
-          "id": 38,
-          "name": "coll-2.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 600,
-          "height": 338,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_coll-2.jpg",
-              "hash": "thumbnail_coll_2_bfc2467cc8",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 245,
-              "height": 138,
-              "size": 6.91,
-              "path": null,
-              "url": "/uploads/thumbnail_coll_2_bfc2467cc8.jpg"
-            },
-            "small": {
-              "name": "small_coll-2.jpg",
-              "hash": "small_coll_2_bfc2467cc8",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 500,
-              "height": 282,
-              "size": 16.76,
-              "path": null,
-              "url": "/uploads/small_coll_2_bfc2467cc8.jpg"
-            }
-          },
-          "hash": "coll_2_bfc2467cc8",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 20.56,
-          "url": "/uploads/coll_2_bfc2467cc8.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:50.061Z",
-          "updated_at": "2021-11-02T15:12:50.118Z"
-        }
+        "banner": "/uploads/coll_2_bfc2467cc8.jpg"
       }
     ]
   },
@@ -474,37 +236,7 @@
         "published_at": "2021-11-04T16:26:30.429Z",
         "created_at": "2021-11-04T16:26:28.153Z",
         "updated_at": "2021-11-30T15:42:16.397Z",
-        "preview_image": {
-          "id": 8,
-          "name": "anim-2.webp",
-          "alternativeText": "",
-          "caption": "",
-          "width": 258,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_anim-2.webp",
-              "hash": "thumbnail_anim_2_fdd2e0f4d1",
-              "ext": ".webp",
-              "mime": "image/webp",
-              "width": 201,
-              "height": 156,
-              "size": 4.87,
-              "path": null,
-              "url": "/uploads/thumbnail_anim_2_fdd2e0f4d1.webp"
-            }
-          },
-          "hash": "anim_2_fdd2e0f4d1",
-          "ext": ".webp",
-          "mime": "image/webp",
-          "size": 116.38,
-          "url": "/uploads/anim_2_fdd2e0f4d1.webp",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:42.424Z",
-          "updated_at": "2021-11-06T04:16:43.696Z"
-        }
+        "preview_image": "/uploads/anim_2_fdd2e0f4d1.webp"
       },
       {
         "id": 7,
@@ -530,37 +262,7 @@
         "published_at": "2021-11-04T16:58:10.360Z",
         "created_at": "2021-11-04T16:57:59.507Z",
         "updated_at": "2021-11-30T15:42:16.397Z",
-        "preview_image": {
-          "id": 7,
-          "name": "anim-1.webp",
-          "alternativeText": "",
-          "caption": "",
-          "width": 200,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_anim-1.webp",
-              "hash": "thumbnail_anim_1_2db0091b86",
-              "ext": ".webp",
-              "mime": "image/webp",
-              "width": 156,
-              "height": 156,
-              "size": 2.39,
-              "path": null,
-              "url": "/uploads/thumbnail_anim_1_2db0091b86.webp"
-            }
-          },
-          "hash": "anim_1_2db0091b86",
-          "ext": ".webp",
-          "mime": "image/webp",
-          "size": 89.64,
-          "url": "/uploads/anim_1_2db0091b86.webp",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:42.271Z",
-          "updated_at": "2021-11-06T15:03:04.381Z"
-        }
+        "preview_image": "/uploads/anim_1_2db0091b86.webp"
       },
       {
         "id": 15,
@@ -586,59 +288,7 @@
         "published_at": "2021-11-06T20:57:07.008Z",
         "created_at": "2021-11-06T20:56:58.958Z",
         "updated_at": "2021-11-30T15:42:16.397Z",
-        "preview_image": {
-          "id": 57,
-          "name": "crs-5.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 1000,
-          "height": 1000,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_crs-5.jpg",
-              "hash": "thumbnail_crs_5_86f0d779bb",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 156,
-              "height": 156,
-              "size": 4.99,
-              "path": null,
-              "url": "/uploads/thumbnail_crs_5_86f0d779bb.jpg"
-            },
-            "medium": {
-              "name": "medium_crs-5.jpg",
-              "hash": "medium_crs_5_86f0d779bb",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 750,
-              "height": 750,
-              "size": 84.59,
-              "path": null,
-              "url": "/uploads/medium_crs_5_86f0d779bb.jpg"
-            },
-            "small": {
-              "name": "small_crs-5.jpg",
-              "hash": "small_crs_5_86f0d779bb",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 500,
-              "height": 500,
-              "size": 38.71,
-              "path": null,
-              "url": "/uploads/small_crs_5_86f0d779bb.jpg"
-            }
-          },
-          "hash": "crs_5_86f0d779bb",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 145.04,
-          "url": "/uploads/crs_5_86f0d779bb.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:54.502Z",
-          "updated_at": "2021-11-02T15:12:54.538Z"
-        }
+        "preview_image": "/uploads/crs_5_86f0d779bb.jpg"
       },
       {
         "id": 17,
@@ -664,59 +314,7 @@
         "published_at": "2021-11-06T21:00:10.701Z",
         "created_at": "2021-11-06T21:00:01.010Z",
         "updated_at": "2021-11-30T15:42:16.397Z",
-        "preview_image": {
-          "id": 54,
-          "name": "crs-3.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 1000,
-          "height": 1000,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_crs-3.jpg",
-              "hash": "thumbnail_crs_3_4b09f7083d",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 156,
-              "height": 156,
-              "size": 5.24,
-              "path": null,
-              "url": "/uploads/thumbnail_crs_3_4b09f7083d.jpg"
-            },
-            "medium": {
-              "name": "medium_crs-3.jpg",
-              "hash": "medium_crs_3_4b09f7083d",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 750,
-              "height": 750,
-              "size": 93.61,
-              "path": null,
-              "url": "/uploads/medium_crs_3_4b09f7083d.jpg"
-            },
-            "small": {
-              "name": "small_crs-3.jpg",
-              "hash": "small_crs_3_4b09f7083d",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 500,
-              "height": 500,
-              "size": 45.04,
-              "path": null,
-              "url": "/uploads/small_crs_3_4b09f7083d.jpg"
-            }
-          },
-          "hash": "crs_3_4b09f7083d",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 157.13,
-          "url": "/uploads/crs_3_4b09f7083d.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:53.371Z",
-          "updated_at": "2021-11-02T15:12:53.392Z"
-        }
+        "preview_image": "/uploads/crs_3_4b09f7083d.jpg"
       }
     ],
     "hot_collections": [
@@ -728,37 +326,7 @@
         "published_at": "2021-11-06T20:46:47.454Z",
         "created_at": "2021-11-06T20:43:12.757Z",
         "updated_at": "2021-11-30T15:42:16.396Z",
-        "banner": {
-          "id": 105,
-          "name": "coll-3.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 600,
-          "height": 338,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_coll-3.jpg",
-              "hash": "thumbnail_coll_3_e286085ffd",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 245,
-              "height": 138,
-              "size": 11.52,
-              "path": null,
-              "url": "/uploads/thumbnail_coll_3_e286085ffd.jpg"
-            }
-          },
-          "hash": "coll_3_e286085ffd",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 77.26,
-          "url": "/uploads/coll_3_e286085ffd.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-06T20:43:09.793Z",
-          "updated_at": "2021-11-06T20:43:09.817Z"
-        }
+        "banner": "/uploads/coll_3_e286085ffd.jpg"
       }
     ]
   },
@@ -822,37 +390,7 @@
         "published_at": "2021-11-04T18:58:59.456Z",
         "created_at": "2021-11-04T18:58:56.792Z",
         "updated_at": "2021-11-30T15:41:59.445Z",
-        "preview_image": {
-          "id": 13,
-          "name": "anim-5.webp",
-          "alternativeText": "",
-          "caption": "",
-          "width": 200,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_anim-5.webp",
-              "hash": "thumbnail_anim_5_ec9190202f",
-              "ext": ".webp",
-              "mime": "image/webp",
-              "width": 156,
-              "height": 156,
-              "size": 7.38,
-              "path": null,
-              "url": "/uploads/thumbnail_anim_5_ec9190202f.webp"
-            }
-          },
-          "hash": "anim_5_ec9190202f",
-          "ext": ".webp",
-          "mime": "image/webp",
-          "size": 358.51,
-          "url": "/uploads/anim_5_ec9190202f.webp",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:43.552Z",
-          "updated_at": "2021-11-06T15:03:26.853Z"
-        }
+        "preview_image": "/uploads/anim_5_ec9190202f.webp"
       }
     ],
     "hot_collections": [
@@ -864,48 +402,7 @@
         "published_at": "2021-11-06T20:46:59.797Z",
         "created_at": "2021-11-06T20:43:50.379Z",
         "updated_at": "2021-11-30T15:41:59.445Z",
-        "banner": {
-          "id": 43,
-          "name": "coll-4.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 600,
-          "height": 338,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_coll-4.jpg",
-              "hash": "thumbnail_coll_4_69f3883518",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 245,
-              "height": 138,
-              "size": 8.87,
-              "path": null,
-              "url": "/uploads/thumbnail_coll_4_69f3883518.jpg"
-            },
-            "small": {
-              "name": "small_coll-4.jpg",
-              "hash": "small_coll_4_69f3883518",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 500,
-              "height": 282,
-              "size": 24.51,
-              "path": null,
-              "url": "/uploads/small_coll_4_69f3883518.jpg"
-            }
-          },
-          "hash": "coll_4_69f3883518",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 30.92,
-          "url": "/uploads/coll_4_69f3883518.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:50.996Z",
-          "updated_at": "2021-11-02T15:12:51.059Z"
-        }
+        "banner": "/uploads/coll_4_69f3883518.jpg"
       }
     ]
   },
@@ -969,37 +466,7 @@
         "published_at": "2021-11-04T19:00:09.285Z",
         "created_at": "2021-11-04T19:00:06.617Z",
         "updated_at": "2021-11-30T15:41:50.332Z",
-        "preview_image": {
-          "id": 9,
-          "name": "anim-3.webp",
-          "alternativeText": "",
-          "caption": "",
-          "width": 419,
-          "height": 500,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_anim-3.webp",
-              "hash": "thumbnail_anim_3_8b6ded67ad",
-              "ext": ".webp",
-              "mime": "image/webp",
-              "width": 131,
-              "height": 156,
-              "size": 1.78,
-              "path": null,
-              "url": "/uploads/thumbnail_anim_3_8b6ded67ad.webp"
-            }
-          },
-          "hash": "anim_3_8b6ded67ad",
-          "ext": ".webp",
-          "mime": "image/webp",
-          "size": 51.93,
-          "url": "/uploads/anim_3_8b6ded67ad.webp",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:42.606Z",
-          "updated_at": "2021-11-06T15:03:44.478Z"
-        }
+        "preview_image": "/uploads/anim_3_8b6ded67ad.webp"
       }
     ],
     "hot_collections": [
@@ -1011,48 +478,7 @@
         "published_at": "2021-11-06T20:47:03.070Z",
         "created_at": "2021-11-06T20:44:32.728Z",
         "updated_at": "2021-11-30T15:41:50.332Z",
-        "banner": {
-          "id": 46,
-          "name": "coll-5.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 600,
-          "height": 338,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_coll-5.jpg",
-              "hash": "thumbnail_coll_5_61977a4c99",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 245,
-              "height": 138,
-              "size": 5.64,
-              "path": null,
-              "url": "/uploads/thumbnail_coll_5_61977a4c99.jpg"
-            },
-            "small": {
-              "name": "small_coll-5.jpg",
-              "hash": "small_coll_5_61977a4c99",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 500,
-              "height": 282,
-              "size": 13.05,
-              "path": null,
-              "url": "/uploads/small_coll_5_61977a4c99.jpg"
-            }
-          },
-          "hash": "coll_5_61977a4c99",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 15.42,
-          "url": "/uploads/coll_5_61977a4c99.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:51.517Z",
-          "updated_at": "2021-11-02T15:12:51.536Z"
-        }
+        "banner": "/uploads/coll_5_61977a4c99.jpg"
       }
     ]
   },
@@ -1108,37 +534,7 @@
         "published_at": "2021-11-04T19:02:36.770Z",
         "created_at": "2021-11-04T19:02:33.927Z",
         "updated_at": "2021-11-30T15:41:54.322Z",
-        "preview_image": {
-          "id": 14,
-          "name": "anim-6.webp",
-          "alternativeText": "",
-          "caption": "",
-          "width": 200,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_anim-6.webp",
-              "hash": "thumbnail_anim_6_afe5709e78",
-              "ext": ".webp",
-              "mime": "image/webp",
-              "width": 156,
-              "height": 156,
-              "size": 3.09,
-              "path": null,
-              "url": "/uploads/thumbnail_anim_6_afe5709e78.webp"
-            }
-          },
-          "hash": "anim_6_afe5709e78",
-          "ext": ".webp",
-          "mime": "image/webp",
-          "size": 281.81,
-          "url": "/uploads/anim_6_afe5709e78.webp",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:43.692Z",
-          "updated_at": "2021-11-06T15:04:11.028Z"
-        }
+        "preview_image": "/uploads/anim_6_afe5709e78.webp"
       }
     ],
     "hot_collections": [
@@ -1150,48 +546,7 @@
         "published_at": "2021-11-06T20:46:53.318Z",
         "created_at": "2021-11-06T20:44:56.183Z",
         "updated_at": "2021-11-30T15:41:54.322Z",
-        "banner": {
-          "id": 48,
-          "name": "coll-6.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 600,
-          "height": 338,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_coll-6.jpg",
-              "hash": "thumbnail_coll_6_62bc79d217",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 245,
-              "height": 138,
-              "size": 10.04,
-              "path": null,
-              "url": "/uploads/thumbnail_coll_6_62bc79d217.jpg"
-            },
-            "small": {
-              "name": "small_coll-6.jpg",
-              "hash": "small_coll_6_62bc79d217",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 500,
-              "height": 282,
-              "size": 24.83,
-              "path": null,
-              "url": "/uploads/small_coll_6_62bc79d217.jpg"
-            }
-          },
-          "hash": "coll_6_62bc79d217",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 31.7,
-          "url": "/uploads/coll_6_62bc79d217.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:51.800Z",
-          "updated_at": "2021-11-02T15:12:51.820Z"
-        }
+        "banner": "/uploads/coll_6_62bc79d217.jpg"
       }
     ]
   },
@@ -1247,48 +602,7 @@
         "published_at": "2021-11-04T19:01:19.533Z",
         "created_at": "2021-11-04T19:01:15.881Z",
         "updated_at": "2021-11-30T15:41:40.107Z",
-        "preview_image": {
-          "id": 83,
-          "name": "static-5.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 600,
-          "height": 279,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_static-5.jpg",
-              "hash": "thumbnail_static_5_82c702df64",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 245,
-              "height": 114,
-              "size": 6.36,
-              "path": null,
-              "url": "/uploads/thumbnail_static_5_82c702df64.jpg"
-            },
-            "small": {
-              "name": "small_static-5.jpg",
-              "hash": "small_static_5_82c702df64",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 500,
-              "height": 233,
-              "size": 18.3,
-              "path": null,
-              "url": "/uploads/small_static_5_82c702df64.jpg"
-            }
-          },
-          "hash": "static_5_82c702df64",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 22.84,
-          "url": "/uploads/static_5_82c702df64.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:13:02.613Z",
-          "updated_at": "2021-11-02T15:13:02.634Z"
-        }
+        "preview_image": "/uploads/static_5_82c702df64.jpg"
       }
     ],
     "hot_collections": []
@@ -1345,37 +659,7 @@
         "published_at": "2021-11-04T19:04:22.224Z",
         "created_at": "2021-11-04T19:04:16.101Z",
         "updated_at": "2021-11-30T15:41:23.479Z",
-        "preview_image": {
-          "id": 15,
-          "name": "anim-7.webp",
-          "alternativeText": "",
-          "caption": "",
-          "width": 387,
-          "height": 480,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_anim-7.webp",
-              "hash": "thumbnail_anim_7_b0be11eee1",
-              "ext": ".webp",
-              "mime": "image/webp",
-              "width": 126,
-              "height": 156,
-              "size": 2.83,
-              "path": null,
-              "url": "/uploads/thumbnail_anim_7_b0be11eee1.webp"
-            }
-          },
-          "hash": "anim_7_b0be11eee1",
-          "ext": ".webp",
-          "mime": "image/webp",
-          "size": 97.66,
-          "url": "/uploads/anim_7_b0be11eee1.webp",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:43.841Z",
-          "updated_at": "2021-11-06T15:04:27.910Z"
-        }
+        "preview_image": "/uploads/anim_7_b0be11eee1.webp"
       }
     ],
     "hot_collections": []
@@ -1432,37 +716,7 @@
         "published_at": "2021-11-04T16:24:00.095Z",
         "created_at": "2021-11-04T16:23:53.377Z",
         "updated_at": "2021-11-30T15:41:29.174Z",
-        "preview_image": {
-          "id": 104,
-          "name": "anim-4.webp",
-          "alternativeText": "",
-          "caption": "",
-          "width": 200,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_anim-4.webp",
-              "hash": "thumbnail_anim_4_0f6539826b",
-              "ext": ".webp",
-              "mime": "image/webp",
-              "width": 156,
-              "height": 156,
-              "size": 7.93,
-              "path": null,
-              "url": "/uploads/thumbnail_anim_4_0f6539826b.webp"
-            }
-          },
-          "hash": "anim_4_0f6539826b",
-          "ext": ".webp",
-          "mime": "image/webp",
-          "size": 49.05,
-          "url": "/uploads/anim_4_0f6539826b.webp",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-06T04:15:54.446Z",
-          "updated_at": "2021-11-06T15:02:35.022Z"
-        }
+        "preview_image": "/uploads/anim_4_0f6539826b.webp"
       },
       {
         "id": 13,
@@ -1488,48 +742,7 @@
         "published_at": "2021-11-04T19:06:08.718Z",
         "created_at": "2021-11-04T19:06:06.220Z",
         "updated_at": "2021-11-30T15:41:29.174Z",
-        "preview_image": {
-          "id": 84,
-          "name": "static-6.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 600,
-          "height": 472,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_static-6.jpg",
-              "hash": "thumbnail_static_6_3b7902d4b7",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 198,
-              "height": 156,
-              "size": 5.68,
-              "path": null,
-              "url": "/uploads/thumbnail_static_6_3b7902d4b7.jpg"
-            },
-            "small": {
-              "name": "small_static-6.jpg",
-              "hash": "small_static_6_3b7902d4b7",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 500,
-              "height": 393,
-              "size": 19.22,
-              "path": null,
-              "url": "/uploads/small_static_6_3b7902d4b7.jpg"
-            }
-          },
-          "hash": "static_6_3b7902d4b7",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 20.26,
-          "url": "/uploads/static_6_3b7902d4b7.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:13:02.728Z",
-          "updated_at": "2021-11-02T15:13:02.749Z"
-        }
+        "preview_image": "/uploads/static_6_3b7902d4b7.jpg"
       }
     ],
     "hot_collections": []
@@ -1616,37 +829,7 @@
         "published_at": "2021-11-04T16:16:57.864Z",
         "created_at": "2021-11-04T16:16:45.075Z",
         "updated_at": "2021-11-30T15:41:46.404Z",
-        "preview_image": {
-          "id": 80,
-          "name": "static-3.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 390,
-          "height": 450,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_static-3.jpg",
-              "hash": "thumbnail_static_3_fffde34782",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 135,
-              "height": 156,
-              "size": 6.71,
-              "path": null,
-              "url": "/uploads/thumbnail_static_3_fffde34782.jpg"
-            }
-          },
-          "hash": "static_3_fffde34782",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 31.88,
-          "url": "/uploads/static_3_fffde34782.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:13:02.113Z",
-          "updated_at": "2021-11-02T15:13:02.194Z"
-        }
+        "preview_image": "/uploads/static_3_fffde34782.jpg"
       }
     ],
     "hot_collections": []
@@ -1703,37 +886,7 @@
         "published_at": "2021-11-04T16:18:25.596Z",
         "created_at": "2021-11-04T16:18:23.191Z",
         "updated_at": "2021-11-30T15:41:34.852Z",
-        "preview_image": {
-          "id": 81,
-          "name": "static-4.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 500,
-          "height": 500,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_static-4.jpg",
-              "hash": "thumbnail_static_4_ccd42beea6",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 156,
-              "height": 156,
-              "size": 6.77,
-              "path": null,
-              "url": "/uploads/thumbnail_static_4_ccd42beea6.jpg"
-            }
-          },
-          "hash": "static_4_ccd42beea6",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 57.88,
-          "url": "/uploads/static_4_ccd42beea6.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:13:02.313Z",
-          "updated_at": "2021-11-02T15:13:02.335Z"
-        }
+        "preview_image": "/uploads/static_4_ccd42beea6.jpg"
       },
       {
         "id": 14,
@@ -1759,37 +912,7 @@
         "published_at": "2021-11-04T19:08:32.990Z",
         "created_at": "2021-11-04T19:08:30.033Z",
         "updated_at": "2021-11-30T15:41:34.852Z",
-        "preview_image": {
-          "id": 16,
-          "name": "anim-8.webp",
-          "alternativeText": "",
-          "caption": "",
-          "width": 200,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_anim-8.webp",
-              "hash": "thumbnail_anim_8_3b95944cfb",
-              "ext": ".webp",
-              "mime": "image/webp",
-              "width": 156,
-              "height": 156,
-              "size": 3.03,
-              "path": null,
-              "url": "/uploads/thumbnail_anim_8_3b95944cfb.webp"
-            }
-          },
-          "hash": "anim_8_3b95944cfb",
-          "ext": ".webp",
-          "mime": "image/webp",
-          "size": 18.55,
-          "url": "/uploads/anim_8_3b95944cfb.webp",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:44.001Z",
-          "updated_at": "2021-11-06T15:04:49.926Z"
-        }
+        "preview_image": "/uploads/anim_8_3b95944cfb.webp"
       }
     ],
     "hot_collections": []

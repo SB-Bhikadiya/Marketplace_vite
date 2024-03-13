@@ -43,7 +43,7 @@ const NftMintCard = ({
             <img
               className="lazy"
               src={api.baseUrl + nft.author.avatar}
-              alt=""
+              alt={api.baseUrl + nft.author.avatar}
             />
             <i className="fa fa-check"></i>
           </span>
@@ -53,9 +53,9 @@ const NftMintCard = ({
             <span>
               <img
                 onLoad={onImgLoad}
-                src={api.baseUrl + nft.preview_image.url}
+                src={api.baseUrl + nft.preview_image}
                 className="lazy nft__item_preview"
-                alt=""
+                alt={api.baseUrl + nft.preview_image}
               />
             </span>
           </Outer>

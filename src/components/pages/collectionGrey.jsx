@@ -142,7 +142,7 @@ const Collection = function ({ collectionId = 1 }) {
                   <div className="d_profile_img">
                     <img
                       src={api.baseUrl + hotCollections.author.avatar}
-                      alt=""
+                      alt={api.baseUrl + hotCollections.author.avatar}
                     />
                     <i className="fa fa-check"></i>
                   </div>

@@ -25,6 +25,7 @@ const NftCard = ({
     navigate(link);
   };
 
+
   return (
     <div className={className}>
       <div className="nft__item m-0">
@@ -47,7 +48,7 @@ const NftCard = ({
             <img
               className="lazy"
               src={api.baseUrl + nft.author.avatar}
-              alt=""
+              alt={api.baseUrl + nft.author.avatar}
             />
             <i className="fa fa-check"></i>
           </span>
@@ -57,9 +58,9 @@ const NftCard = ({
             <span>
               <img
                 onLoad={onImgLoad}
-                src={api.baseUrl + nft.preview_image.url}
+                src={api.baseUrl + nft.preview_image}
                 className="lazy nft__item_preview"
-                alt=""
+                alt={api.baseUrl + nft.preview_image}
               />
             </span>
           </Outer>

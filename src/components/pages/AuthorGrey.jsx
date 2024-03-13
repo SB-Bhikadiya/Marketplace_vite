@@ -157,7 +157,7 @@ const Colection = ({ authorId }) => {
               <div className="de-flex-col">
                 <div className="profile_avatar">
                   {author.avatar && (
-                    <img src={api.baseUrl + author.avatar} alt="" />
+                    <img src={api.baseUrl + author.avatar} alt={api.baseUrl + author.avatar} />
                   )}
                   <i className="fa fa-check"></i>
                   <div className="profile_name">

@@ -157,7 +157,7 @@ const RankingRedux = () => {
                             <img
                               className="lazy"
                               src={api.baseUrl + author.avatar}
-                              alt=""
+                              alt={api.baseUrl + author.avatar}
                             />
                           )}
                           <i className="fa fa-check"></i>

@@ -1,11 +1,11 @@
-import React, { memo, useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import Footer from '../components/footer';
-import { createGlobalStyle } from 'styled-components';
-import * as selectors from '../../store/selectors';
-import { getBlogPosts, getRecentPosts, getBlogComments, getBlogTags } from "../../store/actions/thunks";
-import api from "../../core/api";
 import moment from "moment";
+import React, { memo, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { createGlobalStyle } from 'styled-components';
+import api from "../../core/api";
+import { getBlogComments, getBlogPosts, getBlogTags, getRecentPosts } from "../../store/actions/thunks";
+import * as selectors from '../../store/selectors';
+import Footer from '../components/footer';
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -84,7 +84,7 @@ const NewsSingle = ({ postId }) => {
                         <div className="col-md-8">
                             <div className="blog-read">
                                 {blogPosts && blogPosts.cover &&
-                                    <img alt="" src={api.baseUrl + blogPosts.cover.url} className="img-fullwidth rounded" />
+                                    <img alt={api.baseUrl + blogPosts.cover} src={api.baseUrl + blogPosts.cover} className="img-fullwidth rounded" />
                                 }
 
                                 <div className="post-text">
@@ -108,7 +108,7 @@ const NewsSingle = ({ postId }) => {
                                     {comments && comments.map( (comment, index) => (
                                         <li key={index}>
                                             <div className="avatar">
-                                                <img src={api.baseUrl + comment.avatar} alt="" width="70px" /></div>
+                                                <img src={api.baseUrl + comment.avatar} alt={api.baseUrl + comment.avatar} width="70px" /></div>
                                             <div className="comment-info">
                                                 <span className="c_name">{comment.username}</span>
                                                 <span className="c_date id-color">{moment(comment.timestamp).format('MMMM D yyyy, h:m A')}</span>
@@ -122,7 +122,7 @@ const NewsSingle = ({ postId }) => {
                                                     {comment.replies.map( (reply, replyIndex) => (
                                                         <li key={replyIndex}>
                                                             <div className="avatar">
-                                                                <img src={api.baseUrl + reply.avatar} alt="" width="70px" /></div>
+                                                                <img src={api.baseUrl + reply.avatar} alt={api.baseUrl + reply.avatar} width="70px" /></div>
                                                                 <div className="comment-info">
                                                                     <span className="c_name">{reply.username}</span>
                                                                     <span className="c_date id-color">{moment(reply.timestamp).format('MMMM D yyyy, h:m A')}</span>

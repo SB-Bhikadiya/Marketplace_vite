@@ -42,9 +42,9 @@ const SliderCarouselRedux = () => {
                 </span>
                 <div className="nft_pic_wrap">
                   <img
-                    src={api.baseUrl + nft.preview_image.url}
+                    src={api.baseUrl + nft.preview_image}
                     className="lazy img-fluid"
-                    alt=""
+                    alt={api.baseUrl + nft.preview_image}
                   />
                 </div>
               </div>

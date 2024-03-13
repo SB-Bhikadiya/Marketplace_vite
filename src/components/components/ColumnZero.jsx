@@ -223,7 +223,7 @@ const Responsive = () => {
                     onLoad={(e) => onImgLoad(e.target)}
                     src={nft.previewImg}
                     className="lazy nft__item_preview"
-                    alt=""
+                    alt={nft.previewImg}
                   />
                 </span>
               </Outer>

@@ -29,106 +29,13 @@
     "published_at": "2021-11-02T15:20:32.637Z",
     "created_at": "2021-11-02T15:20:24.426Z",
     "updated_at": "2021-11-30T15:42:09.638Z",
-    "avatar": {
-      "id": 19,
-      "name": "author-1.jpg",
-      "alternativeText": "",
-      "caption": "",
-      "width": 200,
-      "height": 200,
-      "formats": {
-        "thumbnail": {
-          "name": "thumbnail_author-1.jpg",
-          "hash": "thumbnail_author_1_6f9ad9e11a",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "width": 156,
-          "height": 156,
-          "size": 7.45,
-          "path": null,
-          "url": "/uploads/thumbnail_author_1_6f9ad9e11a.jpg"
-        }
-      },
-      "hash": "author_1_6f9ad9e11a",
-      "ext": ".jpg",
-      "mime": "image/jpeg",
-      "size": 9.93,
-      "url": "/uploads/author_1_6f9ad9e11a.jpg",
-      "previewUrl": null,
-      "provider": "local",
-      "provider_metadata": null,
-      "created_at": "2021-11-02T15:12:44.838Z",
-      "updated_at": "2021-11-02T15:12:44.890Z"
-    }
+    "avatar": "/uploads/author_1_6f9ad9e11a.jpg"
   },
   "showcase": null,
   "published_at": "2021-11-04T13:34:54.734Z",
   "created_at": "2021-11-04T13:34:10.002Z",
   "updated_at": "2021-11-30T15:42:09.579Z",
-  "preview_image": {
-    "id": 41,
-    "name": "big-1.jpg",
-    "alternativeText": "",
-    "caption": "",
-    "width": 1920,
-    "height": 1920,
-    "formats": {
-      "thumbnail": {
-        "name": "thumbnail_big-1.jpg",
-        "hash": "thumbnail_big_1_5e0d3a105a",
-        "ext": ".jpg",
-        "mime": "image/jpeg",
-        "width": 156,
-        "height": 156,
-        "size": 10.23,
-        "path": null,
-        "url": "/uploads/thumbnail_big_1_5e0d3a105a.jpg"
-      },
-      "large": {
-        "name": "large_big-1.jpg",
-        "hash": "large_big_1_5e0d3a105a",
-        "ext": ".jpg",
-        "mime": "image/jpeg",
-        "width": 1000,
-        "height": 1000,
-        "size": 235.77,
-        "path": null,
-        "url": "/uploads/large_big_1_5e0d3a105a.jpg"
-      },
-      "medium": {
-        "name": "medium_big-1.jpg",
-        "hash": "medium_big_1_5e0d3a105a",
-        "ext": ".jpg",
-        "mime": "image/jpeg",
-        "width": 750,
-        "height": 750,
-        "size": 143.9,
-        "path": null,
-        "url": "/uploads/medium_big_1_5e0d3a105a.jpg"
-      },
-      "small": {
-        "name": "small_big-1.jpg",
-        "hash": "small_big_1_5e0d3a105a",
-        "ext": ".jpg",
-        "mime": "image/jpeg",
-        "width": 500,
-        "height": 500,
-        "size": 75.02,
-        "path": null,
-        "url": "/uploads/small_big_1_5e0d3a105a.jpg"
-      }
-    },
-    "hash": "big_1_5e0d3a105a",
-    "ext": ".jpg",
-    "mime": "image/jpeg",
-    "size": 511.06,
-    "url": "/uploads/big_1_5e0d3a105a.jpg",
-    "previewUrl": null,
-    "provider": "local",
-    "provider_metadata": null,
-    "created_at": "2021-11-02T15:12:50.521Z",
-    "updated_at": "2021-11-02T15:12:50.539Z"
-  },
+  "preview_image": "/uploads/big_1_5e0d3a105a.jpg",
   "bids": [
     {
       "id": 5,
@@ -146,37 +53,7 @@
         "published_at": "2021-11-04T13:53:12.990Z",
         "created_at": "2021-11-04T13:53:10.647Z",
         "updated_at": "2021-11-30T15:41:50.391Z",
-        "avatar": {
-          "id": 23,
-          "name": "author-5.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 200,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_author-5.jpg",
-              "hash": "thumbnail_author_5_a558aecf04",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 156,
-              "height": 156,
-              "size": 4.73,
-              "path": null,
-              "url": "/uploads/thumbnail_author_5_a558aecf04.jpg"
-            }
-          },
-          "hash": "author_5_a558aecf04",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 6.32,
-          "url": "/uploads/author_5_a558aecf04.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:45.936Z",
-          "updated_at": "2021-11-02T15:12:45.962Z"
-        }
+        "avatar": "/uploads/author_5_a558aecf04.jpg"
       },
       "published_at": "2021-11-04T14:33:48.844Z",
       "created_at": "2021-11-04T14:33:44.314Z",
@@ -198,37 +75,7 @@
         "published_at": "2021-11-02T15:20:32.637Z",
         "created_at": "2021-11-02T15:20:24.426Z",
         "updated_at": "2021-11-30T15:42:09.638Z",
-        "avatar": {
-          "id": 19,
-          "name": "author-1.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 200,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_author-1.jpg",
-              "hash": "thumbnail_author_1_6f9ad9e11a",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 156,
-              "height": 156,
-              "size": 7.45,
-              "path": null,
-              "url": "/uploads/thumbnail_author_1_6f9ad9e11a.jpg"
-            }
-          },
-          "hash": "author_1_6f9ad9e11a",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 9.93,
-          "url": "/uploads/author_1_6f9ad9e11a.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:44.838Z",
-          "updated_at": "2021-11-02T15:12:44.890Z"
-        }
+        "avatar": "/uploads/author_1_6f9ad9e11a.jpg"
       },
       "published_at": "2021-11-04T14:33:13.291Z",
       "created_at": "2021-11-04T14:33:08.498Z",
@@ -250,37 +97,7 @@
         "published_at": "2021-11-04T13:41:34.589Z",
         "created_at": "2021-11-04T13:41:22.945Z",
         "updated_at": "2021-11-30T15:42:05.058Z",
-        "avatar": {
-          "id": 20,
-          "name": "author-2.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 200,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_author-2.jpg",
-              "hash": "thumbnail_author_2_c6ff6b745e",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 156,
-              "height": 156,
-              "size": 3.92,
-              "path": null,
-              "url": "/uploads/thumbnail_author_2_c6ff6b745e.jpg"
-            }
-          },
-          "hash": "author_2_c6ff6b745e",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 5.1,
-          "url": "/uploads/author_2_c6ff6b745e.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:45.387Z",
-          "updated_at": "2021-11-02T15:12:45.407Z"
-        }
+        "avatar": "/uploads/author_2_c6ff6b745e.jpg"
       },
       "published_at": "2021-11-04T14:32:39.420Z",
       "created_at": "2021-11-04T14:32:35.573Z",
@@ -302,37 +119,7 @@
         "published_at": "2021-11-04T13:50:28.703Z",
         "created_at": "2021-11-04T13:50:26.184Z",
         "updated_at": "2021-11-30T15:42:16.497Z",
-        "avatar": {
-          "id": 21,
-          "name": "author-3.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 200,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_author-3.jpg",
-              "hash": "thumbnail_author_3_1769046ae5",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 156,
-              "height": 156,
-              "size": 2.72,
-              "path": null,
-              "url": "/uploads/thumbnail_author_3_1769046ae5.jpg"
-            }
-          },
-          "hash": "author_3_1769046ae5",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 3.42,
-          "url": "/uploads/author_3_1769046ae5.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:45.680Z",
-          "updated_at": "2021-11-02T15:12:45.700Z"
-        }
+        "avatar": "/uploads/author_3_1769046ae5.jpg"
       },
       "published_at": "2021-11-04T14:32:12.128Z",
       "created_at": "2021-11-04T14:29:58.125Z",
@@ -354,37 +141,7 @@
         "published_at": "2021-11-04T13:51:31.671Z",
         "created_at": "2021-11-04T13:51:29.459Z",
         "updated_at": "2021-11-30T15:41:59.490Z",
-        "avatar": {
-          "id": 22,
-          "name": "author-4.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 200,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_author-4.jpg",
-              "hash": "thumbnail_author_4_623046d09c",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 156,
-              "height": 156,
-              "size": 3.92,
-              "path": null,
-              "url": "/uploads/thumbnail_author_4_623046d09c.jpg"
-            }
-          },
-          "hash": "author_4_623046d09c",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 5.12,
-          "url": "/uploads/author_4_623046d09c.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:45.797Z",
-          "updated_at": "2021-11-02T15:12:45.825Z"
-        }
+        "avatar": "/uploads/author_4_623046d09c.jpg"
       },
       "published_at": "2021-11-04T13:41:39.517Z",
       "created_at": "2021-11-04T13:37:07.867Z",
@@ -408,37 +165,7 @@
         "published_at": "2021-11-04T13:53:12.990Z",
         "created_at": "2021-11-04T13:53:10.647Z",
         "updated_at": "2021-11-30T15:41:50.391Z",
-        "avatar": {
-          "id": 23,
-          "name": "author-5.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 200,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_author-5.jpg",
-              "hash": "thumbnail_author_5_a558aecf04",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 156,
-              "height": 156,
-              "size": 4.73,
-              "path": null,
-              "url": "/uploads/thumbnail_author_5_a558aecf04.jpg"
-            }
-          },
-          "hash": "author_5_a558aecf04",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 6.32,
-          "url": "/uploads/author_5_a558aecf04.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:45.936Z",
-          "updated_at": "2021-11-02T15:12:45.962Z"
-        }
+        "avatar": "/uploads/author_5_a558aecf04.jpg"
       },
       "published_at": "2021-11-04T14:33:48.844Z",
       "created_at": "2021-11-04T14:33:44.314Z",
@@ -460,37 +187,7 @@
         "published_at": "2021-11-02T15:20:32.637Z",
         "created_at": "2021-11-02T15:20:24.426Z",
         "updated_at": "2021-11-30T15:42:09.638Z",
-        "avatar": {
-          "id": 19,
-          "name": "author-1.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 200,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_author-1.jpg",
-              "hash": "thumbnail_author_1_6f9ad9e11a",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 156,
-              "height": 156,
-              "size": 7.45,
-              "path": null,
-              "url": "/uploads/thumbnail_author_1_6f9ad9e11a.jpg"
-            }
-          },
-          "hash": "author_1_6f9ad9e11a",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 9.93,
-          "url": "/uploads/author_1_6f9ad9e11a.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:44.838Z",
-          "updated_at": "2021-11-02T15:12:44.890Z"
-        }
+        "avatar": "/uploads/author_1_6f9ad9e11a.jpg"
       },
       "published_at": "2021-11-04T14:33:13.291Z",
       "created_at": "2021-11-04T14:33:08.498Z",
@@ -512,37 +209,7 @@
         "published_at": "2021-11-04T13:41:34.589Z",
         "created_at": "2021-11-04T13:41:22.945Z",
         "updated_at": "2021-11-30T15:42:05.058Z",
-        "avatar": {
-          "id": 20,
-          "name": "author-2.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 200,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_author-2.jpg",
-              "hash": "thumbnail_author_2_c6ff6b745e",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 156,
-              "height": 156,
-              "size": 3.92,
-              "path": null,
-              "url": "/uploads/thumbnail_author_2_c6ff6b745e.jpg"
-            }
-          },
-          "hash": "author_2_c6ff6b745e",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 5.1,
-          "url": "/uploads/author_2_c6ff6b745e.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:45.387Z",
-          "updated_at": "2021-11-02T15:12:45.407Z"
-        }
+        "avatar": "/uploads/author_2_c6ff6b745e.jpg"
       },
       "published_at": "2021-11-04T14:32:39.420Z",
       "created_at": "2021-11-04T14:32:35.573Z",
@@ -564,37 +231,7 @@
         "published_at": "2021-11-04T13:50:28.703Z",
         "created_at": "2021-11-04T13:50:26.184Z",
         "updated_at": "2021-11-30T15:42:16.497Z",
-        "avatar": {
-          "id": 21,
-          "name": "author-3.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 200,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_author-3.jpg",
-              "hash": "thumbnail_author_3_1769046ae5",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 156,
-              "height": 156,
-              "size": 2.72,
-              "path": null,
-              "url": "/uploads/thumbnail_author_3_1769046ae5.jpg"
-            }
-          },
-          "hash": "author_3_1769046ae5",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 3.42,
-          "url": "/uploads/author_3_1769046ae5.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:45.680Z",
-          "updated_at": "2021-11-02T15:12:45.700Z"
-        }
+        "avatar": "/uploads/author_3_1769046ae5.jpg"
       },
       "published_at": "2021-11-04T14:32:12.128Z",
       "created_at": "2021-11-04T14:29:58.125Z",
@@ -616,37 +253,7 @@
         "published_at": "2021-11-04T13:51:31.671Z",
         "created_at": "2021-11-04T13:51:29.459Z",
         "updated_at": "2021-11-30T15:41:59.490Z",
-        "avatar": {
-          "id": 22,
-          "name": "author-4.jpg",
-          "alternativeText": "",
-          "caption": "",
-          "width": 200,
-          "height": 200,
-          "formats": {
-            "thumbnail": {
-              "name": "thumbnail_author-4.jpg",
-              "hash": "thumbnail_author_4_623046d09c",
-              "ext": ".jpg",
-              "mime": "image/jpeg",
-              "width": 156,
-              "height": 156,
-              "size": 3.92,
-              "path": null,
-              "url": "/uploads/thumbnail_author_4_623046d09c.jpg"
-            }
-          },
-          "hash": "author_4_623046d09c",
-          "ext": ".jpg",
-          "mime": "image/jpeg",
-          "size": 5.12,
-          "url": "/uploads/author_4_623046d09c.jpg",
-          "previewUrl": null,
-          "provider": "local",
-          "provider_metadata": null,
-          "created_at": "2021-11-02T15:12:45.797Z",
-          "updated_at": "2021-11-02T15:12:45.825Z"
-        }
+        "avatar": "/uploads/author_4_623046d09c.jpg"
       },
       "published_at": "2021-11-04T13:41:39.517Z",
       "created_at": "2021-11-04T13:37:07.867Z",

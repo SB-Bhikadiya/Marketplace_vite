@@ -1,12 +1,12 @@
-import React, { memo, useEffect } from "react";
-import { useSelector, useDispatch } from 'react-redux';
-import Footer from '../components/footer';
-import { createGlobalStyle } from 'styled-components';
 import { navigate } from '@reach/router';
-import * as selectors from '../../store/selectors';
-import { getBlogPosts } from "../../store/actions/thunks";
-import api from "../../core/api";
 import moment from "moment";
+import React, { memo, useEffect } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { createGlobalStyle } from 'styled-components';
+import api from "../../core/api";
+import { getBlogPosts } from "../../store/actions/thunks";
+import * as selectors from '../../store/selectors';
+import Footer from '../components/footer';
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -79,7 +79,7 @@ return (
             <div className="bloglist item">
                 <div className="post-content">
                     <div className="post-image">
-                        <img alt="" src={api.baseUrl + blog.cover.url} className="lazy"/>
+                        <img alt={api.baseUrl + blog.cover} src={api.baseUrl + blog.cover} className="lazy"/>
                     </div>
                     <div className="post-text">
                         <span className="p-tagline">Tips &amp; Tricks</span>

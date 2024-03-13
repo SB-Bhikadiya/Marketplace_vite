@@ -15,7 +15,7 @@
     "@web3modal/ethers": "^4.0.10",
     "axios": "^1.6.7",
     "bootstrap": "^5.1.1",
-    "contracts": "./../@marketplace",
+    "contracts": "./../marketplace-contracts",
     "cra-template": "1.2.0",
     "dotenv": "^16.4.5",
     "elegant-icons": "0.0.1",

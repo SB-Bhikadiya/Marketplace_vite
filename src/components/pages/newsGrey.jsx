@@ -53,8 +53,8 @@ const News = () => {
                   <div className="post-content">
                     <div className="post-image">
                       <img
-                        alt=""
-                        src={api.baseUrl + blog.cover.url}
+                        alt={api.baseUrl + blog.cover}
+                        src={api.baseUrl + blog.cover}
                         className="lazy"
                       />
                     </div>

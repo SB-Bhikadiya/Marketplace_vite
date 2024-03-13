@@ -7,7 +7,7 @@ const UserTopSeller = ({ user }) => {
     <>
       <div className="author_list_pp">
         <span onClick={() => window.open("", "_self")}>
-          <img className="lazy" src={api.baseUrl + user.avatar} alt="" />
+          <img className="lazy" src={api.baseUrl + user.avatar} alt={api.baseUrl + user.avatar} />
           <i className="fa fa-check"></i>
         </span>
       </div>

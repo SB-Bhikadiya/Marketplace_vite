@@ -82,7 +82,7 @@ const Minter = (props) => {
   const onSelectNft = (nft) => {
     setName(nft.title);
     setDescription(nft.description);
-    setURL(api.baseUrl + nft.preview_image.url);
+    setURL(api.baseUrl + nft.preview_image);
   };
 
   const isEmpty = useCallback(() => {

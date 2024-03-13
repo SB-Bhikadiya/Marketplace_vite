@@ -86,7 +86,7 @@ const ItemDetailRedux = ({ nftId }) => {
         <div className="row mt-md-5 pt-md-4">
           <div className="col-md-6 text-center">
             <img
-              src={nft.preview_image && api.baseUrl + nft.preview_image.url}
+              src={nft.preview_image && api.baseUrl + nft.preview_image}
               className="img-fluid img-rounded mb-sm-30"
               alt=""
             />
@@ -277,7 +277,7 @@ const ItemDetailRedux = ({ nftId }) => {
                                 <img
                                   className="lazy"
                                   src={api.baseUrl + bid.author.avatar}
-                                  alt=""
+                                  alt={api.baseUrl + bid.author.avatar}
                                 />
                                 <i className="fa fa-check"></i>
                               </span>
@@ -306,7 +306,7 @@ const ItemDetailRedux = ({ nftId }) => {
                                 <img
                                   className="lazy"
                                   src={api.baseUrl + bid.author.avatar}
-                                  alt=""
+                                  alt={api.baseUrl + bid.author.avatar}
                                 />
                                 <i className="fa fa-check"></i>
                               </span>
