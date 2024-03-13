@@ -315,13 +315,13 @@ const Header = function () {
                               Create options
                             </NavLink>
                             <NavLink
-                              to={PAGE_ROUTES.MINT_PATH}
+                              to={PAGE_ROUTES.MINTER_PATH}
                               onClick={() => btn_icon(!showmenu)}
                             >
                               Nft Minting
                             </NavLink>
                             <NavLink
-                              to={PAGE_ROUTES.MINTER_PATH}
+                              to={PAGE_ROUTES.MINTER_GREY_PATH}
                               onClick={() => btn_icon(!showmenu)}
                             >
                               Nft Minting Grey
@@ -399,7 +399,7 @@ const Header = function () {
                               Etline Icon
                             </NavLink>
                             <NavLink
-                              to={PAGE_ROUTES.FONT_AWESOME_ICONS_PATH}
+                              to={PAGE_ROUTES.FONTAWESOME_ICONS_PATH}
                               onClick={() => btn_icon(!showmenu)}
                             >
                               Font Awesome Icon
@@ -423,7 +423,7 @@ const Header = function () {
                               Pricing Table
                             </NavLink>
                             <NavLink
-                              to={PAGE_ROUTES.PROGRESS_BAR_PATH}
+                              to={PAGE_ROUTES.PROGRESSBAR_PATH}
                               onClick={() => btn_icon(!showmenu)}
                             >
                               Progress bar

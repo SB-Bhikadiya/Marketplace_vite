@@ -1,4 +1,5 @@
 import {
+  useWeb3Modal,
   useWeb3ModalAccount,
   useWeb3ModalProvider,
 } from "@web3modal/ethers/react";
@@ -14,14 +15,18 @@ export const MarketplaceContext = createContext({});
 export const MarketplaceProvider = ({ children }) => {
   const { address, chainId, isConnected } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
+  const {open} = useWeb3Modal();
 
   useEffect(() => {
-    localStorage.setItem(ADDRESS_KEY, address);
-    localStorage.setItem(CHAIN_ID_KEY, `${chainId}`);
-    localStorage.setItem(CONNECTION_KEY, `${isConnected}`);
-
+    if (!localStorage.getItem(ADDRESS_KEY)) { 
+      open()
+    }
+      localStorage.setItem(ADDRESS_KEY, address);
+      localStorage.setItem(CHAIN_ID_KEY, `${chainId}`);
+      localStorage.setItem(CONNECTION_KEY, `${isConnected}`);
+    console.log('MARKETPLACE USE EFFECTED');
     return () => {};
-  }, [address, chainId, isConnected]);
+  }, [address, chainId, isConnected,open]);
 
   const contextValue = {
     marketplace: undefined,

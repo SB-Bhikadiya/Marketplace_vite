@@ -1,16 +1,18 @@
-import { useEffect, useState } from "react";
+import { navigate } from "@reach/router";
+import { useFormik } from "formik";
+import { useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
 import { createGlobalStyle } from "styled-components";
+import * as Yup from "yup";
 import { settings } from "../../constants";
 import { COLLECTION_ENDPOINT } from "../../constants/endpoints";
 import { ADDRESS_KEY } from "../../constants/keys";
-import { AxiosInstance } from "../../core/axios";
-import { pinFileToIPFS } from "../../core/nft/pinata";
-import Footer from "../components/footer";
-import { useFormik } from "formik";
-import * as Yup from "yup";
-import { navigate } from "@reach/router";
 import { PAGE_ROUTES } from "../../constants/routes";
+import { AxiosInstance } from "../../core/axios";
+import { MarketplaceContext } from "../../core/marketplace";
+import { pinFileToIPFS, pinJSONToIPFS } from "../../core/nft/pinata";
+import useAlert from "../components/Alert";
+import Footer from "../components/footer";
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
     background: #403f83;
@@ -82,6 +84,9 @@ const Createpage = () => {
     collection_name: Yup.string().required("Collection Name is required"),
   });
 
+  const {provideCollection} = useContext(MarketplaceContext);
+  const {showAlert} = useAlert();
+
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -95,15 +100,27 @@ const Createpage = () => {
       collection_name: "",
     },
     validationSchema,
-    onSubmit: (values) => {
-      console.log("Form submitted:", values);
+    onSubmit:async  (values) => {
+      try {
+        const collection = await provideCollection(values.collection_address);
+        const {pinataUrl} =await  pinJSONToIPFS(values);
+        const tx = await collection
+            .safeMint(localStorage.getItem(ADDRESS_KEY), pinataUrl);
+        await tx.wait();
+        showAlert('success', 'NFT Minted');
+        // navigate(PAGE_ROUTES.HOME_PATH)
+      } catch (error) {
+        showAlert('error', 'Something went wrong while minting NFT');
+      }
     },
+    
   });
 
   const [collections, setCollections] = useState([]);
 
   useEffect(() => {
-    const getUsersCollections = () => {
+
+    const getUsersCollections = async () => {
       AxiosInstance.get(COLLECTION_ENDPOINT, {
         params: { creator: localStorage.getItem(ADDRESS_KEY) },
       }).then((response) => {
@@ -384,7 +401,10 @@ const Createpage = () => {
                 Create Collection
               </button>
 
-              <button className="btn-main" type="submit">
+              <button className="btn-main" 
+          onClick={formik.handleSubmit}
+              
+              type="submit" >
                 Create NFT
               </button>
             </form>
@@ -431,15 +451,12 @@ const Createpage = () => {
                 <span>
                   <h4>{formik.values.name}</h4>
                 </span>
-                <div className="nft__item_price">
-                  0.08 ETH<span>1/20</span>
-                </div>
                 <div className="nft__item_action">
-                  <span>Place a bid</span>
+                  <span>{formik.values.name}</span>
                 </div>
                 <div className="nft__item_like">
                   <i className="fa fa-heart"></i>
-                  <span>50</span>
+                  <span>{formik.values.collection_name}</span>
                 </div>
 
                 <div className="row mt-5">

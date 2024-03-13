@@ -61,6 +61,7 @@ import { createGlobalStyle } from "styled-components";
 import { PAGE_ROUTES } from "../constants/routes";
 import { MarketplaceProvider } from "../core/marketplace";
 import Web3ModalProvider from "../core/modal";
+import useAlert from "./components/Alert";
 import CreateCollection from "./pages/CreateCollection";
 
 const GlobalStyles = createGlobalStyle`
@@ -87,12 +88,15 @@ const PosedRouter = ({ children }) => (
 );
 
 const App = () => {
+  const {AlertComponent} = useAlert();
+  
   return (
     <div className="wraper">
       <Web3ModalProvider>
         <MarketplaceProvider>
           <GlobalStyles />
           <Header />
+          {AlertComponent && <AlertComponent/>}
           <PosedRouter>
             <ScrollTop path={PAGE_ROUTES.ROOT_PATH}>
               <Home exact path={PAGE_ROUTES.ROOT_PATH}>

@@ -17,11 +17,11 @@ export const PAGE_ROUTES = {
   AUCTION_GREY_PATH: "/auction-grey",
   HELPCENTER_PATH: "/help-center",
   HELPCENTER_GREY_PATH: "/help-center-grey",
-  COLLECTION_PATH: "/colection/:collectionId",
-  GET_COLLECTION_PATH: (id) => `/colection/${id}`,
+  COLLECTION_PATH: "/collection/:collectionId",
+  GET_COLLECTION_PATH: (id) => `/collection/${id}`,
 
-  COLLECTION_GREY_PATH: "/colection-grey/:collectionId",
-  GET_COLLECTION_GREY_PATH: (id) => `/colection-grey/${id}`,
+  COLLECTION_GREY_PATH: "/collection-grey/:collectionId",
+  GET_COLLECTION_GREY_PATH: (id) => `/collection-grey/${id}`,
 
   ITEM_DETAIL_PATH: "/item-detail/:nftId",
   GET_ITEM_DETAIL_PATH: (id) => `/item-detail/${id}`,
