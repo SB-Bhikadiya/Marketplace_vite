@@ -28,8 +28,8 @@ const CarouselCollectionRedux = () => {
             <CustomSlide
               key={index}
               index={index + 1}
-              avatar={api.baseUrl + item.author.avatar.url}
-              banner={api.baseUrl + item.banner.url}
+              avatar={api.baseUrl + item.author.avatar}
+              banner={api.baseUrl + item.banner}
               username={item.name}
               uniqueId={item.unique_id}
               collectionId={item.id}

@@ -151,12 +151,6 @@ const Header = function () {
                         <div className="item-dropdown">
                           <div className="dropdown" onClick={closeHomeMenu}>
                             <NavLink
-                              to={PAGE_ROUTES.HOME_GREY_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Homepage Grey
-                            </NavLink>
-                            <NavLink
                               to={PAGE_ROUTES.HOME_PATH}
                               onClick={() => btn_icon(!showmenu)}
                             >
@@ -168,24 +162,14 @@ const Header = function () {
                             >
                               Homepage 1
                             </NavLink>
-                            <NavLink
-                              to={PAGE_ROUTES.HOME_1_GREY_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Homepage 1 Grey
-                            </NavLink>
+
                             <NavLink
                               to={PAGE_ROUTES.HOME_2_PATH}
                               onClick={() => btn_icon(!showmenu)}
                             >
                               Homepage 2
                             </NavLink>
-                            <NavLink
-                              to={PAGE_ROUTES.HOME_2_GREY_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Homepage 2 Grey
-                            </NavLink>
+
                             <NavLink
                               to={PAGE_ROUTES.HOME_3_PATH}
                               onClick={() => btn_icon(!showmenu)}
@@ -238,24 +222,14 @@ const Header = function () {
                             >
                               Items Details
                             </NavLink>
-                            <NavLink
-                              to={`${PAGE_ROUTES.GET_ITEM_DETAIL_GREY_PATH(1)}`}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Items Details Grey
-                            </NavLink>
+
                             <NavLink
                               to={PAGE_ROUTES.AUCTION_PATH}
                               onClick={() => btn_icon(!showmenu)}
                             >
                               Live Auction
                             </NavLink>
-                            <NavLink
-                              to={PAGE_ROUTES.AUCTION_GREY_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Live Auction Grey
-                            </NavLink>
+
                             <NavLink
                               to={PAGE_ROUTES.HELPCENTER_PATH}
                               onClick={() => btn_icon(!showmenu)}
@@ -284,12 +258,7 @@ const Header = function () {
                             >
                               Author
                             </NavLink>
-                            <NavLink
-                              to={`${PAGE_ROUTES.GET_AUTHOR_GREY_PATH(1)}`}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Author Grey
-                            </NavLink>
+
                             <NavLink
                               to={PAGE_ROUTES.WALLET_PATH}
                               onClick={() => btn_icon(!showmenu)}
@@ -303,10 +272,10 @@ const Header = function () {
                               Create
                             </NavLink>
                             <NavLink
-                              to={PAGE_ROUTES.CREATE_2_PATH}
+                              to={PAGE_ROUTES.CREATE_LISTING_PATH}
                               onClick={() => btn_icon(!showmenu)}
                             >
-                              Create 2
+                              Create Listing
                             </NavLink>
                             <NavLink
                               to={PAGE_ROUTES.CREATE_OPTIONS_PATH}
@@ -320,12 +289,7 @@ const Header = function () {
                             >
                               Nft Minting
                             </NavLink>
-                            <NavLink
-                              to={PAGE_ROUTES.MINTER_GREY_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Nft Minting Grey
-                            </NavLink>
+
                             <NavLink
                               to={PAGE_ROUTES.NEWS_PATH}
                               onClick={() => btn_icon(!showmenu)}
@@ -457,24 +421,17 @@ const Header = function () {
                       {openHomeMenu && (
                         <div className="item-dropdown">
                           <div className="dropdown" onClick={closeHomeMenu}>
-                            <NavLink to={PAGE_ROUTES.HOME_GREY_PATH}>
-                              Homepage Grey
-                            </NavLink>
                             <NavLink to={PAGE_ROUTES.ROOT_PATH}>
                               Homepage
                             </NavLink>
                             <NavLink to={PAGE_ROUTES.HOME_1_PATH}>
                               Homepage 1
                             </NavLink>
-                            <NavLink to={PAGE_ROUTES.HOME_1_GREY_PATH}>
-                              Homepage 1 Grey
-                            </NavLink>
+
                             <NavLink to={PAGE_ROUTES.HOME_2_PATH}>
                               Homepage 2
                             </NavLink>
-                            <NavLink to={PAGE_ROUTES.HOME_2_GREY_PATH}>
-                              Homepage 2 Grey
-                            </NavLink>
+
                             <NavLink to={PAGE_ROUTES.HOME_3_PATH}>
                               Homepage 3
                             </NavLink>
@@ -499,52 +456,33 @@ const Header = function () {
                             <NavLink to={PAGE_ROUTES.EXPLORE_PATH}>
                               Explore
                             </NavLink>
-                            <NavLink to={PAGE_ROUTES.EXPLORE_GREY_PATH}>
-                              Explore Grey
-                            </NavLink>
+
                             <NavLink to={PAGE_ROUTES.EXPLORE_2_PATH}>
                               Explore 2
                             </NavLink>
-                            <NavLink to={PAGE_ROUTES.EXPLORE_2_GREY_PATH}>
-                              Explore 2 Grey
-                            </NavLink>
+
                             <NavLink to={PAGE_ROUTES.RANKING_PATH}>
                               Ranking
                             </NavLink>
-                            <NavLink to={PAGE_ROUTES.RANKING_GREY_PATH}>
-                              Ranking Grey
-                            </NavLink>
+
                             <NavLink
                               to={`${PAGE_ROUTES.GET_COLLECTION_PATH(1)}`}
                             >
                               Collection
                             </NavLink>
-                            <NavLink
-                              to={`${PAGE_ROUTES.GET_COLLECTION_GREY_PATH(1)}`}
-                            >
-                              Collection Grey
-                            </NavLink>
+
                             <NavLink
                               to={`${PAGE_ROUTES.GET_ITEM_DETAIL_PATH(1)}`}
                             >
                               Items Details
                             </NavLink>
-                            <NavLink
-                              to={`${PAGE_ROUTES.GET_ITEM_DETAIL_GREY_PATH(1)}`}
-                            >
-                              Items Details Grey
-                            </NavLink>
+
                             <NavLink to={PAGE_ROUTES.AUCTION_PATH}>
                               Live Auction
                             </NavLink>
-                            <NavLink to={PAGE_ROUTES.AUCTION_GREY_PATH}>
-                              Live Auction Grey
-                            </NavLink>
+
                             <NavLink to={PAGE_ROUTES.HELPCENTER_PATH}>
                               Help Center
-                            </NavLink>
-                            <NavLink to={PAGE_ROUTES.HELPCENTER_GREY_PATH}>
-                              Help Center Grey
                             </NavLink>
                           </div>
                         </div>
@@ -567,11 +505,7 @@ const Header = function () {
                             <NavLink to={`${PAGE_ROUTES.GET_AUTHOR_PATH(1)}`}>
                               Author
                             </NavLink>
-                            <NavLink
-                              to={`${PAGE_ROUTES.GET_AUTHOR_GREY_PATH(1)}`}
-                            >
-                              Author Grey
-                            </NavLink>
+
                             <NavLink to={PAGE_ROUTES.WALLET_PATH}>
                               Wallet
                             </NavLink>
@@ -581,11 +515,9 @@ const Header = function () {
                             <NavLink to={PAGE_ROUTES.CREATE_COLLECTION_PATH}>
                               Create Collection
                             </NavLink>
-                            <NavLink to={PAGE_ROUTES.CREATE_GREY_PATH}>
-                              Create Grey
-                            </NavLink>
-                            <NavLink to={PAGE_ROUTES.CREATE_2_PATH}>
-                              Create 2
+
+                            <NavLink to={PAGE_ROUTES.CREATE_LISTING_PATH}>
+                              Create Listing
                             </NavLink>
                             <NavLink to={PAGE_ROUTES.CREATE_OPTIONS_PATH}>
                               Create Option
@@ -593,9 +525,7 @@ const Header = function () {
                             <NavLink to={PAGE_ROUTES.MINTER_PATH}>
                               Nft Minting
                             </NavLink>
-                            <NavLink to={PAGE_ROUTES.MINTER_GREY_PATH}>
-                              Nft Minting Grey
-                            </NavLink>
+
                             <NavLink to={PAGE_ROUTES.NEWS_PATH}>News</NavLink>
                             <NavLink to={PAGE_ROUTES.GALLERY_PATH}>
                               Gallery

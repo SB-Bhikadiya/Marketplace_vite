@@ -2,7 +2,7 @@ import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createGlobalStyle } from "styled-components";
 import api from "../../core/api";
-import { fetchAuthorList } from "../../store/actions/thunks";
+import { fetchHotCollections } from "../../store/actions/thunks";
 import * as selectors from "../../store/selectors";
 import ColumnNewRedux from "../components/ColumnNewRedux";
 import Footer from "../components/footer";
@@ -83,24 +83,6 @@ const GlobalStyles = createGlobalStyle`
   #scroll-to-top div {
     background: #ff343f;
   }
-  .mainside{
-    .connect-wal{
-      display: none;
-    }
-    .logout{
-      display: flex;
-      align-items: center;
-    }
-    .de-menu-notification .d-count{
-      background: #FF343F;
-    }
-    .de-menu-notification .popshow span.viewaall, .de-menu-profile .popshow .d-name span.name{
-      color: #FF343F;
-    }
-    .de-menu-profile .popshow .d-wallet #btn_copy:hover{
-      background: #FF343F;
-    }
-  }
   @media only screen and (max-width: 1199px) { 
     .navbar {
       background: #212428;
@@ -108,80 +90,76 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-const Colection = ({ authorId }) => {
+const Collection = function ({ collectionId = 1 }) {
   const [openMenu, setOpenMenu] = React.useState(true);
   const [openMenu1, setOpenMenu1] = React.useState(false);
-  const [openMenu2, setOpenMenu2] = React.useState(false);
   const handleBtnClick = () => {
     setOpenMenu(!openMenu);
     setOpenMenu1(false);
-    setOpenMenu2(false);
     document.getElementById("Mainbtn").classList.add("active");
     document.getElementById("Mainbtn1").classList.remove("active");
-    document.getElementById("Mainbtn2").classList.remove("active");
   };
   const handleBtnClick1 = () => {
     setOpenMenu1(!openMenu1);
-    setOpenMenu2(false);
     setOpenMenu(false);
     document.getElementById("Mainbtn1").classList.add("active");
     document.getElementById("Mainbtn").classList.remove("active");
-    document.getElementById("Mainbtn2").classList.remove("active");
-  };
-  const handleBtnClick2 = () => {
-    setOpenMenu2(!openMenu2);
-    setOpenMenu(false);
-    setOpenMenu1(false);
-    document.getElementById("Mainbtn2").classList.add("active");
-    document.getElementById("Mainbtn").classList.remove("active");
-    document.getElementById("Mainbtn1").classList.remove("active");
   };
 
   const dispatch = useDispatch();
-  const authorsState = useSelector(selectors.authorsState);
-  const author = authorsState.data ? authorsState.data[0] : {};
+  const hotCollectionsState = useSelector(selectors.hotCollectionsState);
+  const hotCollections = hotCollectionsState.data
+    ? hotCollectionsState.data[0]
+    : {};
 
   useEffect(() => {
-    dispatch(fetchAuthorList(authorId));
-  }, [dispatch, authorId]);
+    dispatch(fetchHotCollections(collectionId));
+  }, [dispatch, collectionId]);
 
   return (
     <div className="greyscheme">
       <GlobalStyles />
+      {hotCollections.author && hotCollections.author.banner && (
+        <section
+          id="profile_banner"
+          className="jumbotron breadcumb no-bg"
+          style={{
+            backgroundImage: `url(${
+              api.baseUrl + hotCollections.author.banner
+            })`,
+          }}
+        >
+          <div className="mainbreadcumb"></div>
+        </section>
+      )}
 
-      <section className="container no-bottom">
+      <section className="container d_coll no-top no-bottom">
         <div className="row">
-          <div className="spacer-double"></div>
           <div className="col-md-12">
-            <div className="d_profile de-flex">
-              <div className="de-flex-col">
-                <div className="profile_avatar">
-                  {author.avatar && (
-                    <img src={api.baseUrl + author.avatar} alt="" />
-                  )}
-                  <i className="fa fa-check"></i>
-                  <div className="profile_name">
-                    <h4>
-                      {author.username}
-                      <span className="profile_username">{author.social}</span>
+            <div className="d_profile">
+              <div className="profile_avatar">
+                {hotCollections.author && hotCollections.author.avatar && (
+                  <div className="d_profile_img">
+                    <img
+                      src={api.baseUrl + hotCollections.author.avatar}
+                      alt=""
+                    />
+                    <i className="fa fa-check"></i>
+                  </div>
+                )}
+                <div className="profile_name">
+                  <h4>
+                    {hotCollections.name}
+                    <div className="clearfix"></div>
+                    {hotCollections.author && hotCollections.author.wallet && (
                       <span id="wallet" className="profile_wallet">
-                        {author.wallet}
+                        {hotCollections.author.wallet}
                       </span>
-                      <button id="btn_copy" title="Copy Text">
-                        Copy
-                      </button>
-                    </h4>
-                  </div>
-                </div>
-              </div>
-              <div className="profile_follow de-flex">
-                <div className="de-flex-col">
-                  <div className="profile_follower">
-                    {author.followers} followers
-                  </div>
-                </div>
-                <div className="de-flex-col">
-                  <span className="btn-main">Follow</span>
+                    )}
+                    <button id="btn_copy" title="Copy Text">
+                      Copy
+                    </button>
+                  </h4>
                 </div>
               </div>
             </div>
@@ -193,15 +171,12 @@ const Colection = ({ authorId }) => {
         <div className="row">
           <div className="col-lg-12">
             <div className="items_filter">
-              <ul className="de_nav text-left">
+              <ul className="de_nav">
                 <li id="Mainbtn" className="active">
                   <span onClick={handleBtnClick}>On Sale</span>
                 </li>
                 <li id="Mainbtn1" className="">
-                  <span onClick={handleBtnClick1}>Created</span>
-                </li>
-                <li id="Mainbtn2" className="">
-                  <span onClick={handleBtnClick2}>Liked</span>
+                  <span onClick={handleBtnClick1}>Owned</span>
                 </li>
               </ul>
             </div>
@@ -209,16 +184,15 @@ const Colection = ({ authorId }) => {
         </div>
         {openMenu && (
           <div id="zero1" className="onStep fadeIn">
-            <ColumnNewRedux shuffle showLoadMore={false} authorId={author.id} />
+            <ColumnNewRedux
+              shuffle
+              showLoadMore={false}
+              authorId={hotCollections.author ? hotCollections.author.id : 1}
+            />
           </div>
         )}
         {openMenu1 && (
           <div id="zero2" className="onStep fadeIn">
-            <ColumnNewRedux shuffle showLoadMore={false} authorId={author.id} />
-          </div>
-        )}
-        {openMenu2 && (
-          <div id="zero3" className="onStep fadeIn">
             <ColumnNewRedux shuffle showLoadMore={false} />
           </div>
         )}
@@ -228,4 +202,4 @@ const Colection = ({ authorId }) => {
     </div>
   );
 };
-export default memo(Colection);
+export default memo(Collection);

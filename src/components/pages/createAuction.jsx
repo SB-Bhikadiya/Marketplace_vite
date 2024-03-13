@@ -52,7 +52,7 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-const Createpage = () => {
+const CreateAuction = () => {
   const [files, setFiles] = useState([]);
   const [isActive, setIsActive] = useState(false);
 
@@ -414,4 +414,4 @@ const Createpage = () => {
   );
 };
 
-export default Createpage;
+export default CreateAuction;

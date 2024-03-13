@@ -84,8 +84,8 @@ const Createpage = () => {
     collection_name: Yup.string().required("Collection Name is required"),
   });
 
-  const {provideCollection} = useContext(MarketplaceContext);
-  const {showAlert} = useAlert();
+  const { provideCollection } = useContext(MarketplaceContext);
+  const { showAlert } = useAlert();
 
   const formik = useFormik({
     initialValues: {
@@ -100,26 +100,26 @@ const Createpage = () => {
       collection_name: "",
     },
     validationSchema,
-    onSubmit:async  (values) => {
+    onSubmit: async (values) => {
       try {
         const collection = await provideCollection(values.collection_address);
-        const {pinataUrl} =await  pinJSONToIPFS(values);
-        const tx = await collection
-            .safeMint(localStorage.getItem(ADDRESS_KEY), pinataUrl);
+        const { pinataUrl } = await pinJSONToIPFS(values);
+        const tx = await collection.safeMint(
+          localStorage.getItem(ADDRESS_KEY),
+          pinataUrl
+        );
         await tx.wait();
-        showAlert('success', 'NFT Minted');
+        showAlert("success", "NFT Minted");
         // navigate(PAGE_ROUTES.HOME_PATH)
       } catch (error) {
-        showAlert('error', 'Something went wrong while minting NFT');
+        showAlert("error", "Something went wrong while minting NFT");
       }
     },
-    
   });
 
   const [collections, setCollections] = useState([]);
 
   useEffect(() => {
-
     const getUsersCollections = async () => {
       AxiosInstance.get(COLLECTION_ENDPOINT, {
         params: { creator: localStorage.getItem(ADDRESS_KEY) },
@@ -197,87 +197,91 @@ const Createpage = () => {
             <form onSubmit={formik.handleSubmit}>
               {/* Metadata fields */}
               <div className="field-set">
-          <h5>Upload file</h5>
-          <div className="d-create-file">
-            <p id="file_name">PNG, JPG, GIF, WEBP or MP4. Max 200mb.</p>
+                <h5>Upload file</h5>
+                <div className="d-create-file">
+                  <p id="file_name">PNG, JPG, GIF, WEBP or MP4. Max 200mb.</p>
 
-            <div className="browse">
-              <input
-                type="button"
-                id="get_file"
-                className="btn-main"
-                value="Browse"
-              />
-              <input
-                id="upload_file"
-                type="file"
-                multiple
-                onChange={onChangeImage}
-              />
-            </div>
-          </div>
-          <div className="spacer-10"></div>
-        </div>
+                  <div className="browse">
+                    <input
+                      type="button"
+                      id="get_file"
+                      className="btn-main"
+                      value="Browse"
+                    />
+                    <input
+                      id="upload_file"
+                      type="file"
+                      multiple
+                      onChange={onChangeImage}
+                    />
+                  </div>
+                </div>
+                <div className="spacer-10"></div>
+              </div>
 
-        {/* Other form fields */}
-        <div className="form-group">
-          <h5>Name</h5>
-          <input
-            className="form-control"
-            type="text"
-            name="name"
-            value={formik.values.name}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.name && formik.errors.name && (
-            <div className="error-message">{formik.errors.name}</div>
-          )}
-        </div>
+              {/* Other form fields */}
+              <div className="form-group">
+                <h5>Name</h5>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="name"
+                  value={formik.values.name}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.name && formik.errors.name && (
+                  <div className="error-message">{formik.errors.name}</div>
+                )}
+              </div>
 
-        <div className="form-group">
-          <h5>Description</h5>
-          <textarea
-            className="form-control"
-            name="description"
-            value={formik.values.description}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.description && formik.errors.description && (
-            <div className="error-message">{formik.errors.description}</div>
-          )}
-        </div>
+              <div className="form-group">
+                <h5>Description</h5>
+                <textarea
+                  className="form-control"
+                  name="description"
+                  value={formik.values.description}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.description && formik.errors.description && (
+                  <div className="error-message">
+                    {formik.errors.description}
+                  </div>
+                )}
+              </div>
 
-        <div className="form-group">
-          <h5>Image</h5>
-          <input
-            className="form-control"
-            type="text"
-            name="image"
-            value={formik.values.image}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.image && formik.errors.image && (
-            <div className="error-message">{formik.errors.image}</div>
-          )}
-        </div>
+              <div className="form-group">
+                <h5>Image</h5>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="image"
+                  value={formik.values.image}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.image && formik.errors.image && (
+                  <div className="error-message">{formik.errors.image}</div>
+                )}
+              </div>
 
-        <div className="form-group">
-          <h5>External URL</h5>
-          <input
-            className="form-control"
-            type="text"
-            name="external_url"
-            value={formik.values.external_url}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.external_url && formik.errors.external_url && (
-            <div className="error-message">{formik.errors.external_url}</div>
-          )}
-        </div>
+              <div className="form-group">
+                <h5>External URL</h5>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="external_url"
+                  value={formik.values.external_url}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.external_url && formik.errors.external_url && (
+                  <div className="error-message">
+                    {formik.errors.external_url}
+                  </div>
+                )}
+              </div>
 
               {/* Attribute fields */}
               {formik.values.attributes.map((attribute, index) => (
@@ -336,75 +340,103 @@ const Createpage = () => {
               </button>
               {/* Other fields */}
               <div className="form-group">
-          <h5>Animation URL</h5>
-          <input
-            className="form-control"
-            type="text"
-            name="animation_url"
-            value={formik.values.animation_url}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.animation_url && formik.errors.animation_url && (
-            <div className="error-message">{formik.errors.animation_url}</div>
-          )}
-        </div>
+                <h5>Animation URL</h5>
+                <input
+                  className="form-control"
+                  type="text"
+                  name="animation_url"
+                  value={formik.values.animation_url}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.animation_url &&
+                  formik.errors.animation_url && (
+                    <div className="error-message">
+                      {formik.errors.animation_url}
+                    </div>
+                  )}
+              </div>
 
-        <div className="form-group">
-          <h5>Background Color</h5>
-          <input
-            className="form-control"
-            type="color"
-            name="background_color"
-            value={formik.values.background_color}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.background_color && formik.errors.background_color && (
-            <div className="error-message">{formik.errors.background_color}</div>
-          )}
-        </div>
-        <div className="container">
-
-              <div className="nft my-4">
-                <Slider {...settings}>
-                  {collections &&
-                    collections.map((collection, index) => {
-                      return (
-                        <div className="itm" onClick={() => {
-                          formik.setValues({...formik.values,collection_address:collection.nft , collection_name:collection.name})}} key={index} >
-                          <div className="nft_coll" style={formik.values.collection_name == collection.name ? {background:'#8364E2'}:{}}>
-                            <div className="nft_wrap">
-                              <span>
-                                <img
-                                  src={collection.image}
-                                  className="lazy img-fluid"
-                                  alt=""
-                                />
-                              </span>
-                            </div>
-                            <div className="nft_coll_info py-2">
-                              <span >
-                                <h4>{collection.name}</h4>
-                              </span>
-                              <span style={{color:'black'}}>{collection.symbol}</span>
+              <div className="form-group">
+                <h5>Background Color</h5>
+                <input
+                  className="form-control"
+                  type="color"
+                  name="background_color"
+                  value={formik.values.background_color}
+                  onChange={formik.handleChange}
+                  onBlur={formik.handleBlur}
+                />
+                {formik.touched.background_color &&
+                  formik.errors.background_color && (
+                    <div className="error-message">
+                      {formik.errors.background_color}
+                    </div>
+                  )}
+              </div>
+              <div className="container">
+                <div className="nft my-4">
+                  <Slider {...settings}>
+                    {collections &&
+                      collections.map((collection, index) => {
+                        return (
+                          <div
+                            className="itm"
+                            onClick={() => {
+                              formik.setValues({
+                                ...formik.values,
+                                collection_address: collection.nft,
+                                collection_name: collection.name,
+                              });
+                            }}
+                            key={index}
+                          >
+                            <div
+                              className="nft_coll"
+                              style={
+                                formik.values.collection_name == collection.name
+                                  ? { background: "#8364E2" }
+                                  : {}
+                              }
+                            >
+                              <div className="nft_wrap">
+                                <span>
+                                  <img
+                                    src={collection.image}
+                                    className="lazy img-fluid"
+                                    alt=""
+                                  />
+                                </span>
+                              </div>
+                              <div className="nft_coll_info py-2">
+                                <span>
+                                  <h4>{collection.name}</h4>
+                                </span>
+                                <span style={{ color: "black" }}>
+                                  {collection.symbol}
+                                </span>
+                              </div>
                             </div>
                           </div>
-                        </div>
-                      );
-                    })}
-                </Slider>
+                        );
+                      })}
+                  </Slider>
+                </div>
               </div>
-        </div>
 
-              <button onClick={()=> navigate(PAGE_ROUTES.CREATE_COLLECTION_PATH)} className="btn-main my-2" type="submit">
+              <button
+                onClick={() => navigate(PAGE_ROUTES.CREATE_COLLECTION_PATH)}
+                className="btn-main my-2"
+                type="submit"
+              >
                 Create Collection
               </button>
 
-              <button className="btn-main" 
-          onClick={formik.handleSubmit}
-              
-              type="submit" >
+              <button
+                className="btn-main"
+                onClick={formik.handleSubmit}
+                type="submit"
+              >
                 Create NFT
               </button>
             </form>
@@ -412,65 +444,7 @@ const Createpage = () => {
 
           <div className="col-lg-3 col-sm-6 col-xs-12">
             <h5>Preview item</h5>
-            <div
-              className="nft__item m-0"
-              style={
-                formik.values.background_color
-                  ? { backgroundColor: formik.values.background_color }
-                  : {}
-              }
-            >
-              {/* 
-              <div className="de_countdown">
-                <Clock deadline="December, 30, 2021" />
-              </div>
-               */}
-              <div className="author_list_pp">
-                <span>
-                  <img
-                    className="lazy"
-                    src="./img/author/author-1.jpg"
-                    alt=""
-                  />
-                  <i className="fa fa-check"></i>
-                </span>
-              </div>
-              <div className="nft__item_wrap">
-                <span>
-                  {formik.values.image && (
-                    <img
-                      src={formik.values.image}
-                      id="get_file_2"
-                      className="lazy nft__item_preview"
-                      alt=""
-                    />
-                  )}
-                </span>
-              </div>
-              <div className="nft__item_info">
-                <span>
-                  <h4>{formik.values.name}</h4>
-                </span>
-                <div className="nft__item_action">
-                  <span>{formik.values.name}</span>
-                </div>
-                <div className="nft__item_like">
-                  <i className="fa fa-heart"></i>
-                  <span>{formik.values.collection_name}</span>
-                </div>
-
-                <div className="row mt-5">
-                  {formik.values.attributes.map((attribute, index) => (
-                    <div className="col-lg-4 col-md-6 col-sm-6" key={index}>
-                      <div className="nft_attr">
-                        <h5>{attribute.trait_type}</h5>
-                        <h4>{attribute.value}</h4>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </div>
+            <NFTCard token={formik.values} />
           </div>
         </div>
       </section>
@@ -479,5 +453,61 @@ const Createpage = () => {
     </div>
   );
 };
+
+function NFTCard(props) {
+  return (
+    <div className="nft__item m-2" onClick={props.onClick}>
+      {/* 
+    <div className="de_countdown">
+      <Clock deadline="December, 30, 2021" />
+    </div>
+      <div className="author_list_pp">
+        <span>
+          <img className="lazy" src="./img/author/author-1.jpg" alt="" />
+          <i className="fa fa-check"></i>
+        </span>
+      </div>
+        */}
+      <div className="nft__item_wrap">
+        <span>
+          {props.token.image && (
+            <img
+              src={props.token.image}
+              id="get_file_2"
+              className="lazy nft__item_preview"
+              alt=""
+            />
+          )}
+        </span>
+      </div>
+      <div className="nft__item_info">
+        <span>
+          <h4>{props.token.name}</h4>
+        </span>
+        <div className="nft__item_action">
+          <span>{props.token.collection_name}</span>
+        </div>
+        <div className="nft__item_like">
+          <i className="fa fa-heart"></i>
+          <span></span>
+        </div>
+        {!props.disableAttribute && (
+          <div className="row mt-5">
+            {props.token.attributes.map((attribute, index) => (
+              <div className="col-lg-4 col-md-6 col-sm-6" key={index}>
+                <div className="nft_attr">
+                  <h5>{attribute.trait_type}</h5>
+                  <h4>{attribute.value}</h4>
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export { NFTCard };
 
 export default Createpage;

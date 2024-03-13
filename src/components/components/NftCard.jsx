@@ -46,7 +46,7 @@ const NftCard = ({
           <span onClick={() => navigateTo(`${nft.author_link}/1`)}>
             <img
               className="lazy"
-              src={api.baseUrl + nft.author.avatar.url}
+              src={api.baseUrl + nft.author.avatar}
               alt=""
             />
             <i className="fa fa-check"></i>

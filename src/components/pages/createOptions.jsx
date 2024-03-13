@@ -74,7 +74,7 @@ const Createpage = () => {
               Choose "Single" if you want your collectible to be one of a kind
               or "Multiple" if you want to sell one collectible times
             </p>
-            <Link to={PAGE_ROUTES.CREATE_2_PATH} className="opt-create">
+            <Link to={PAGE_ROUTES.CREATE_LISTING_PATH} className="opt-create">
               <img src="./img/misc/coll-single.png" alt="" />
               <h3>Single</h3>
             </Link>
