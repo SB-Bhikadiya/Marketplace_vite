@@ -1,13 +1,13 @@
-import React, { useEffect, useState } from "react";
+import  { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { createGlobalStyle } from "styled-components";
 import { TOKEN_ENDPOINT } from "../../constants/endpoints";
-import { ADDRESS_KEY, ALERT_DANGER } from "../../constants/keys";
+import { ADDRESS_KEY } from "../../constants/keys";
 import { AxiosInstance } from "../../core/axios";
-import useAlert from "../components/Alert";
 import Clock from "../components/Clock";
 import Footer from "../components/footer";
 import { NFTCard } from "./create";
+import { Swal } from "../../core/sweet-alert";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -110,8 +110,6 @@ const CreateAuction = () => {
     tokenURI: "",
   });
 
-  const { showAlert } = useAlert();
-
   useEffect(() => {
     async function fetchNFTs() {
       try {
@@ -120,7 +118,11 @@ const CreateAuction = () => {
         });
         setTokens(response.data);
       } catch (error) {
-        showAlert(ALERT_DANGER, "Something went wrong");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong! while fetching NFTs",
+        });
       }
     }
     fetchNFTs();

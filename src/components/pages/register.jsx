@@ -1,6 +1,12 @@
-import React from 'react';
-import Footer from '../components/footer';
-import { createGlobalStyle } from 'styled-components';
+import Footer from "../components/footer";
+import { createGlobalStyle } from "styled-components";
+import { pinFileToIPFS } from "../../core/nft/pinata";
+import { useFormik } from "formik";
+import * as Yup from "yup";
+import { ADDRESS_KEY } from "../../constants/keys";
+import { AxiosInstance } from "../../core/axios";
+import { SIGNUP_ENDPOINT } from "../../constants/endpoints";
+import { Swal } from "../../core/sweet-alert";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -36,97 +42,240 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
+const Register = () => {
+  const allowedTypes = [
+    "image/png",
+    "image/jpeg",
+    "image/gif",
+    "image/webp",
+    "video/mp4",
+  ];
+  const maxSizeInBytes = 20 * 1024 * 1024; // 200 MB
 
+  const formik = useFormik({
+    initialValues: {
+      username: "",
+      password: "",
+      email: "",
+      wallet: localStorage.getItem(ADDRESS_KEY),
+      avatar: "",
+    },
+    validationSchema: Yup.object({
+      username: Yup.string()
+        .min(3, "Username must be at least 3 characters")
+        .required("Username is required"),
+      password: Yup.string()
+        .min(6, "Password must be at least 6 characters")
+        .required("Password is required"),
+      email: Yup.string()
+        .email("Invalid email address")
+        .required("Email is required"),
+      avatar: Yup.string().required("avatar is required"),
+      wallet: Yup.string().required("Wallet is required"),
+    }),
+    onSubmit: async (values) => {
+       try {
+        await AxiosInstance.post(
+          SIGNUP_ENDPOINT, 
+          values
+        );
+        Swal.fire("Account created successfully");
 
-const register= () => (
-<div>
-<GlobalStyles />
+       } catch (error) {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: 'Something went wrong while creating account may user already exist with wallet address',
+        });
+       }
+    },
+  });
 
-  <section className='jumbotron breadcumb no-bg' style={{backgroundImage: `url(${'./img/background/subheader.jpg'})`}}>
-    <div className='mainbreadcumb'>
-      <div className='container'>
-        <div className='row'>
-          <div className="col-md-12 text-center">
-              <h1>Register</h1>
-              <p>Anim pariatur cliche reprehenderit</p>
+  const onChangeImage = async (e) => {
+    try {
+      if (
+        allowedTypes.includes(e.target.files[0].type) &&
+        e.target.files[0].size < maxSizeInBytes
+      ) {
+        const formData = new FormData();
+        const file = e.target.files[0];
+        formData.append("file", file);
+
+        const pinataOptions = JSON.stringify({
+          cidVersion: 0,
+        });
+        formData.append("pinataOptions", pinataOptions);
+
+        const response = await pinFileToIPFS(formData);
+        formik.setFieldValue("avatar", response.pinataUrl);
+      } else {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: 'File should be PNG, JPG, GIF, WEBP or MP4. Max 20mb.',
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+  return (
+    <div>
+      <GlobalStyles />
+
+      <section
+        className="jumbotron breadcumb no-bg"
+        style={{ backgroundImage: `url(${"./img/background/subheader.jpg"})` }}
+      >
+        <div className="mainbreadcumb">
+          <div className="container">
+            <div className="row">
+              <div className="col-md-12 text-center">
+                <h1>Register</h1>
+                <p>Anim pariatur cliche reprehenderit</p>
+              </div>
+            </div>
           </div>
         </div>
-      </div>
+      </section>
+
+      <section className="container">
+        <div className="row">
+          <div className="col-md-8 offset-md-2">
+            <h3>Do not have an account? Register now.</h3>
+            <p>
+              Sed ut perspiciatis unde omnis iste natus error sit voluptatem
+              accusantium doloremque laudantium, totam rem aperiam, eaque ipsa
+              quae ab illo inventore veritatis et quasi architecto beatae vitae
+              dicta sunt explicabo.
+            </p>
+
+            <div className="spacer-10"></div>
+
+            <form
+              name="contactForm"
+              id="contact_form"
+              className="form-border"
+              action="#"
+            >
+              <div className="row">
+                <div className={`col-lg-12 col-md-12 col-sm-12`}>
+                  <div className="field-set">
+                    <h5>Upload file</h5>
+                    <div className="d-create-file">
+                      <p id="file_name">
+                        PNG, JPG, GIF, WEBP or MP4. Max 20mb.
+                      </p>
+                      <div className="browse">
+                        <input
+                          type="button"
+                          id="get_file"
+                          className="btn-main"
+                          value="Browse"
+                        />
+                        <input
+                          id="upload_file"
+                          type="file"
+                          multiple
+                          onChange={onChangeImage}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className="col-lg-12 col-md-12 col-sm-12">
+                  {formik.values.avatar && (
+                    <div className="nft_coll_pp">
+                      <span>
+                        <img
+                          className="lazy"
+                          src={formik.values.avatar}
+                          alt=""
+                        />
+                      </span>
+                      <i className="fa fa-check"></i>
+                    </div>
+                  )}
+                </div>
+            <div className="spacer-10"></div>
+
+                <div className="spacer-10"></div>
+
+                <div className="col-md-12">
+                  <div className="field-set">
+                    <label htmlFor="username">Choose a Username:</label>
+                    <input
+                      type="text"
+                      id="username"
+                      name="username"
+                      className="form-control"
+                      value={formik.values.username}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    />
+                    {formik.touched.username && formik.errors.username ? (
+                      <div>{formik.errors.username}</div>
+                    ) : null}
+                  </div>
+                </div>
+
+                <div className="col-md-12">
+                  <div className="field-set">
+                    <label htmlFor="email">Email Address:</label>
+                    <input
+                      type="text"
+                      id="email"
+                      name="email"
+                      className="form-control"
+                      value={formik.values.email}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    />
+                    {formik.touched.email && formik.errors.email ? (
+                      <div>{formik.errors.email}</div>
+                    ) : null}
+                  </div>
+                </div>
+
+                <div className="col-md-12">
+                  <div className="field-set">
+                    <label htmlFor="password">Password:</label>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      className="form-control"
+                      value={formik.values.password}
+                      onChange={formik.handleChange}
+                      onBlur={formik.handleBlur}
+                    />
+                    {formik.touched.password && formik.errors.password ? (
+                      <div>{formik.errors.password}</div>
+                    ) : null}
+                    
+                  </div>
+                </div>
+                <div className="spacer-10"></div>
+                <div className="col-md-12">
+                  <div className="field-set">
+        <input
+          type="button"
+          id="submit"
+          className="btn-main"
+          onClick={formik.handleSubmit}
+          value="Register"
+        />
+              </div>
+              </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </section>
+
+      <Footer />
     </div>
-  </section>
-
-  <section className='container'>
-    <div className="row">
-
-    <div className="col-md-8 offset-md-2">
-      <h3>Don't have an account? Register now.</h3>
-                    <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo.</p>
-
-      <div className="spacer-10"></div>
-
-      <form name="contactForm" id='contact_form' className="form-border" action='#'>
-
-                        <div className="row">
-
-                            <div className="col-md-6">
-                                <div className="field-set">
-                                    <label>Name:</label>
-                                    <input type='text' name='name' id='name' className="form-control"/>
-                                </div>
-                            </div>
-
-                            <div className="col-md-6">
-                                <div className="field-set">
-                                    <label>Email Address:</label>
-                                    <input type='text' name='email' id='email' className="form-control"/>
-                                </div>
-                            </div>
-
-                            <div className="col-md-6">
-                                <div className="field-set">
-                                    <label>Choose a Username:</label>
-                                    <input type='text' name='username' id='username' className="form-control"/>
-                                </div>
-                            </div>
-
-                            <div className="col-md-6">
-                                <div className="field-set">
-                                    <label>Phone:</label>
-                                    <input type='text' name='phone' id='phone' className="form-control"/>
-                                </div>
-                            </div>
-
-                            <div className="col-md-6">
-                                <div className="field-set">
-                                    <label>Password:</label>
-                                    <input type='text' name='password' id='password' className="form-control"/>
-                                </div>
-                            </div>
-
-                            <div className="col-md-6">
-                                <div className="field-set">
-                                    <label>Re-enter Password:</label>
-                                    <input type='text' name='re-password' id='re-password' className="form-control"/>
-                                </div>
-                            </div>
-
-                            <div className="col-md-12">
-                                <div id='submit' className="pull-left">
-                                    <input type='submit' id='send_message' value='Register Now' className="btn btn-main color-2" />
-                                </div>
-                                
-                                <div className="clearfix"></div>
-                            </div>
-
-                        </div>
-                    </form>
-      </div>
-
-    </div>
-  </section>
-
-  <Footer />
-</div>
-
-);
-export default register;
+  );
+};
+export default Register;

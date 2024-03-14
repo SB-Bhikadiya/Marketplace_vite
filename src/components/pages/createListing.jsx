@@ -1,15 +1,15 @@
 import { ethers } from "ethers";
-import React, { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
 import { createGlobalStyle } from "styled-components";
 import { TOKEN_ENDPOINT } from "../../constants/endpoints";
-import { ADDRESS_KEY, ALERT_DANGER, ALERT_SUCCESS } from "../../constants/keys";
+import { ADDRESS_KEY } from "../../constants/keys";
 import { AxiosInstance } from "../../core/axios";
 import { MarketplaceContext } from "../../core/marketplace";
-import useAlert from "../components/Alert";
 import Clock from "../components/Clock";
 import Footer from "../components/footer";
 import { NFTCard } from "./create";
+import { Swal } from "../../core/sweet-alert";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -76,7 +76,6 @@ const CreateListing = () => {
     },
     tokenURI: "",
   });
-  const { showAlert } = useAlert();
   const { provideNFTMarketplace, provideCollection } =
     useContext(MarketplaceContext);
 
@@ -91,9 +90,14 @@ const CreateListing = () => {
         ethers.parseEther(selectedToken.price.toString())
       );
       await tx.wait();
-      showAlert(ALERT_SUCCESS, "Listed successfully");
+      Swal.fire("Listed successfully");
+
     } catch (error) {
-      showAlert(ALERT_DANGER, "Something went wrong");
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong! while fetching Tokens",
+      });
     }
   }
 
@@ -105,7 +109,11 @@ const CreateListing = () => {
         });
         setTokens(response.data);
       } catch (error) {
-        showAlert(ALERT_DANGER, "Something went wrong");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong! while fetching Tokens",
+        });
       }
     }
     fetchNFTs();

@@ -8,6 +8,7 @@ import useAlert from "../components/Alert";
 import Clock from "../components/Clock";
 import Footer from "../components/footer";
 import { NFTCard } from "./create";
+import { Swal } from "../../core/sweet-alert";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -110,7 +111,6 @@ const Createpage = () => {
     tokenURI: "",
   });
 
-  const { showAlert } = useAlert();
 
   useEffect(() => {
     async function fetchNFTs() {
@@ -120,7 +120,11 @@ const Createpage = () => {
         });
         setTokens(response.data);
       } catch (error) {
-        showAlert(ALERT_DANGER, "Something went wrong");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong! while fetching tokens",
+        });
       }
     }
     fetchNFTs();

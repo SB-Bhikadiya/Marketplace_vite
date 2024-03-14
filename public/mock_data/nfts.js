@@ -1,6 +1,7 @@
 import { Axios, Canceler } from '../../../core/axios';
 import * as actions from '../../actions';
-import api from '../../../core/api';
+import api from '../../src/core/api';
+
 
 export const fetchNftsBreakdown = (authorId) => async (dispatch, getState) => {
   
@@ -44,7 +45,7 @@ export const fetchNftDetail = (nftId) => async (dispatch) => {
   dispatch(actions.getNftDetail.request(Canceler.cancel));
 
   try {
-    const { data } = await Axios.get(`${api.baseUrl}/nft_detail.json`, {
+    const { data } = await Axios.get(`${api.baseUrl}/${api.nfts}`, {
       cancelToken: Canceler.token,
       params: {}
     });

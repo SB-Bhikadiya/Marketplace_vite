@@ -47,8 +47,8 @@ const NftCard = ({
           <span onClick={() => navigateTo(`${nft.author_link}/1`)}>
             <img
               className="lazy"
-              src={api.baseUrl + nft.author.avatar}
-              alt={api.baseUrl + nft.author.avatar}
+              src={nft.author.avatar}
+              alt={nft.author.avatar}
             />
             <i className="fa fa-check"></i>
           </span>
@@ -58,9 +58,9 @@ const NftCard = ({
             <span>
               <img
                 onLoad={onImgLoad}
-                src={api.baseUrl + nft.preview_image}
+                src={nft.preview_image}
                 className="lazy nft__item_preview"
-                alt={api.baseUrl + nft.preview_image}
+                alt={nft.preview_image}
               />
             </span>
           </Outer>

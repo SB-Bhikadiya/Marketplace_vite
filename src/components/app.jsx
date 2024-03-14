@@ -43,7 +43,6 @@ import { PAGE_ROUTES } from "../constants/routes";
 import { AuthProvider } from "../core/auth";
 import { MarketplaceProvider } from "../core/marketplace";
 import Web3ModalProvider from "../core/modal";
-import useAlert from "./components/Alert";
 import CreateCollection from "./pages/CreateCollection";
 import CreateAuction from "./pages/createAuction";
 import CreateListing from "./pages/createListing";
@@ -72,7 +71,6 @@ const PosedRouter = ({ children }) => (
 );
 
 const App = () => {
-  const { AlertComponent } = useAlert();
 
   return (
     <div className="wraper">
@@ -80,7 +78,6 @@ const App = () => {
         <MarketplaceProvider>
           <GlobalStyles />
           <Header />
-          {AlertComponent && <AlertComponent />}
           <AuthProvider>
             <PosedRouter>
               <ScrollTop path={PAGE_ROUTES.ROOT_PATH}>

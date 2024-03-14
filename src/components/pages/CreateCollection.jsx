@@ -9,7 +9,7 @@ import Footer from "../components/footer";
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
-import useAlert from "../components/Alert";
+import { Swal } from "../../core/sweet-alert";
 
 
 const validationSchema = Yup.object().shape({
@@ -67,7 +67,6 @@ const GlobalStyles = createGlobalStyle`
 
 const CreateCollection = () => {
   const { provideNFTFactory } = useContext(MarketplaceContext);
-  const { showAlert, AlertComponent ,hideAlert} = useAlert();
 
   const createCollection = async () => {
     try {
@@ -106,7 +105,6 @@ const CreateCollection = () => {
   const onChangeImage = async (e) => {
     try {
       if (allowedTypes.includes(e.target.files[0].type)  && e.target.files[0].size < maxSizeInBytes) {
-        hideAlert();
         const formData = new FormData();
         const file = e.target.files[0];
         formData.append("file", file);
@@ -119,8 +117,11 @@ const CreateCollection = () => {
         const response = await pinFileToIPFS(formData);
         formik.setFieldValue('item_image', response.pinataUrl);
       } else {
-        console.log('ere');
-        showAlert('danger', 'File should be PNG, JPG, GIF, WEBP or MP4. Max 20mb.');
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: 'File should be PNG, JPG, GIF, WEBP or MP4. Max 20mb.',
+        });
       }
     } catch (error) {
       console.log(error);
@@ -169,7 +170,6 @@ const CreateCollection = () => {
             />
           </div>
         </div>
-        {AlertComponent && <AlertComponent />}
 
         {formik.touched.item_image && formik.errors.item_image && (
           <div className="error-message">{formik.errors.item_image}</div>

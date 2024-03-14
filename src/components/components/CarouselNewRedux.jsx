@@ -43,17 +43,17 @@ const CarouselNewRedux = () => {
             <div className="itm" index={index + 1} key={index}>
               <div className="d-item">
                 <div className="nft__item">
-                  {nft.deadline && (
+                  {Date.parse(nft.deadline) !== 0  ? (
                     <div className="de_countdown">
                       <Clock deadline={nft.deadline} />
                     </div>
-                  )}
+                  ) : <></>}
                   <div className="author_list_pp">
                     <span onClick={() => window.open("/home1", "_self")}>
                       <img
                         className="lazy"
-                        src={api.baseUrl + nft.author.avatar}
-                        alt={api.baseUrl + nft.author.avatar}
+                        src={nft.author.avatar }
+                        alt={nft.author.avatar}
                       />
                       <i className="fa fa-check"></i>
                     </span>
@@ -65,10 +65,10 @@ const CarouselNewRedux = () => {
                     <Outer>
                       <span>
                         <img
-                          src={api.baseUrl + nft.preview_image}
+                          src={nft.preview_image}
                           className="lazy nft__item_preview"
                           onLoad={onImgLoad}
-                          alt={api.baseUrl + nft.preview_image}
+                          alt={nft.preview_image}
                         />
                       </span>
                     </Outer>

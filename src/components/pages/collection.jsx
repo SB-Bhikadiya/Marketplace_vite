@@ -59,7 +59,7 @@ const Collection = function ({ collectionId = 1 }) {
           className="jumbotron breadcumb no-bg"
           style={{
             backgroundImage: `url(${
-              api.baseUrl + hotCollections.author.banner
+              hotCollections.author.banner
             })`,
           }}
         >
@@ -75,8 +75,8 @@ const Collection = function ({ collectionId = 1 }) {
                 {hotCollections.author && hotCollections.author.avatar && (
                   <div className="d_profile_img">
                     <img
-                      src={api.baseUrl + hotCollections.author.avatar}
-                      alt={api.baseUrl + hotCollections.author.avatar}
+                      src={hotCollections.author.avatar}
+                      alt={hotCollections.author.avatar}
                     />
                     <i className="fa fa-check"></i>
                   </div>

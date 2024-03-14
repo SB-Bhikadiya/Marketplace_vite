@@ -11,8 +11,8 @@ import { PAGE_ROUTES } from "../../constants/routes";
 import { AxiosInstance } from "../../core/axios";
 import { MarketplaceContext } from "../../core/marketplace";
 import { pinFileToIPFS, pinJSONToIPFS } from "../../core/nft/pinata";
-import useAlert from "../components/Alert";
 import Footer from "../components/footer";
+import { Swal } from "../../core/sweet-alert";
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
     background: #403f83;
@@ -85,7 +85,6 @@ const Createpage = () => {
   });
 
   const { provideCollection } = useContext(MarketplaceContext);
-  const { showAlert } = useAlert();
 
   const formik = useFormik({
     initialValues: {
@@ -109,10 +108,15 @@ const Createpage = () => {
           pinataUrl
         );
         await tx.wait();
-        showAlert("success", "NFT Minted");
+        Swal.fire("NFT minted");
         // navigate(PAGE_ROUTES.HOME_PATH)
       } catch (error) {
-        showAlert("error", "Something went wrong while minting NFT");
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong!",
+          footer: '<a href="#">Why do I have this issue?</a>'
+        });
       }
     },
   });

@@ -1,6 +1,7 @@
+export const BASE_URL = 'http://127.0.0.1:3000';
 export const LOGIN_ENDPOINT = "/auth/login";
-export const SIGNUP_ENDPOINT = "/user";
-export const USER_ENDPOINT = "/user";
+export const SIGNUP_ENDPOINT = "/users";
+export const USER_ENDPOINT = "/users";
 export const COLLECTION_ENDPOINT = "/collection";
 export const ACCEPTED_ENDPOINT = '/accepted';
 export const BOUGHT_ENDPOINT = '/bought';
@@ -12,4 +13,6 @@ export const PLACED_BID_ENDPOINT = '/placed-bid';
 export const RESULTED_AUCTION_ENDPOINT = '/resulted-auction';
 export const TOKEN_ENDPOINT = '/token';
 export const METADATA_ENDPOINT = '/metadata';
+export const NFTS_ENDPOINT = '/nfts';
+
 

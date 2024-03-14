@@ -1,6 +1,8 @@
+import { BASE_URL, NFTS_ENDPOINT } from "../constants/endpoints";
+
 const api = {
-    baseUrl: '/mock_data', //mock data base folder
-    nfts: '/nfts.json',
+    baseUrl: BASE_URL, //mock data base folder
+    nfts: NFTS_ENDPOINT,
     nftShowcases: '/nft_showcases.json',
     authors: '/authors.json',
     authorsSales: '/author_ranks.json',
