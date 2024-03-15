@@ -41,9 +41,9 @@ export const AuthProvider = ({ children }) => {
     if (token) {
       const decodedToken = jwtDecode(token);
       if (decodedToken.exp * 1000 > Date.now()) {
-        setIsLoggedIn(true);
         setUser(decodedToken.sub);
       } else {
+        console.log('Expored');
         localStorage.removeItem(MARKETPLACE_TOKEN); // Remove expired JWT
       }
     }
@@ -67,7 +67,7 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, register, login, logout, getHeaders, isLoggedIn }}
+      value={{ user, loading, register, login, logout, getHeaders ,isLoggedInCheck}}
     >
       {children}
     </AuthContext.Provider>

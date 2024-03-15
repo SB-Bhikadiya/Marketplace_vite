@@ -35,6 +35,10 @@ export const categories = [
 
 export const status = [
     {
+        value: 'none',
+        label: 'None'
+    },
+    {
         value: 'buy_now',
         label: 'Buy Now'
     },

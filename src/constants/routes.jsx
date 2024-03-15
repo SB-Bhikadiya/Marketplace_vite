@@ -23,7 +23,7 @@ export const PAGE_ROUTES = {
   COLLECTION_GREY_PATH: "/collection-grey/:collectionId",
   GET_COLLECTION_GREY_PATH: (id) => `/collection-grey/${id}`,
 
-  ITEM_DETAIL_PATH: "/item-detail/:nftId",
+  ITEM_DETAIL_PATH: "/item-detail/:nftId/:tokenId",
   GET_ITEM_DETAIL_PATH: (id) => `/item-detail/${id}`,
 
   ITEM_DETAIL_GREY_PATH: "/item-detail-grey/:nftId",

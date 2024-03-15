@@ -1,8 +1,8 @@
-import { navigate } from "@reach/router";
 import React, { memo } from "react";
 import styled from "styled-components";
 import api from "../../core/api";
 import Clock from "./Clock";
+import { useNavigate } from "react-router-dom";
 
 const Outer = styled.div`
   display: flex;
@@ -22,6 +22,8 @@ const NftMintCard = ({
   onImgLoad,
   onSelectNft,
 }) => {
+  const navigate = useNavigate();
+
   const navigateTo = (link) => {
     navigate(link);
   };

@@ -7,17 +7,18 @@ export const fetchHotCollections = (collectionId) => async (dispatch) => {
   dispatch(actions.getHotCollections.request(Canceler.cancel));
 
   try {
-    let filter = collectionId ? "id=" + collectionId : "";
     const { data } = await Axios.get(
-      `${api.baseUrl + api.hotCollections}?${filter}`,
+      `${api.baseUrl + api.nfts}`,
       {
         cancelToken: Canceler.token,
-        params: {},
+        params: {
+          page:collectionId
+        },
         ...getHeaders(),
       }
     );
 
-    dispatch(actions.getHotCollections.success(data));
+    dispatch(actions.getHotCollections.success(data.data));
   } catch (err) {
     dispatch(actions.getHotCollections.failure(err));
   }

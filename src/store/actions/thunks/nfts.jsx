@@ -19,7 +19,7 @@ export const fetchNftsBreakdown = (authorId) => async (dispatch, getState) => {
       ...getHeaders(),
     });
 
-    dispatch(actions.getNftBreakdown.success(data));
+    dispatch(actions.getNftBreakdown.success(data.data));
   } catch (err) {
     dispatch(actions.getNftBreakdown.failure(err));
   }
@@ -41,15 +41,17 @@ export const fetchNftShowcase = () => async (dispatch) => {
   }
 };
 
-export const fetchNftDetail = (nftId) => async (dispatch) => {
+export const fetchNftDetail = (nftId,tokenId) => async (dispatch) => {
   dispatch(actions.getNftDetail.request(Canceler.cancel));
 
   try {
     const { data } = await Axios.get(
-      `${api.baseUrl}/${NFTS_ENDPOINT}/${nftId}`,
+      `${api.baseUrl}${NFTS_ENDPOINT}`,
       {
         cancelToken: Canceler.token,
-        params: {},
+        params: {
+          id:`${nftId}/${tokenId}`
+        },
         ...getHeaders(),
       }
     );

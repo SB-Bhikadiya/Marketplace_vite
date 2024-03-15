@@ -1,4 +1,4 @@
-import { Link } from "@reach/router";
+import { NavLink as Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import useOnclickOutside from "react-cool-onclickoutside";
 import Breakpoint, {
@@ -13,13 +13,8 @@ setDefaultBreakpoints([{ xs: 0 }, { l: 1199 }, { xl: 1200 }]);
 const NavLink = (props) => (
   <Link
     {...props}
-    getProps={({ isCurrent }) => {
-      // the object returned here is passed to the
-      // anchor element's props
-      return {
-        className: isCurrent ? "active" : "non-active",
-      };
-    }}
+    activeClassName="active"
+    className="non-active"
   />
 );
 
@@ -199,12 +194,7 @@ const Header = function () {
                             >
                               Explore
                             </NavLink>
-                            <NavLink
-                              to={PAGE_ROUTES.EXPLORE_2_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Explore 2
-                            </NavLink>
+                         
                             <NavLink
                               to={PAGE_ROUTES.RANKING_PATH}
                               onClick={() => btn_icon(!showmenu)}
@@ -451,11 +441,6 @@ const Header = function () {
                             <NavLink to={PAGE_ROUTES.EXPLORE_PATH}>
                               Explore
                             </NavLink>
-
-                            <NavLink to={PAGE_ROUTES.EXPLORE_2_PATH}>
-                              Explore 2
-                            </NavLink>
-
                             <NavLink to={PAGE_ROUTES.RANKING_PATH}>
                               Ranking
                             </NavLink>

@@ -1,4 +1,4 @@
-import { navigate } from "@reach/router";
+
 import { useFormik } from "formik";
 import { createGlobalStyle } from "styled-components";
 import * as Yup from "yup";
@@ -8,6 +8,7 @@ import { useAuth } from "../../core/auth";
 import { pinFileToIPFS } from "../../core/nft/pinata";
 import { Swal } from "../../core/sweet-alert";
 import Footer from "../components/footer";
+import { useNavigate } from "react-router-dom";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -44,6 +45,8 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const allowedTypes = [
     "image/png",
     "image/jpeg",

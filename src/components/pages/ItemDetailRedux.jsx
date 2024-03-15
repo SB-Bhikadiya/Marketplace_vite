@@ -38,7 +38,8 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-const ItemDetailRedux = ({ nftId }) => {
+const ItemDetailRedux = ({ nftId,tokenId }) => {
+
   const [openMenu0, setOpenMenu0] = React.useState(true);
   const [openMenu, setOpenMenu] = React.useState(false);
   const [openMenu1, setOpenMenu1] = React.useState(false);
@@ -76,8 +77,8 @@ const ItemDetailRedux = ({ nftId }) => {
   const [openCheckoutbid, setOpenCheckoutbid] = React.useState(false);
 
   useEffect(() => {
-    dispatch(fetchNftDetail(nftId));
-  }, [dispatch, nftId]);
+    dispatch(fetchNftDetail(nftId,tokenId));
+  }, [dispatch, nftId,tokenId]);
 
   return (
     <div>
@@ -86,7 +87,7 @@ const ItemDetailRedux = ({ nftId }) => {
         <div className="row mt-md-5 pt-md-4">
           <div className="col-md-6 text-center">
             <img
-              src={nft.preview_image && api.baseUrl + nft.preview_image}
+              src={nft.preview_image}
               className="img-fluid img-rounded mb-sm-30"
               alt=""
             />
@@ -126,7 +127,7 @@ const ItemDetailRedux = ({ nftId }) => {
                       <span>
                         <img
                           className="lazy"
-                          src={nft.author && api.baseUrl + nft.author.avatar}
+                          src={nft.author && nft.author.avatar}
                           alt=""
                         />
                         <i className="fa fa-check"></i>
@@ -144,7 +145,7 @@ const ItemDetailRedux = ({ nftId }) => {
                       <span>
                         <img
                           className="lazy"
-                          src={nft.author && api.baseUrl + nft.author.avatar}
+                          src={nft.author && nft.author.avatar}
                           alt=""
                         />
                         <i className="fa fa-check"></i>
@@ -185,7 +186,7 @@ const ItemDetailRedux = ({ nftId }) => {
                                   className="lazy"
                                   src={
                                     nft.author &&
-                                    api.baseUrl + nft.author.avatar
+                                    nft.author.avatar
                                   }
                                   alt=""
                                 />
@@ -199,69 +200,15 @@ const ItemDetailRedux = ({ nftId }) => {
                         </div>
 
                         <div className="row mt-5">
-                          <div className="col-lg-4 col-md-6 col-sm-6">
+                          {nft.metadata && nft.metadata.attributes.map((attriubute,index) => {
+                            return  (<div className="col-lg-4 col-md-6 col-sm-6" key={index}>
                             <div className="nft_attr">
-                              <h5>Background</h5>
-                              <h4>Yellowish Sky</h4>
-                              <span>85% have this trait</span>
+                              <h5>{attriubute.trait_type}</h5>
+                              <h4>{attriubute.value}</h4>
                             </div>
-                          </div>
-                          <div className="col-lg-4 col-md-6 col-sm-6">
-                            <div className="nft_attr">
-                              <h5>Eyes</h5>
-                              <h4>Purple Eyes</h4>
-                              <span>14% have this trait</span>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-md-6 col-sm-6">
-                            <div className="nft_attr">
-                              <h5>Nose</h5>
-                              <h4>Small Nose</h4>
-                              <span>45% have this trait</span>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-md-6 col-sm-6">
-                            <div className="nft_attr">
-                              <h5>Mouth</h5>
-                              <h4>Smile Red Lip</h4>
-                              <span>61% have this trait</span>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-md-6 col-sm-6">
-                            <div className="nft_attr">
-                              <h5>Neck</h5>
-                              <h4>Pink Ribbon</h4>
-                              <span>27% have this trait</span>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-md-6 col-sm-6">
-                            <div className="nft_attr">
-                              <h5>Hair</h5>
-                              <h4>Pink Short</h4>
-                              <span>35% have this trait</span>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-md-6 col-sm-6">
-                            <div className="nft_attr">
-                              <h5>Accessories</h5>
-                              <h4>Heart Necklace</h4>
-                              <span>33% have this trait</span>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-md-6 col-sm-6">
-                            <div className="nft_attr">
-                              <h5>Hat</h5>
-                              <h4>Cute Panda</h4>
-                              <span>62% have this trait</span>
-                            </div>
-                          </div>
-                          <div className="col-lg-4 col-md-6 col-sm-6">
-                            <div className="nft_attr">
-                              <h5>Clothes</h5>
-                              <h4>Casual Purple</h4>
-                              <span>78% have this trait</span>
-                            </div>
-                          </div>
+                          </div>)
+                          })}
+                         
                         </div>
                       </div>
                     </div>

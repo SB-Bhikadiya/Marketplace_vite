@@ -1,4 +1,4 @@
-import { navigate } from "@reach/router";
+
 import { useFormik } from "formik";
 import { useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
@@ -10,10 +10,14 @@ import { ADDRESS_KEY } from "../../constants/keys";
 import { PAGE_ROUTES } from "../../constants/routes";
 import { useAuth } from "../../core/auth";
 import { AxiosInstance } from "../../core/axios";
+import Select from "react-select";
+
 import { MarketplaceContext } from "../../core/marketplace";
 import { pinFileToIPFS, pinJSONToIPFS } from "../../core/nft/pinata";
 import { Swal } from "../../core/sweet-alert";
 import Footer from "../components/footer";
+import { categories, itemsType } from "../../constants/filters";
+import { useNavigate } from "react-router-dom";
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
     background: #403f83;
@@ -58,6 +62,8 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const Createpage = () => {
+  const navigate = useNavigate();
+
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Name is required"),
     description: Yup.string().required("Description is required"),
@@ -81,12 +87,42 @@ const Createpage = () => {
         message: "Please enter a valid hex color code",
       }
     ),
+    category:Yup.string().required("Category is required"),
+    item_type:Yup.string().required("Item type is required"),
     collection_address: Yup.string().required("Collection Address is required"),
     collection_name: Yup.string().required("Collection Name is required"),
   });
 
   const { provideCollection } = useContext(MarketplaceContext);
 
+  const defaultValue = {
+    value: null,
+    label: "Select Filter",
+  };
+  const customStyles = {
+    option: (base, state) => ({
+      ...base,
+      background: "#fff",
+      color: "#333",
+      borderRadius: state.isFocused ? "0" : 0,
+      "&:hover": {
+        background: "#eee",
+      },
+    }),
+    menu: (base) => ({
+      ...base,
+      borderRadius: 0,
+      marginTop: 0,
+    }),
+    menuList: (base) => ({
+      ...base,
+      padding: 0,
+    }),
+    control: (base, state) => ({
+      ...base,
+      padding: 2,
+    }),
+  };
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -96,6 +132,8 @@ const Createpage = () => {
       attributes: [{ trait_type: "", value: "" }],
       animation_url: "",
       background_color: "",
+      category: "",
+      item_type: "",
       collection_address: "",
       collection_name: "",
     },
@@ -110,7 +148,7 @@ const Createpage = () => {
         );
         await tx.wait();
         Swal.fire("NFT minted");
-        // navigate(PAGE_ROUTES.HOME_PATH)
+        navigate(PAGE_ROUTES.HOME_PATH)
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -289,6 +327,34 @@ const Createpage = () => {
                   </div>
                 )}
               </div>
+              <div className="form-group my-2">
+                <h5>Select Category</h5>
+              <div className="dropdownSelect one my-2">
+                <Select
+                  styles={customStyles}
+                  menuContainerStyle={{ zIndex: 999 }}
+                  options={[defaultValue, ...categories]}
+                  onChange={(option) => {
+                    formik.setFieldValue("category", option.value);
+                  }}
+                />
+              </div>
+              </div>
+
+              <div className="form-group my-2">
+                <h5>Select Item Type</h5>
+              <div className="dropdownSelect one my-2">
+                <Select
+                  styles={customStyles}
+                  menuContainerStyle={{ zIndex: 999 }}
+                  options={[defaultValue, ...itemsType]}
+                  onChange={(option) => {
+                    formik.setFieldValue("item_type", option.value);
+                  }}
+                />
+              </div>
+              </div>
+
 
               {/* Attribute fields */}
               {formik.values.attributes.map((attribute, index) => (

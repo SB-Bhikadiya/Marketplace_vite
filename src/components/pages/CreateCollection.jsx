@@ -1,4 +1,4 @@
-import { navigate } from "@reach/router";
+
 import  { useContext } from "react";
 import { createGlobalStyle } from "styled-components";
 import { ADDRESS_KEY } from "../../constants/keys";
@@ -10,6 +10,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 
 import { Swal } from "../../core/sweet-alert";
+import { useNavigate } from "react-router-dom";
 
 
 const validationSchema = Yup.object().shape({
@@ -66,6 +67,8 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const CreateCollection = () => {
+  const navigate = useNavigate();
+
   const { provideNFTFactory } = useContext(MarketplaceContext);
 
   const createCollection = async () => {

@@ -1,4 +1,4 @@
-import { navigate } from "@reach/router";
+
 import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Slider from "react-slick";
@@ -8,6 +8,7 @@ import { settings } from "../../constants";
 import api from "../../core/api";
 import { fetchNftShowcase } from "../../store/actions/thunks";
 import * as selectors from "../../store/selectors";
+import { useNavigate } from "react-router-dom";
 
 const SliderCarouselRedux = () => {
   const dispatch = useDispatch();
@@ -17,6 +18,9 @@ const SliderCarouselRedux = () => {
   useEffect(() => {
     dispatch(fetchNftShowcase());
   }, [dispatch]);
+
+  const navigate = useNavigate();
+
 
   const navigateTo = (link) => {
     navigate(link);

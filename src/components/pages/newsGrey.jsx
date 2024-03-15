@@ -1,12 +1,13 @@
-import { navigate } from "@reach/router";
+
 import moment from "moment";
-import React, { memo, useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createGlobalStyle } from "styled-components";
 import api from "../../core/api";
 import { getBlogPosts } from "../../store/actions/thunks";
 import * as selectors from "../../store/selectors";
 import Footer from "../components/footer";
+import { useNavigate } from "react-router-dom";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.white {
@@ -15,6 +16,8 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const News = () => {
+  const navigate = useNavigate();
+
   const navigateTo = (link) => {
     navigate(link);
   };

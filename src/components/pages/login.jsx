@@ -1,4 +1,4 @@
-import { navigate } from "@reach/router";
+
 import { useFormik } from "formik";
 import { createGlobalStyle } from "styled-components";
 import Swal from "sweetalert2";
@@ -6,6 +6,7 @@ import * as Yup from "yup";
 import { PAGE_ROUTES } from "../../constants/routes";
 import { useAuth } from "../../core/auth";
 import Footer from "../components/footer";
+import { useNavigate } from "react-router-dom";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -42,6 +43,8 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   const { login } = useAuth();
 
   const formik = useFormik({

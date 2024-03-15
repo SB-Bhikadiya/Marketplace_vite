@@ -1,8 +1,9 @@
-import { navigate } from "@reach/router";
+
 import React, { memo } from "react";
 import styled from "styled-components";
 import api from "../../core/api";
 import Clock from "./Clock";
+import { useNavigate } from "react-router-dom";
 
 const Outer = styled.div`
   display: flex;
@@ -21,6 +22,8 @@ const NftCard = ({
   height,
   onImgLoad,
 }) => {
+  const navigate = useNavigate();
+
   const navigateTo = (link) => {
     navigate(link);
   };
@@ -89,7 +92,7 @@ const NftCard = ({
             </div>
           )}
           <div className="nft__item_action">
-            <span onClick={() => navigateTo(`${nft.bid_link}/${nft.id}`)}>
+            <span onClick={() => navigateTo(nft.bid_link)}>
               {nft.status === "on_auction" ? "Place a bid" : "Buy Now"}
             </span>
           </div>
