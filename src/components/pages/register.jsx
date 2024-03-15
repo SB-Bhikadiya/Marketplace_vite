@@ -1,12 +1,13 @@
-import Footer from "../components/footer";
-import { createGlobalStyle } from "styled-components";
-import { pinFileToIPFS } from "../../core/nft/pinata";
+import { navigate } from "@reach/router";
 import { useFormik } from "formik";
+import { createGlobalStyle } from "styled-components";
 import * as Yup from "yup";
 import { ADDRESS_KEY } from "../../constants/keys";
-import { AxiosInstance } from "../../core/axios";
-import { SIGNUP_ENDPOINT } from "../../constants/endpoints";
+import { PAGE_ROUTES } from "../../constants/routes";
+import { useAuth } from "../../core/auth";
+import { pinFileToIPFS } from "../../core/nft/pinata";
 import { Swal } from "../../core/sweet-alert";
+import Footer from "../components/footer";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -51,6 +52,7 @@ const Register = () => {
     "video/mp4",
   ];
   const maxSizeInBytes = 20 * 1024 * 1024; // 200 MB
+  const { register } = useAuth();
 
   const formik = useFormik({
     initialValues: {
@@ -74,20 +76,17 @@ const Register = () => {
       wallet: Yup.string().required("Wallet is required"),
     }),
     onSubmit: async (values) => {
-       try {
-        await AxiosInstance.post(
-          SIGNUP_ENDPOINT, 
-          values
-        );
-        Swal.fire("Account created successfully");
-
-       } catch (error) {
+      try {
+        await register(values);
+        await Swal.fire("Account created successfully");
+        navigate(PAGE_ROUTES.LOGIN_PATH);
+      } catch (error) {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: 'Something went wrong while creating account may user already exist with wallet address',
+          text: "Something went wrong while creating account may user already exist with wallet address",
         });
-       }
+      }
     },
   });
 
@@ -112,7 +111,7 @@ const Register = () => {
         Swal.fire({
           icon: "error",
           title: "Oops...",
-          text: 'File should be PNG, JPG, GIF, WEBP or MP4. Max 20mb.',
+          text: "File should be PNG, JPG, GIF, WEBP or MP4. Max 20mb.",
         });
       }
     } catch (error) {
@@ -197,7 +196,7 @@ const Register = () => {
                     </div>
                   )}
                 </div>
-            <div className="spacer-10"></div>
+                <div className="spacer-10"></div>
 
                 <div className="spacer-10"></div>
 
@@ -252,23 +251,21 @@ const Register = () => {
                     {formik.touched.password && formik.errors.password ? (
                       <div>{formik.errors.password}</div>
                     ) : null}
-                    
                   </div>
                 </div>
                 <div className="spacer-10"></div>
                 <div className="col-md-12">
                   <div className="field-set">
-        <input
-          type="button"
-          id="submit"
-          className="btn-main"
-          onClick={formik.handleSubmit}
-          value="Register"
-        />
+                    <input
+                      type="button"
+                      id="submit"
+                      className="btn-main"
+                      onClick={formik.handleSubmit}
+                      value="Register"
+                    />
+                  </div>
+                </div>
               </div>
-              </div>
-              </div>
-
             </form>
           </div>
         </div>

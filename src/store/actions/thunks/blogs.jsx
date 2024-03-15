@@ -1,16 +1,20 @@
-import { Axios, Canceler } from '../../../core/axios';
-import * as actions from '../../actions';
-import api from '../../../core/api';
+import api from "../../../core/api";
+import { Axios, Canceler } from "../../../core/axios";
+import * as actions from "../../actions";
+import { getHeaders } from "../helper";
 
 export const getBlogPosts = (postId) => async (dispatch) => {
-
   dispatch(actions.getBlogPosts.request(Canceler.cancel));
 
   try {
-    const { data } = await Axios.get(`${api.baseUrl}${api.blogs}${postId ? '/single.json' : '/all.json'}`, {
-      cancelToken: Canceler.token,
-      params: {}
-    });
+    const { data } = await Axios.get(
+      `${api.baseUrl}${api.blogs}${postId ? "/single.json" : "/all.json"}`,
+      {
+        cancelToken: Canceler.token,
+        params: {},
+        ...getHeaders(),
+      }
+    );
 
     dispatch(actions.getBlogPosts.success(data));
   } catch (err) {
@@ -19,13 +23,13 @@ export const getBlogPosts = (postId) => async (dispatch) => {
 };
 
 export const getBlogComments = (postId) => async (dispatch) => {
-
   dispatch(actions.getComments.request(Canceler.cancel));
 
   try {
     const { data } = await Axios.get(`${api.baseUrl}${api.comments}`, {
       cancelToken: Canceler.token,
-      params: {}
+      params: {},
+      ...getHeaders(),
     });
 
     dispatch(actions.getComments.success(data));
@@ -35,13 +39,13 @@ export const getBlogComments = (postId) => async (dispatch) => {
 };
 
 export const getBlogTags = (postId) => async (dispatch) => {
-
   dispatch(actions.getTags.request(Canceler.cancel));
 
   try {
     const { data } = await Axios.get(`${api.baseUrl}${api.tags}`, {
       cancelToken: Canceler.token,
-      params: {}
+      params: {},
+      ...getHeaders(),
     });
 
     dispatch(actions.getTags.success(data));
@@ -51,12 +55,12 @@ export const getBlogTags = (postId) => async (dispatch) => {
 };
 
 export const getRecentPosts = () => async (dispatch) => {
-
   dispatch(actions.getRecentPosts.request(Canceler.cancel));
 
   try {
     const { data } = await Axios.get(`${api.baseUrl}${api.recent}`, {
-      cancelToken: Canceler.token
+      cancelToken: Canceler.token,
+      ...getHeaders(),
     });
 
     dispatch(actions.getRecentPosts.success(data));

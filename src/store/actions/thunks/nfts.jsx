@@ -1,10 +1,10 @@
-import { Axios, Canceler } from '../../../core/axios';
-import * as actions from '../../actions';
-import api from '../../../core/api';
-import { NFTS_ENDPOINT } from '../../../constants/endpoints';
+import { NFTS_ENDPOINT } from "../../../constants/endpoints";
+import api from "../../../core/api";
+import { Axios, Canceler } from "../../../core/axios";
+import * as actions from "../../actions";
+import { getHeaders } from "../helper";
 
 export const fetchNftsBreakdown = (authorId) => async (dispatch, getState) => {
-  
   //access the state
   const state = getState();
   console.log(state);
@@ -12,10 +12,11 @@ export const fetchNftsBreakdown = (authorId) => async (dispatch, getState) => {
   dispatch(actions.getNftBreakdown.request(Canceler.cancel));
 
   try {
-    let filter = authorId ? 'author='+authorId : '';
+    let filter = authorId ? "author=" + authorId : "";
     const { data } = await Axios.get(`${api.baseUrl}${api.nfts}?${filter}`, {
       cancelToken: Canceler.token,
-      params: {}
+      params: {},
+      ...getHeaders(),
     });
 
     dispatch(actions.getNftBreakdown.success(data));
@@ -25,13 +26,13 @@ export const fetchNftsBreakdown = (authorId) => async (dispatch, getState) => {
 };
 
 export const fetchNftShowcase = () => async (dispatch) => {
-
   dispatch(actions.getNftShowcase.request(Canceler.cancel));
 
   try {
     const { data } = await Axios.get(`${api.baseUrl}${api.nftShowcases}`, {
       cancelToken: Canceler.token,
-      params: {}
+      params: {},
+      ...getHeaders(),
     });
 
     dispatch(actions.getNftShowcase.success(data));
@@ -41,14 +42,17 @@ export const fetchNftShowcase = () => async (dispatch) => {
 };
 
 export const fetchNftDetail = (nftId) => async (dispatch) => {
-
   dispatch(actions.getNftDetail.request(Canceler.cancel));
 
   try {
-    const { data } = await Axios.get(`${api.baseUrl}/${NFTS_ENDPOINT}/${nftId}`, {
-      cancelToken: Canceler.token,
-      params: {}
-    });
+    const { data } = await Axios.get(
+      `${api.baseUrl}/${NFTS_ENDPOINT}/${nftId}`,
+      {
+        cancelToken: Canceler.token,
+        params: {},
+        ...getHeaders(),
+      }
+    );
 
     dispatch(actions.getNftDetail.success(data));
   } catch (err) {

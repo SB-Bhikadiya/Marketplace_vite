@@ -1,6 +1,7 @@
 export const BASE_URL = 'http://127.0.0.1:3000';
-export const LOGIN_ENDPOINT = "/auth/login";
-export const SIGNUP_ENDPOINT = "/users";
+export const REGISTER_ENDPOINT = "/users";
+export const LOGIN_ENDPOINT = "/users/login";
+
 export const USER_ENDPOINT = "/users";
 export const COLLECTION_ENDPOINT = "/collection";
 export const ACCEPTED_ENDPOINT = '/accepted';

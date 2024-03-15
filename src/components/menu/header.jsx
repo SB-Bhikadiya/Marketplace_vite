@@ -6,6 +6,7 @@ import Breakpoint, {
   setDefaultBreakpoints,
 } from "react-socks";
 import { PAGE_ROUTES } from "../../constants/routes";
+import UserProfilePopup from "../components/UserProfilePopup";
 
 setDefaultBreakpoints([{ xs: 0 }, { l: 1199 }, { xl: 1200 }]);
 
@@ -297,12 +298,6 @@ const Header = function () {
                               News
                             </NavLink>
                             <NavLink
-                              to={PAGE_ROUTES.GALLERY_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Gallery
-                            </NavLink>
-                            <NavLink
                               to={PAGE_ROUTES.LOGIN_PATH}
                               onClick={() => btn_icon(!showmenu)}
                             >
@@ -527,9 +522,7 @@ const Header = function () {
                             </NavLink>
 
                             <NavLink to={PAGE_ROUTES.NEWS_PATH}>News</NavLink>
-                            <NavLink to={PAGE_ROUTES.GALLERY_PATH}>
-                              Gallery
-                            </NavLink>
+
                             <NavLink to={PAGE_ROUTES.LOGIN_PATH}>login</NavLink>
                             <NavLink to={PAGE_ROUTES.LOGIN_2_PATH}>
                               login 2
@@ -711,50 +704,7 @@ const Header = function () {
                   src="../../img/author_single/author_thumbnail.jpg"
                   alt=""
                 />
-                {showpop && (
-                  <div className="popshow">
-                    <div className="d-name">
-                      <h4>Monica Lucas</h4>
-                      <span
-                        className="name"
-                        onClick={() => window.open("", "_self")}
-                      >
-                        Set display name
-                      </span>
-                    </div>
-                    <div className="d-balance">
-                      <h4>Balance</h4>
-                      12.858 ETH
-                    </div>
-                    <div className="d-wallet">
-                      <h4>My Wallet</h4>
-                      <span id="wallet" className="d-wallet-address">
-                        DdzFFzCqrhshMSxb9oW3mRo4MJrQkusV3fGFSTwaiu4wPBqMryA9DYVJCkW9n7twCffG5f5wX2sSkoDXGiZB1HPa7K7f865Kk4LqnrME
-                      </span>
-                      <button id="btn_copy" title="Copy Text">
-                        Copy
-                      </button>
-                    </div>
-                    <div className="d-line"></div>
-                    <ul className="de-submenu-profile">
-                      <li>
-                        <span>
-                          <i className="fa fa-user"></i> My profile
-                        </span>
-                      </li>
-                      <li>
-                        <span>
-                          <i className="fa fa-pencil"></i> Edit profile
-                        </span>
-                      </li>
-                      <li>
-                        <span>
-                          <i className="fa fa-sign-out"></i> Sign out
-                        </span>
-                      </li>
-                    </ul>
-                  </div>
-                )}
+                {showpop && <UserProfilePopup />}
               </div>
             </div>
           </div>

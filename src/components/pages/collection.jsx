@@ -1,7 +1,6 @@
 import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createGlobalStyle } from "styled-components";
-import api from "../../core/api";
 import { fetchHotCollections } from "../../store/actions/thunks";
 import * as selectors from "../../store/selectors";
 import ColumnNewRedux from "../components/ColumnNewRedux";
@@ -58,9 +57,7 @@ const Collection = function ({ collectionId = 1 }) {
           id="profile_banner"
           className="jumbotron breadcumb no-bg"
           style={{
-            backgroundImage: `url(${
-              hotCollections.author.banner
-            })`,
+            backgroundImage: `url(${hotCollections.author.banner})`,
           }}
         >
           <div className="mainbreadcumb"></div>

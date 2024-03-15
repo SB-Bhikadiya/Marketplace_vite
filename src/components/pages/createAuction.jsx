@@ -1,13 +1,14 @@
-import  { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { createGlobalStyle } from "styled-components";
 import { TOKEN_ENDPOINT } from "../../constants/endpoints";
 import { ADDRESS_KEY } from "../../constants/keys";
+import { useAuth } from "../../core/auth";
 import { AxiosInstance } from "../../core/axios";
+import { Swal } from "../../core/sweet-alert";
 import Clock from "../components/Clock";
 import Footer from "../components/footer";
 import { NFTCard } from "./create";
-import { Swal } from "../../core/sweet-alert";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -109,12 +110,14 @@ const CreateAuction = () => {
     },
     tokenURI: "",
   });
+  const { getHeaders } = useAuth();
 
   useEffect(() => {
     async function fetchNFTs() {
       try {
         const response = await AxiosInstance.get(TOKEN_ENDPOINT, {
           params: { owner: localStorage.getItem(ADDRESS_KEY) },
+          ...getHeaders(),
         });
         setTokens(response.data);
       } catch (error) {

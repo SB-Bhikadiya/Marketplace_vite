@@ -36,13 +36,13 @@ import Progressbar from "./pages/progressbar";
 import Register from "./pages/register";
 import Tabs from "./pages/tabs";
 import Wallet from "./pages/wallet";
-import Works from "./pages/works";
 
 import { createGlobalStyle } from "styled-components";
 import { PAGE_ROUTES } from "../constants/routes";
 import { AuthProvider } from "../core/auth";
 import { MarketplaceProvider } from "../core/marketplace";
 import Web3ModalProvider from "../core/modal";
+import PrivateRoute from "../core/private-route";
 import CreateCollection from "./pages/CreateCollection";
 import CreateAuction from "./pages/createAuction";
 import CreateListing from "./pages/createListing";
@@ -71,54 +71,139 @@ const PosedRouter = ({ children }) => (
 );
 
 const App = () => {
-
   return (
     <div className="wraper">
       <Web3ModalProvider>
         <MarketplaceProvider>
-          <GlobalStyles />
-          <Header />
           <AuthProvider>
+            <GlobalStyles />
+            <Header />
             <PosedRouter>
               <ScrollTop path={PAGE_ROUTES.ROOT_PATH}>
                 <Home exact path={PAGE_ROUTES.ROOT_PATH}>
                   <Redirect to={PAGE_ROUTES.HOME_PATH} />
                 </Home>
-                <Home1 path={PAGE_ROUTES.HOME_1_PATH} />
-                <Home2 path={PAGE_ROUTES.HOME_2_PATH} />
-                <Home3 path={PAGE_ROUTES.HOME_3_PATH} />
-                <Explore path={PAGE_ROUTES.EXPLORE_PATH} />
-                <Explore2 path={PAGE_ROUTES.EXPLORE_2_PATH} />
-                <RankingRedux path={PAGE_ROUTES.RANKING_PATH} />
-                <Auction path={PAGE_ROUTES.AUCTION_PATH} />
-                <Helpcenter path={PAGE_ROUTES.HELPCENTER_PATH} />
-                <Collection path={PAGE_ROUTES.COLLECTION_PATH} />
-                <ItemDetailRedux path={PAGE_ROUTES.ITEM_DETAIL_PATH} />
-                <Author path={PAGE_ROUTES.AUTHOR_PATH} />
-                <Wallet path={PAGE_ROUTES.WALLET_PATH} />
                 <Login path={PAGE_ROUTES.LOGIN_PATH} />
-                <LoginTwo path={PAGE_ROUTES.LOGIN_2_PATH} />
                 <Register path={PAGE_ROUTES.REGISTER_PATH} />
-                <Price path={PAGE_ROUTES.PRICE_PATH} />
-                <Works path={PAGE_ROUTES.WORKS_PATH} />
-                <News path={PAGE_ROUTES.NEWS_PATH} />
-                <NewsSingle path={PAGE_ROUTES.NEWS_SINGLE_PATH} />
-                <Create path={PAGE_ROUTES.CREATE_PATH} />
-                <CreateCollection path={PAGE_ROUTES.CREATE_COLLECTION_PATH} />
-                <CreateListing path={PAGE_ROUTES.CREATE_LISTING_PATH} />
-                <CreateAuction path={PAGE_ROUTES.CREATE_AUCTION_PATH} />
-                <Create3 path={PAGE_ROUTES.CREATE_3_PATH} />
-                <Createoption path={PAGE_ROUTES.CREATE_OPTIONS_PATH} />
-                <Activity path={PAGE_ROUTES.ACTIVITY_PATH} />
-                <Contact path={PAGE_ROUTES.CONTACT_PATH} />
-                <ElegantIcons path={PAGE_ROUTES.ELEGANT_ICONS_PATH} />
-                <EtlineIcons path={PAGE_ROUTES.ETLINE_ICONS_PATH} />
-                <FontAwesomeIcons path={PAGE_ROUTES.FONTAWESOME_ICONS_PATH} />
-                <Accordion path={PAGE_ROUTES.ACCORDION_PATH} />
-                <Alerts path={PAGE_ROUTES.ALERTS_PATH} />
-                <Progressbar path={PAGE_ROUTES.PROGRESSBAR_PATH} />
-                <Tabs path={PAGE_ROUTES.TABS_PATH} />
-                <Minter path={PAGE_ROUTES.MINTER_PATH} />
+                <PrivateRoute
+                  path={PAGE_ROUTES.HOME_1_PATH}
+                  component={Home1}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.HOME_2_PATH}
+                  component={Home2}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.HOME_3_PATH}
+                  component={Home3}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.EXPLORE_PATH}
+                  component={Explore}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.EXPLORE_2_PATH}
+                  component={Explore2}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.RANKING_PATH}
+                  component={RankingRedux}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.AUCTION_PATH}
+                  component={Auction}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.HELPCENTER_PATH}
+                  component={Helpcenter}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.COLLECTION_PATH}
+                  component={Collection}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.ITEM_DETAIL_PATH}
+                  component={ItemDetailRedux}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.AUTHOR_PATH}
+                  component={Author}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.WALLET_PATH}
+                  component={Wallet}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.LOGIN_2_PATH}
+                  component={LoginTwo}
+                />
+                <PrivateRoute path={PAGE_ROUTES.PRICE_PATH} component={Price} />
+                <PrivateRoute path={PAGE_ROUTES.NEWS_PATH} component={News} />
+                <PrivateRoute
+                  path={PAGE_ROUTES.NEWS_SINGLE_PATH}
+                  component={NewsSingle}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.CREATE_PATH}
+                  component={Create}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.CREATE_COLLECTION_PATH}
+                  component={CreateCollection}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.CREATE_LISTING_PATH}
+                  component={CreateListing}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.CREATE_AUCTION_PATH}
+                  component={CreateAuction}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.CREATE_3_PATH}
+                  component={Create3}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.CREATE_OPTIONS_PATH}
+                  component={Createoption}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.ACTIVITY_PATH}
+                  component={Activity}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.CONTACT_PATH}
+                  component={Contact}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.ELEGANT_ICONS_PATH}
+                  component={ElegantIcons}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.ETLINE_ICONS_PATH}
+                  component={EtlineIcons}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.FONTAWESOME_ICONS_PATH}
+                  component={FontAwesomeIcons}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.ACCORDION_PATH}
+                  component={Accordion}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.ALERTS_PATH}
+                  component={Alerts}
+                />
+                <PrivateRoute
+                  path={PAGE_ROUTES.PROGRESSBAR_PATH}
+                  component={Progressbar}
+                />
+                <PrivateRoute path={PAGE_ROUTES.TABS_PATH} component={Tabs} />
+                <PrivateRoute
+                  path={PAGE_ROUTES.MINTER_PATH}
+                  component={Minter}
+                />
               </ScrollTop>
             </PosedRouter>
           </AuthProvider>

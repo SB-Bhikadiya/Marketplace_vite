@@ -51,9 +51,8 @@ export const MarketplaceProvider = ({ children }) => {
           contextValue.signer
         );
         contextValue.factory = NFTFactoryContract.connect(contextValue.signer);
-      console.log(NFTFactoryContract.target);
-      console.log(NFTMarketplaceContract.target);
-
+        console.log(NFTFactoryContract.target);
+        console.log(NFTMarketplaceContract.target);
 
         console.log("WALLET INTRACTION");
       }

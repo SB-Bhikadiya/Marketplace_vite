@@ -8,11 +8,12 @@ import { settings } from "../../constants";
 import { COLLECTION_ENDPOINT } from "../../constants/endpoints";
 import { ADDRESS_KEY } from "../../constants/keys";
 import { PAGE_ROUTES } from "../../constants/routes";
+import { useAuth } from "../../core/auth";
 import { AxiosInstance } from "../../core/axios";
 import { MarketplaceContext } from "../../core/marketplace";
 import { pinFileToIPFS, pinJSONToIPFS } from "../../core/nft/pinata";
-import Footer from "../components/footer";
 import { Swal } from "../../core/sweet-alert";
+import Footer from "../components/footer";
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
     background: #403f83;
@@ -115,18 +116,20 @@ const Createpage = () => {
           icon: "error",
           title: "Oops...",
           text: "Something went wrong!",
-          footer: '<a href="#">Why do I have this issue?</a>'
+          footer: '<a href="#">Why do I have this issue?</a>',
         });
       }
     },
   });
 
   const [collections, setCollections] = useState([]);
+  const { getHeaders } = useAuth();
 
   useEffect(() => {
     const getUsersCollections = async () => {
       AxiosInstance.get(COLLECTION_ENDPOINT, {
         params: { creator: localStorage.getItem(ADDRESS_KEY) },
+        ...getHeaders(),
       }).then((response) => {
         setCollections(response.data || []);
       });
