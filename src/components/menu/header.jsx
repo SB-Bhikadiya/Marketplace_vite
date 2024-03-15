@@ -11,21 +11,14 @@ import UserProfilePopup from "../components/UserProfilePopup";
 setDefaultBreakpoints([{ xs: 0 }, { l: 1199 }, { xl: 1200 }]);
 
 const NavLink = (props) => (
-  <Link
-    {...props}
-    activeClassName="active"
-    className="non-active"
-  />
+  <Link {...props} activeClassName="active" className="non-active" />
 );
 
 const Header = function () {
-  const [openHomeMenu, setOpenHomeMenu] = React.useState(false);
   const [openExploreMenu, setOpenExploreMenu] = React.useState(false);
   const [openPagesMenu, setOpenPagesMenu] = React.useState(false);
   const [openIconsMenu, setOpenIconsMenu] = React.useState(false);
-  const handleHomeMenuBtnClick = () => {
-    setOpenHomeMenu(!openHomeMenu);
-  };
+
   const handleExploreMenuBtnClick = () => {
     setOpenExploreMenu(!openExploreMenu);
   };
@@ -35,9 +28,7 @@ const Header = function () {
   const handleIconsMenuBtnClick = () => {
     setOpenIconsMenu(!openIconsMenu);
   };
-  const closeHomeMenu = () => {
-    setOpenHomeMenu(false);
-  };
+
   const closeExploreMenu = () => {
     setOpenExploreMenu(false);
   };
@@ -48,9 +39,6 @@ const Header = function () {
     setOpenIconsMenu(false);
   };
 
-  const refHomeMenu = useOnclickOutside(() => {
-    closeHomeMenu();
-  });
   const refExploreMenu = useOnclickOutside(() => {
     closeExploreMenu();
   });
@@ -89,9 +77,6 @@ const Header = function () {
       } else {
         header.classList.remove("sticky");
         totop.classList.remove("show");
-      }
-      if (window.pageYOffset > sticky) {
-        closeHomeMenu();
       }
     });
     return () => {
@@ -136,46 +121,13 @@ const Header = function () {
               {showmenu && (
                 <div className="menu">
                   <div className="navbar-item">
-                    <div ref={refHomeMenu}>
-                      <div
-                        className="dropdown-custom dropdown-toggle btn"
-                        onClick={handleHomeMenuBtnClick}
-                      >
-                        Home
-                      </div>
-                      {openHomeMenu && (
-                        <div className="item-dropdown">
-                          <div className="dropdown" onClick={closeHomeMenu}>
-                            <NavLink
-                              to={PAGE_ROUTES.HOME_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Homepage
-                            </NavLink>
-                            <NavLink
-                              to={PAGE_ROUTES.HOME_1_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Homepage 1
-                            </NavLink>
-
-                            <NavLink
-                              to={PAGE_ROUTES.HOME_2_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Homepage 2
-                            </NavLink>
-
-                            <NavLink
-                              to={PAGE_ROUTES.HOME_3_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Homepage 3
-                            </NavLink>
-                          </div>
+                    <NavLink to={PAGE_ROUTES.HOME_PATH}>
+                      <div>
+                        <div className="dropdown-custom dropdown-toggle btn">
+                          Home
                         </div>
-                      )}
-                    </div>
+                      </div>
+                    </NavLink>
                   </div>
                   <div className="navbar-item">
                     <div ref={refExploreMenu}>
@@ -194,7 +146,7 @@ const Header = function () {
                             >
                               Explore
                             </NavLink>
-                         
+
                             <NavLink
                               to={PAGE_ROUTES.RANKING_PATH}
                               onClick={() => btn_icon(!showmenu)}
@@ -395,36 +347,14 @@ const Header = function () {
             <Breakpoint xl>
               <div className="menu">
                 <div className="navbar-item">
-                  <div ref={refHomeMenu}>
-                    <div
-                      className="dropdown-custom dropdown-toggle btn"
-                      onMouseEnter={handleHomeMenuBtnClick}
-                      onMouseLeave={closeHomeMenu}
-                    >
-                      Home
-                      <span className="lines"></span>
-                      {openHomeMenu && (
-                        <div className="item-dropdown">
-                          <div className="dropdown" onClick={closeHomeMenu}>
-                            <NavLink to={PAGE_ROUTES.ROOT_PATH}>
-                              Homepage
-                            </NavLink>
-                            <NavLink to={PAGE_ROUTES.HOME_1_PATH}>
-                              Homepage 1
-                            </NavLink>
-
-                            <NavLink to={PAGE_ROUTES.HOME_2_PATH}>
-                              Homepage 2
-                            </NavLink>
-
-                            <NavLink to={PAGE_ROUTES.HOME_3_PATH}>
-                              Homepage 3
-                            </NavLink>
-                          </div>
-                        </div>
-                      )}
+                  <NavLink to={PAGE_ROUTES.HOME_PATH}>
+                    <div>
+                      <div className="dropdown-custom dropdown-toggle btn">
+                        Home
+                        <span className="lines"></span>
+                      </div>
                     </div>
-                  </div>
+                  </NavLink>
                 </div>
                 <div className="navbar-item">
                   <div ref={refExploreMenu}>

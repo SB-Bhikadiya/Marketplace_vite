@@ -68,127 +68,113 @@ const App = () => {
               <Header />
               <ScrollTop path={PAGE_ROUTES.ROOT_PATH}>
                 <Routes>
-                  <Route exact path={PAGE_ROUTES.HOME_PATH} element={<Home/>} />
-                  <Route path={PAGE_ROUTES.LOGIN_PATH} element={<Login/>} />
-                  <Route path={PAGE_ROUTES.REGISTER_PATH} element={<Register/>} />
-                  <PrivateRoute
-                    path={PAGE_ROUTES.HOME_1_PATH}
-                    element={<Home1/>}
+                  <Route
+                    exact
+                    path={PAGE_ROUTES.HOME_PATH}
+                    element={<Home />}
                   />
-                  <PrivateRoute
-                    path={PAGE_ROUTES.HOME_2_PATH}
-                    element={<Home2/>}
+                  <Route path={PAGE_ROUTES.LOGIN_PATH} element={<Login />} />
+                  <Route
+                    path={PAGE_ROUTES.REGISTER_PATH}
+                    element={<Register />}
                   />
-                  <PrivateRoute
-                    path={PAGE_ROUTES.HOME_3_PATH}
-                    element={<Home3/>}
-                  />
-                  <PrivateRoute
+                  <Route path={PAGE_ROUTES.HOME_1_PATH} element={<Home1 />} />
+                  <Route path={PAGE_ROUTES.HOME_2_PATH} element={<Home2 />} />
+                  <Route path={PAGE_ROUTES.HOME_3_PATH} element={<Home3 />} />
+                  <Route
                     path={PAGE_ROUTES.EXPLORE_PATH}
-                    element={<Explore/>}
+                    element={<Explore />}
                   />
 
-                  <PrivateRoute
+                  <Route
                     path={PAGE_ROUTES.RANKING_PATH}
-                    element={<RankingRedux/>}
+                    element={<RankingRedux />}
                   />
-                  <PrivateRoute
+                  <Route
                     path={PAGE_ROUTES.AUCTION_PATH}
-                    element={<Auction/>}
+                    element={<Auction />}
                   />
-                  <PrivateRoute
+                  <Route
                     path={PAGE_ROUTES.HELPCENTER_PATH}
-                    element={<Helpcenter/>}
+                    element={<Helpcenter />}
                   />
-                  <PrivateRoute
+                  <Route
                     path={PAGE_ROUTES.COLLECTION_PATH}
-                    element={<Collection/>}
+                    element={<Collection />}
                   />
-                  <PrivateRoute
+                  <Route
                     path={PAGE_ROUTES.ITEM_DETAIL_PATH}
-                    element={<ItemDetailRedux/>}
+                    element={<ItemDetailRedux />}
                   />
-                  <PrivateRoute
-                    path={PAGE_ROUTES.AUTHOR_PATH}
-                    element={<Author/>}
-                  />
-                  <PrivateRoute
-                    path={PAGE_ROUTES.WALLET_PATH}
-                    element={<Wallet/>}
-                  />
-                  <PrivateRoute
+                  <Route path={PAGE_ROUTES.AUTHOR_PATH} element={<Author />} />
+                  <Route path={PAGE_ROUTES.WALLET_PATH} element={<Wallet />} />
+                  <Route
                     path={PAGE_ROUTES.LOGIN_2_PATH}
-                    element={<LoginTwo/>}
+                    element={<LoginTwo />}
                   />
-                  <PrivateRoute
-                    path={PAGE_ROUTES.PRICE_PATH}
-                    element={<Price/>}
-                  />
-                  <PrivateRoute path={PAGE_ROUTES.NEWS_PATH} element={<News/>} />
-                  <PrivateRoute
+                  <Route path={PAGE_ROUTES.PRICE_PATH} element={<Price />} />
+                  <Route path={PAGE_ROUTES.NEWS_PATH} element={<News />} />
+                  <Route
                     path={PAGE_ROUTES.NEWS_SINGLE_PATH}
-                    element={<NewsSingle/>}
+                    element={<NewsSingle />}
                   />
-                  <PrivateRoute
-                    path={PAGE_ROUTES.CREATE_PATH}
-                    element={<Create/>}
-                  />
-                  <PrivateRoute
+                  <Route path={PAGE_ROUTES.CREATE_PATH} element={<Create />} />
+                  <Route
                     path={PAGE_ROUTES.CREATE_COLLECTION_PATH}
-                    element={<CreateCollection/>}
+                    element={<CreateCollection />}
                   />
-                  <PrivateRoute
+                  <Route
                     path={PAGE_ROUTES.CREATE_LISTING_PATH}
-                    element={<CreateListing/>}
+                    element={<CreateListing />}
                   />
-                  <PrivateRoute
+                  <Route
                     path={PAGE_ROUTES.CREATE_AUCTION_PATH}
-                    element={<CreateAuction/>}
+                    element={<CreateAuction />}
                   />
-                  <PrivateRoute
+                  <Route
                     path={PAGE_ROUTES.CREATE_3_PATH}
-                    element={<Create3/>}
+                    element={<Create3 />}
                   />
-                  <PrivateRoute
+                  <Route
                     path={PAGE_ROUTES.CREATE_OPTIONS_PATH}
-                    element={<Createoption/>}
+                    element={<Createoption />}
                   />
-                  <PrivateRoute
+                  <Route
                     path={PAGE_ROUTES.ACTIVITY_PATH}
-                    element={<Activity/>}
+                    element={<Activity />}
                   />
-                  <PrivateRoute
+                  <Route
                     path={PAGE_ROUTES.CONTACT_PATH}
-                    element={<Contact/>}
+                    element={<Contact />}
                   />
-                  <PrivateRoute
+                  <Route
                     path={PAGE_ROUTES.ELEGANT_ICONS_PATH}
-                    element={<ElegantIcons/>}
+                    element={<ElegantIcons />}
                   />
-                  <PrivateRoute
+                  <Route
                     path={PAGE_ROUTES.ETLINE_ICONS_PATH}
-                    element={<EtlineIcons/>}
+                    element={<EtlineIcons />}
                   />
-                  <PrivateRoute
+                  <Route
                     path={PAGE_ROUTES.FONTAWESOME_ICONS_PATH}
-                    element={<FontAwesomeIcons/>}
+                    element={<FontAwesomeIcons />}
                   />
-                  <PrivateRoute
+                  <Route
                     path={PAGE_ROUTES.ACCORDION_PATH}
-                    element={<Accordion/>}
+                    element={<Accordion />}
                   />
-                  <PrivateRoute
-                    path={PAGE_ROUTES.ALERTS_PATH}
-                    element={<Alerts/>}
-                  />
-                  <PrivateRoute
+                  <Route path={PAGE_ROUTES.ALERTS_PATH} element={<Alerts />} />
+                  <Route
                     path={PAGE_ROUTES.PROGRESSBAR_PATH}
-                    element={<Progressbar/>}
+                    element={<Progressbar />}
                   />
-                  <PrivateRoute path={PAGE_ROUTES.TABS_PATH} element={<Tabs/>} />
-                  <PrivateRoute
+                  <Route
+                    path={PAGE_ROUTES.TABS_PATH}
+                    element={<Tabs />}
+                  />
+                  <Route
                     path={PAGE_ROUTES.MINTER_PATH}
-                    element={<Minter/>}
+                    element={<Minter />}
                   />
                 </Routes>
               </ScrollTop>

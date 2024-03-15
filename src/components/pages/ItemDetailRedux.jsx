@@ -9,6 +9,7 @@ import Footer from "../components/footer";
 import Checkoutbid from "../components/Checkoutbid";*/
 import moment from "moment";
 import api from "../../core/api";
+import { useParams } from "react-router-dom";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.white {
@@ -38,7 +39,9 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-const ItemDetailRedux = ({ nftId,tokenId }) => {
+const ItemDetailRedux = () => {
+  let { nftId,tokenId} = useParams();
+  console.log({nftId,tokenId});
 
   const [openMenu0, setOpenMenu0] = React.useState(true);
   const [openMenu, setOpenMenu] = React.useState(false);
