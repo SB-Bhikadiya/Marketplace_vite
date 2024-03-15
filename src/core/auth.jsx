@@ -1,7 +1,7 @@
 import { jwtDecode } from "jwt-decode";
 import { createContext, useContext, useEffect, useState } from "react";
 import { LOGIN_ENDPOINT, REGISTER_ENDPOINT } from "../constants/endpoints";
-import { MARKETPLACE_TOKEN } from "../constants/keys";
+import { MARKETPLACE_TOKEN, USER_KEY } from "../constants/keys";
 import { AxiosInstance } from "./axios";
 
 const AuthContext = createContext();
@@ -26,8 +26,8 @@ export const AuthProvider = ({ children }) => {
     setLoading(true);
     try {
       const response = await AxiosInstance.post(LOGIN_ENDPOINT, userData);
-      console.log(response.data);
       setUser(response.data.user);
+      localStorage.setItem(USER_KEY, response.data.user);
       localStorage.setItem(MARKETPLACE_TOKEN, response.data.token); // Store JWT in localStorage
       setLoading(false);
     } catch (error) {
@@ -43,7 +43,7 @@ export const AuthProvider = ({ children }) => {
       if (decodedToken.exp * 1000 > Date.now()) {
         setUser(decodedToken.sub);
       } else {
-        console.log('Expored');
+        console.log("Expored");
         localStorage.removeItem(MARKETPLACE_TOKEN); // Remove expired JWT
       }
     }
@@ -67,7 +67,15 @@ export const AuthProvider = ({ children }) => {
 
   return (
     <AuthContext.Provider
-      value={{ user, loading, register, login, logout, getHeaders ,isLoggedInCheck}}
+      value={{
+        user,
+        loading,
+        register,
+        login,
+        logout,
+        getHeaders,
+        isLoggedInCheck,
+      }}
     >
       {children}
     </AuthContext.Provider>

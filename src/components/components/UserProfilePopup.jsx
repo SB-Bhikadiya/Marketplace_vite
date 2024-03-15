@@ -1,13 +1,12 @@
-import { ADDRESS_KEY } from "../../constants/keys";
-import { useAuth } from "../../core/auth";
+import { ADDRESS_KEY, USER_KEY } from "../../constants/keys";
 
 function UserProfilePopup() {
-  const { user } = useAuth();
+  const user = localStorage.getItem(USER_KEY);
 
   return (
     <div className="popshow">
       <div className="d-name">
-        <h4>{user.username}</h4>
+        <h4>{user && user.username}</h4>
         <span className="name" onClick={() => window.open("", "_self")}>
           Set display name
         </span>

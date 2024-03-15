@@ -1,6 +1,6 @@
-import { NavLink as Link } from "react-router-dom";
 import React, { useEffect, useState } from "react";
 import useOnclickOutside from "react-cool-onclickoutside";
+import { NavLink as Link } from "react-router-dom";
 import Breakpoint, {
   BreakpointProvider,
   setDefaultBreakpoints,
@@ -123,9 +123,7 @@ const Header = function () {
                   <div className="navbar-item">
                     <NavLink to={PAGE_ROUTES.HOME_PATH}>
                       <div>
-                        <div className="dropdown-custom dropdown-toggle btn">
-                          Home
-                        </div>
+                        <div className="dropdown-custom btn">Home</div>
                       </div>
                     </NavLink>
                   </div>
@@ -227,13 +225,6 @@ const Header = function () {
                               Create options
                             </NavLink>
                             <NavLink
-                              to={PAGE_ROUTES.MINTER_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Nft Minting
-                            </NavLink>
-
-                            <NavLink
                               to={PAGE_ROUTES.NEWS_PATH}
                               onClick={() => btn_icon(!showmenu)}
                             >
@@ -245,12 +236,7 @@ const Header = function () {
                             >
                               Login
                             </NavLink>
-                            <NavLink
-                              to={PAGE_ROUTES.LOGIN_2_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Login 2
-                            </NavLink>
+
                             <NavLink
                               to={PAGE_ROUTES.REGISTER_PATH}
                               onClick={() => btn_icon(!showmenu)}
@@ -276,70 +262,6 @@ const Header = function () {
                       Activity
                     </NavLink>
                   </div>
-                  <div className="navbar-item">
-                    <div ref={refIconsMenu}>
-                      <div
-                        className="dropdown-custom dropdown-toggle btn"
-                        onClick={handleIconsMenuBtnClick}
-                      >
-                        Element
-                      </div>
-                      {openIconsMenu && (
-                        <div className="item-dropdown">
-                          <div className="dropdown" onClick={closeIconsMenu}>
-                            <NavLink
-                              to={PAGE_ROUTES.ELEGANT_ICONS_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Elegant Icon
-                            </NavLink>
-                            <NavLink
-                              to={PAGE_ROUTES.ETLINE_ICONS_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Etline Icon
-                            </NavLink>
-                            <NavLink
-                              to={PAGE_ROUTES.FONTAWESOME_ICONS_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Font Awesome Icon
-                            </NavLink>
-                            <NavLink
-                              to={PAGE_ROUTES.ACCORDION_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Accordion
-                            </NavLink>
-                            <NavLink
-                              to={PAGE_ROUTES.ALERTS_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Alerts
-                            </NavLink>
-                            <NavLink
-                              to={PAGE_ROUTES.PRICE_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Pricing Table
-                            </NavLink>
-                            <NavLink
-                              to={PAGE_ROUTES.PROGRESSBAR_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Progress bar
-                            </NavLink>
-                            <NavLink
-                              to={PAGE_ROUTES.TABS_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Tabs
-                            </NavLink>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
                 </div>
               )}
             </Breakpoint>
@@ -349,7 +271,7 @@ const Header = function () {
                 <div className="navbar-item">
                   <NavLink to={PAGE_ROUTES.HOME_PATH}>
                     <div>
-                      <div className="dropdown-custom dropdown-toggle btn">
+                      <div className="dropdown-custom btn">
                         Home
                         <span className="lines"></span>
                       </div>
@@ -432,16 +354,10 @@ const Header = function () {
                             <NavLink to={PAGE_ROUTES.CREATE_OPTIONS_PATH}>
                               Create Option
                             </NavLink>
-                            <NavLink to={PAGE_ROUTES.MINTER_PATH}>
-                              Nft Minting
-                            </NavLink>
-
                             <NavLink to={PAGE_ROUTES.NEWS_PATH}>News</NavLink>
 
-                            <NavLink to={PAGE_ROUTES.LOGIN_PATH}>login</NavLink>
-                            <NavLink to={PAGE_ROUTES.LOGIN_2_PATH}>
-                              login 2
-                            </NavLink>
+                            <NavLink to={PAGE_ROUTES.LOGIN_PATH}>Login</NavLink>
+
                             <NavLink to={PAGE_ROUTES.REGISTER_PATH}>
                               Register
                             </NavLink>
@@ -459,46 +375,6 @@ const Header = function () {
                     Activity
                     <span className="lines"></span>
                   </NavLink>
-                </div>
-                <div className="navbar-item">
-                  <div ref={refIconsMenu}>
-                    <div
-                      className="dropdown-custom dropdown-toggle btn"
-                      onMouseEnter={handleIconsMenuBtnClick}
-                      onMouseLeave={closeIconsMenu}
-                    >
-                      Elements
-                      <span className="lines"></span>
-                      {openIconsMenu && (
-                        <div className="item-dropdown">
-                          <div className="dropdown" onClick={closeIconsMenu}>
-                            <NavLink to={PAGE_ROUTES.ELEGANT_ICONS_PATH}>
-                              Elegant Icon
-                            </NavLink>
-                            <NavLink to={PAGE_ROUTES.ETLINE_ICONS_PATH}>
-                              Etline Icon
-                            </NavLink>
-                            <NavLink to={PAGE_ROUTES.FONTAWESOME_ICONS_PATH}>
-                              Font Awesome Icon
-                            </NavLink>
-                            <NavLink to={PAGE_ROUTES.ACCORDION_PATH}>
-                              Accordion
-                            </NavLink>
-                            <NavLink to={PAGE_ROUTES.ALERTS_PATH}>
-                              Alerts
-                            </NavLink>
-                            <NavLink to={PAGE_ROUTES.PRICE_PATH}>
-                              Pricing Table
-                            </NavLink>
-                            <NavLink to={PAGE_ROUTES.PROGRESSBAR_PATH}>
-                              Progress Bar
-                            </NavLink>
-                            <NavLink to={PAGE_ROUTES.TABS_PATH}>Tabs</NavLink>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
                 </div>
               </div>
             </Breakpoint>
