@@ -5,7 +5,7 @@ import "slick-carousel/slick/slick-theme.css";
 import "slick-carousel/slick/slick.css";
 import styled from "styled-components";
 import { carouselNew } from "../../constants";
-import api from "../../core/api";
+import { getEtherFromWei } from "../../constants/utils";
 import { fetchNftsBreakdown } from "../../store/actions/thunks";
 import * as selectors from "../../store/selectors";
 import Clock from "./Clock";
@@ -43,16 +43,18 @@ const CarouselNewRedux = () => {
             <div className="itm" index={index + 1} key={index}>
               <div className="d-item">
                 <div className="nft__item">
-                  {Date.parse(nft.deadline) !== 0  ? (
+                  {nft.deadline && Date.parse(nft.deadline) !== 0 ? (
                     <div className="de_countdown">
                       <Clock deadline={nft.deadline} />
                     </div>
-                  ) : <></>}
+                  ) : (
+                    <></>
+                  )}
                   <div className="author_list_pp">
                     <span onClick={() => window.open("/home1", "_self")}>
                       <img
                         className="lazy"
-                        src={nft.author.avatar }
+                        src={nft.author.avatar}
                         alt={nft.author.avatar}
                       />
                       <i className="fa fa-check"></i>
@@ -78,7 +80,7 @@ const CarouselNewRedux = () => {
                       <h4>{nft.title}</h4>
                     </span>
                     <div className="nft__item_price">
-                      {nft.price} ETH
+                      {getEtherFromWei(nft.price)} ETH
                       <span>
                         {nft.bid}/{nft.max_bid}
                       </span>

@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await AxiosInstance.post(LOGIN_ENDPOINT, userData);
       setUser(response.data.user);
-      localStorage.setItem(USER_KEY, response.data.user);
+      localStorage.setItem(USER_KEY, JSON.stringify(response.data.user));
       localStorage.setItem(MARKETPLACE_TOKEN, response.data.token); // Store JWT in localStorage
       setLoading(false);
     } catch (error) {
@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
 
   const logout = () => {
     setUser(null);
-    localStorage.removeItem(MARKETPLACE_TOKEN); // Remove JWT from localStorage upon logout
+    localStorage.clear(); // Remove JWT from localStorage upon logout
   };
 
   // Check if there's a stored JWT and set the user accordingly

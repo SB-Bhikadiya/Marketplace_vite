@@ -1,7 +1,12 @@
+import { useNavigate } from "react-router-dom";
 import { ADDRESS_KEY, USER_KEY } from "../../constants/keys";
+import { PAGE_ROUTES } from "../../constants/routes";
+import { useAuth } from "../../core/auth";
 
 function UserProfilePopup() {
-  const user = localStorage.getItem(USER_KEY);
+  const user = JSON.parse(localStorage.getItem(USER_KEY));
+  const { logout } = useAuth();
+  const navigate = useNavigate();
 
   return (
     <div className="popshow">
@@ -32,7 +37,12 @@ function UserProfilePopup() {
             <i className="fa fa-pencil"></i> Edit profile
           </span>
         </li>
-        <li>
+        <li
+          onClick={() => {
+            logout();
+            navigate(PAGE_ROUTES.LOGIN_PATH);
+          }}
+        >
           <span>
             <i className="fa fa-sign-out"></i> Sign out
           </span>

@@ -207,10 +207,12 @@ const Responsive = () => {
           className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12 mb-4"
         >
           <div className="nft__item m-0">
-            {nft.deadline && (
+            {nft.deadline && Date.parse(nft.deadline) !== 0 ? (
               <div className="de_countdown">
                 <Clock deadline={nft.deadline} />
               </div>
+            ) : (
+              <></>
             )}
             <div className="author_list_pp">
               <span onClick={() => window.open(nft.authorLink, "_self")}>

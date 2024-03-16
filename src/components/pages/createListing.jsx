@@ -2,6 +2,7 @@ import { ethers } from "ethers";
 import { useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
 import { createGlobalStyle } from "styled-components";
+import { settings } from "../../constants";
 import { TOKEN_ENDPOINT } from "../../constants/endpoints";
 import { ADDRESS_KEY } from "../../constants/keys";
 import { useAuth } from "../../core/auth";
@@ -148,7 +149,12 @@ const CreateListing = () => {
                 <h5>Select NFT to List</h5>
                 <div className="container">
                   <div className="nft my-4">
-                    <Slider slidesPerRow={1} slidesToShow={6}>
+                    <Slider
+                      {...settings}
+                      rows={1}
+                      slidesPerRow={1}
+                      slidesToShow={6}
+                    >
                       {tokens &&
                         tokens.map((token, index) => {
                           return (

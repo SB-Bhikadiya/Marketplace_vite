@@ -1,12 +1,11 @@
-
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import Swal from "sweetalert2";
 import * as Yup from "yup";
 import { PAGE_ROUTES } from "../../constants/routes";
 import { useAuth } from "../../core/auth";
 import Footer from "../components/footer";
-import { useNavigate } from "react-router-dom";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -64,7 +63,7 @@ const LoginPage = () => {
       try {
         await login(values);
         Swal.fire("Logged In successfully");
-        navigate(PAGE_ROUTES.HOME_PATH);
+        navigate(PAGE_ROUTES.ROOT_PATH);
       } catch (error) {
         Swal.fire({
           icon: "error",

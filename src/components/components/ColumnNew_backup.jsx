@@ -86,7 +86,13 @@ const Responsive = () => {
         >
           <div className="nft__item">
             <div className="de_countdown">
-              <Clock deadline={nft.deadline} />
+              {nft.deadline && Date.parse(nft.deadline) !== 0 ? (
+                <div className="de_countdown">
+                  <Clock deadline={nft.deadline} />
+                </div>
+              ) : (
+                <></>
+              )}
             </div>
             <div className="author_list_pp">
               <span onClick={() => window.open("/#", "_self")}>

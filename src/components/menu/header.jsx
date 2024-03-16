@@ -90,7 +90,7 @@ const Header = function () {
           <div className="logo px-0">
             <div className="navbar-title navbar-item">
               <NavLink to={PAGE_ROUTES.ROOT_PATH}>
-                <img
+                {/* <img
                   src="/img/logo.png"
                   className="img-fluid d-block"
                   alt="#"
@@ -101,7 +101,8 @@ const Header = function () {
                   src="/img/logo-light.png"
                   className="img-fluid d-none"
                   alt="#"
-                />
+                /> */}
+                <h2>Marketplace</h2>
               </NavLink>
             </div>
           </div>
@@ -121,7 +122,7 @@ const Header = function () {
               {showmenu && (
                 <div className="menu">
                   <div className="navbar-item">
-                    <NavLink to={PAGE_ROUTES.HOME_PATH}>
+                    <NavLink to={PAGE_ROUTES.ROOT_PATH}>
                       <div>
                         <div className="dropdown-custom btn">Home</div>
                       </div>
@@ -269,7 +270,7 @@ const Header = function () {
             <Breakpoint xl>
               <div className="menu">
                 <div className="navbar-item">
-                  <NavLink to={PAGE_ROUTES.HOME_PATH}>
+                  <NavLink to={PAGE_ROUTES.ROOT_PATH}>
                     <div>
                       <div className="dropdown-custom btn">
                         Home

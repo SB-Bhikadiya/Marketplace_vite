@@ -1,6 +1,6 @@
-
 import { useFormik } from "formik";
 import { useContext, useEffect, useState } from "react";
+import Select from "react-select";
 import Slider from "react-slick";
 import { createGlobalStyle } from "styled-components";
 import * as Yup from "yup";
@@ -10,14 +10,13 @@ import { ADDRESS_KEY } from "../../constants/keys";
 import { PAGE_ROUTES } from "../../constants/routes";
 import { useAuth } from "../../core/auth";
 import { AxiosInstance } from "../../core/axios";
-import Select from "react-select";
 
+import { useNavigate } from "react-router-dom";
+import { categories, itemsType } from "../../constants/filters";
 import { MarketplaceContext } from "../../core/marketplace";
 import { pinFileToIPFS, pinJSONToIPFS } from "../../core/nft/pinata";
 import { Swal } from "../../core/sweet-alert";
 import Footer from "../components/footer";
-import { categories, itemsType } from "../../constants/filters";
-import { useNavigate } from "react-router-dom";
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
     background: #403f83;
@@ -87,8 +86,8 @@ const Createpage = () => {
         message: "Please enter a valid hex color code",
       }
     ),
-    category:Yup.string().required("Category is required"),
-    item_type:Yup.string().required("Item type is required"),
+    category: Yup.string().required("Category is required"),
+    item_type: Yup.string().required("Item type is required"),
     collection_address: Yup.string().required("Collection Address is required"),
     collection_name: Yup.string().required("Collection Name is required"),
   });
@@ -148,7 +147,7 @@ const Createpage = () => {
         );
         await tx.wait();
         Swal.fire("NFT minted");
-        navigate(PAGE_ROUTES.HOME_PATH)
+        navigate(PAGE_ROUTES.ROOT_PATH);
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -329,32 +328,31 @@ const Createpage = () => {
               </div>
               <div className="form-group my-2">
                 <h5>Select Category</h5>
-              <div className="dropdownSelect one my-2">
-                <Select
-                  styles={customStyles}
-                  menuContainerStyle={{ zIndex: 999 }}
-                  options={[defaultValue, ...categories]}
-                  onChange={(option) => {
-                    formik.setFieldValue("category", option.value);
-                  }}
-                />
-              </div>
+                <div className="dropdownSelect one my-2">
+                  <Select
+                    styles={customStyles}
+                    menuContainerStyle={{ zIndex: 999 }}
+                    options={[defaultValue, ...categories]}
+                    onChange={(option) => {
+                      formik.setFieldValue("category", option.value);
+                    }}
+                  />
+                </div>
               </div>
 
               <div className="form-group my-2">
                 <h5>Select Item Type</h5>
-              <div className="dropdownSelect one my-2">
-                <Select
-                  styles={customStyles}
-                  menuContainerStyle={{ zIndex: 999 }}
-                  options={[defaultValue, ...itemsType]}
-                  onChange={(option) => {
-                    formik.setFieldValue("item_type", option.value);
-                  }}
-                />
+                <div className="dropdownSelect one my-2">
+                  <Select
+                    styles={customStyles}
+                    menuContainerStyle={{ zIndex: 999 }}
+                    options={[defaultValue, ...itemsType]}
+                    onChange={(option) => {
+                      formik.setFieldValue("item_type", option.value);
+                    }}
+                  />
+                </div>
               </div>
-              </div>
-
 
               {/* Attribute fields */}
               {formik.values.attributes.map((attribute, index) => (

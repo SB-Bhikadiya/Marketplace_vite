@@ -1,4 +1,4 @@
-import React, { memo, useEffect } from "react";
+import React, { memo, useContext, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createGlobalStyle } from "styled-components";
 import { fetchNftDetail } from "../../store/actions/thunks";
@@ -8,8 +8,10 @@ import Footer from "../components/footer";
 /*import Checkout from "../components/Checkout";
 import Checkoutbid from "../components/Checkoutbid";*/
 import moment from "moment";
-import api from "../../core/api";
 import { useParams } from "react-router-dom";
+import { getEtherFromWei, toWei } from "../../constants/utils";
+import { MarketplaceContext } from "../../core/marketplace";
+import { Swal } from "../../core/sweet-alert";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.white {
@@ -40,8 +42,8 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const ItemDetailRedux = () => {
-  let { nftId,tokenId} = useParams();
-  console.log({nftId,tokenId});
+  let { nftId, tokenId } = useParams();
+  console.log({ nftId, tokenId });
 
   const [openMenu0, setOpenMenu0] = React.useState(true);
   const [openMenu, setOpenMenu] = React.useState(false);
@@ -80,9 +82,23 @@ const ItemDetailRedux = () => {
   const [openCheckoutbid, setOpenCheckoutbid] = React.useState(false);
 
   useEffect(() => {
-    dispatch(fetchNftDetail(nftId,tokenId));
-  }, [dispatch, nftId,tokenId]);
+    dispatch(fetchNftDetail(nftId, tokenId));
+  }, [dispatch, nftId, tokenId]);
 
+  const { provideNFTMarketplace } = useContext(MarketplaceContext);
+  async function buyItem() {
+    try {
+      const marketplace = await provideNFTMarketplace();
+
+      const tx = await marketplace.buyNFT(nftId, tokenId, {
+        value: toWei(getEtherFromWei(nft.price)),
+      });
+      await tx.wait();
+      Swal.fire("Bought Success", "The item is saved to your collection");
+    } catch (error) {
+      Swal.fire("error", "Couldn't Buy" + error.message);
+    }
+  }
   return (
     <div>
       <GlobalStyles />
@@ -101,7 +117,13 @@ const ItemDetailRedux = () => {
                 <>
                   Auctions ends in
                   <div className="de_countdown">
-                    <Clock deadline={nft.deadline} />
+                    {nft.deadline && Date.parse(nft.deadline) !== 0 ? (
+                      <div className="de_countdown">
+                        <Clock deadline={nft.deadline} />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </>
               )}
@@ -187,10 +209,7 @@ const ItemDetailRedux = () => {
                               <span>
                                 <img
                                   className="lazy"
-                                  src={
-                                    nft.author &&
-                                    nft.author.avatar
-                                  }
+                                  src={nft.author && nft.author.avatar}
                                   alt=""
                                 />
                                 <i className="fa fa-check"></i>
@@ -203,15 +222,20 @@ const ItemDetailRedux = () => {
                         </div>
 
                         <div className="row mt-5">
-                          {nft.metadata && nft.metadata.attributes.map((attriubute,index) => {
-                            return  (<div className="col-lg-4 col-md-6 col-sm-6" key={index}>
-                            <div className="nft_attr">
-                              <h5>{attriubute.trait_type}</h5>
-                              <h4>{attriubute.value}</h4>
-                            </div>
-                          </div>)
-                          })}
-                         
+                          {nft.metadata &&
+                            nft.metadata.attributes.map((attriubute, index) => {
+                              return (
+                                <div
+                                  className="col-lg-4 col-md-6 col-sm-6"
+                                  key={index}
+                                >
+                                  <div className="nft_attr">
+                                    <h5>{attriubute.trait_type}</h5>
+                                    <h4>{attriubute.value}</h4>
+                                  </div>
+                                </div>
+                              );
+                            })}
                         </div>
                       </div>
                     </div>
@@ -226,8 +250,8 @@ const ItemDetailRedux = () => {
                               <span>
                                 <img
                                   className="lazy"
-                                  src={api.baseUrl + bid.author.avatar}
-                                  alt={api.baseUrl + bid.author.avatar}
+                                  src={bid.author.avatar}
+                                  alt={bid.author.avatar}
                                 />
                                 <i className="fa fa-check"></i>
                               </span>
@@ -255,20 +279,21 @@ const ItemDetailRedux = () => {
                               <span>
                                 <img
                                   className="lazy"
-                                  src={api.baseUrl + bid.author.avatar}
-                                  alt={api.baseUrl + bid.author.avatar}
+                                  src={bid.author.avatar}
+                                  alt={bid.author.avatar}
                                 />
                                 <i className="fa fa-check"></i>
                               </span>
                             </div>
                             <div className="p_list_info">
                               Bid{" "}
-                              {bid.author.id === nft.author.id && "accepted"}{" "}
-                              <b>{bid.value} ETH</b>
+                              {bid.author.id === nft.author.id && "Accepted"}{" "}
+                              <b>{getEtherFromWei(bid.value)} ETH</b>
                               <span>
                                 by <b>{bid.author.username}</b> at{" "}
                                 {moment(bid.created_at).format("L, LT")}
                               </span>
+                              {bid.author.avatar}
                             </div>
                           </div>
                         ))}
@@ -283,12 +308,14 @@ const ItemDetailRedux = () => {
                     >
                       Buy Now
                     </button>
-                    <button
-                      className="btn-main btn2 lead mb-5"
-                      onClick={() => setOpenCheckoutbid(true)}
-                    >
-                      Place Bid
-                    </button>
+                    {nft.deadline && Date.parse(nft.deadline) !== 0 && (
+                      <button
+                        className="btn-main btn2 lead mb-5"
+                        onClick={() => setOpenCheckoutbid(true)}
+                      >
+                        Place Bid
+                      </button>
+                    )}
                   </div>
                 </div>
               </div>
@@ -311,36 +338,43 @@ const ItemDetailRedux = () => {
             </div>
             <p>
               You are about to purchase a{" "}
-              <span className="bold">AnimeSailorClub #304</span>
-              <span className="bold">from Monica Lucas</span>
+              <span className="bold">{nft.metadata.name}</span>
+              <span className="bold">from {nft.author.username}</span>
             </p>
             <div className="detailcheckout mt-4">
               <div className="listcheckout">
                 <h6>
-                  Enter quantity.
-                  <span className="color">10 available</span>
+                  Enter quantity
+                  <span className="color"> 1 available</span>
                 </h6>
-                <input
+                {/* <input
                   type="text"
                   name="buy_now_qty"
                   id="buy_now_qty"
                   className="form-control"
-                />
+                /> */}
               </div>
             </div>
             <div className="heading mt-3">
-              <p>Your balance</p>
-              <div className="subtotal">10.67856 ETH</div>
+              <p>Required balance</p>
+              <div className="subtotal">{getEtherFromWei(nft.price)} ETH</div>
             </div>
             <div className="heading">
-              <p>Service fee 2.5%</p>
-              <div className="subtotal">0.00325 ETH</div>
+              <p>Service fee 2%</p>
+              <div className="subtotal">
+                {getEtherFromWei(nft.price) * 0.02} ETH
+              </div>
             </div>
             <div className="heading">
               <p>You will pay</p>
-              <div className="subtotal">0.013325 ETH</div>
+              <div className="subtotal">
+                {getEtherFromWei(nft.price) + getEtherFromWei(nft.price) * 0.02}{" "}
+                ETH
+              </div>
             </div>
-            <button className="btn-main lead mb-5">Checkout</button>
+            <button className="btn-main lead mb-5" onClick={buyItem}>
+              Checkout
+            </button>
           </div>
         </div>
       )}

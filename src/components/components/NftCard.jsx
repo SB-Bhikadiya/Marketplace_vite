@@ -1,9 +1,8 @@
-
 import React, { memo } from "react";
-import styled from "styled-components";
-import api from "../../core/api";
-import Clock from "./Clock";
 import { useNavigate } from "react-router-dom";
+import styled from "styled-components";
+import { getEtherFromWei } from "../../constants/utils";
+import Clock from "./Clock";
 
 const Outer = styled.div`
   display: flex;
@@ -28,7 +27,6 @@ const NftCard = ({
     navigate(link);
   };
 
-
   return (
     <div className={className}>
       <div className="nft__item m-0">
@@ -41,10 +39,12 @@ const NftCard = ({
             <i className="fa fa-shopping-basket"></i>
           </div>
         )}
-        {nft.deadline && clockTop && (
+        {nft.deadline && clockTop && Date.parse(nft.deadline) !== 0 ? (
           <div className="de_countdown">
             <Clock deadline={nft.deadline} />
           </div>
+        ) : (
+          <></>
         )}
         <div className="author_list_pp">
           <span onClick={() => navigateTo(`${nft.author_link}/1`)}>
@@ -68,10 +68,12 @@ const NftCard = ({
             </span>
           </Outer>
         </div>
-        {nft.deadline && !clockTop && (
+        {nft.deadline && !clockTop && Date.parse(nft.deadline) !== 0 ? (
           <div className="de_countdown">
             <Clock deadline={nft.deadline} />
           </div>
+        ) : (
+          <></>
         )}
         <div className="nft__item_info">
           <span onClick={() => navigateTo(`${nft.nft_link}/${nft.id}`)}>
@@ -83,7 +85,7 @@ const NftCard = ({
             </div>
           ) : (
             <div className="nft__item_price">
-              {nft.price} ETH
+              {getEtherFromWei(nft.price)} ETH
               {nft.status === "on_auction" && (
                 <span>
                   {nft.bid}/{nft.max_bid}

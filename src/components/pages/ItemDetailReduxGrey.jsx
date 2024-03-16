@@ -157,7 +157,13 @@ const ItemDetailRedux = ({ nftId }) => {
                 <>
                   Auctions ends in
                   <div className="de_countdown">
-                    <Clock deadline={nft.deadline} />
+                    {nft.deadline && Date.parse(nft.deadline) !== 0 ? (
+                      <div className="de_countdown">
+                        <Clock deadline={nft.deadline} />
+                      </div>
+                    ) : (
+                      <></>
+                    )}
                   </div>
                 </>
               )}

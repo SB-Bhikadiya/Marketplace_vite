@@ -35,16 +35,15 @@ import Register from "./pages/register";
 import Tabs from "./pages/tabs";
 import Wallet from "./pages/wallet";
 
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import { PAGE_ROUTES } from "../constants/routes";
 import { AuthProvider } from "../core/auth";
 import { MarketplaceProvider } from "../core/marketplace";
 import Web3ModalProvider from "../core/modal";
-import PrivateRoute from "../core/private-route";
 import CreateCollection from "./pages/CreateCollection";
 import CreateAuction from "./pages/createAuction";
 import CreateListing from "./pages/createListing";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -70,7 +69,7 @@ const App = () => {
                 <Routes>
                   <Route
                     exact
-                    path={PAGE_ROUTES.HOME_PATH}
+                    path={PAGE_ROUTES.ROOT_PATH}
                     element={<Home />}
                   />
                   <Route path={PAGE_ROUTES.LOGIN_PATH} element={<Login />} />
@@ -168,14 +167,8 @@ const App = () => {
                     path={PAGE_ROUTES.PROGRESSBAR_PATH}
                     element={<Progressbar />}
                   />
-                  <Route
-                    path={PAGE_ROUTES.TABS_PATH}
-                    element={<Tabs />}
-                  />
-                  <Route
-                    path={PAGE_ROUTES.MINTER_PATH}
-                    element={<Minter />}
-                  />
+                  <Route path={PAGE_ROUTES.TABS_PATH} element={<Tabs />} />
+                  <Route path={PAGE_ROUTES.MINTER_PATH} element={<Minter />} />
                 </Routes>
               </ScrollTop>
             </AuthProvider>
