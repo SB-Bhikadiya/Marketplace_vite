@@ -1,5 +1,6 @@
 import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import api from "../../core/api";
 import { fetchAuthorList } from "../../store/actions/thunks";
@@ -33,7 +34,8 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-const Colection = ({ authorId }) => {
+const Colection = () => {
+  const { authorId } = useParams();
   const [openMenu, setOpenMenu] = React.useState(true);
   const [openMenu1, setOpenMenu1] = React.useState(false);
   const [openMenu2, setOpenMenu2] = React.useState(false);
@@ -64,7 +66,7 @@ const Colection = ({ authorId }) => {
 
   const dispatch = useDispatch();
   const authorsState = useSelector(selectors.authorsState);
-  const author = authorsState.data ? authorsState.data[0] : {};
+  const author = authorsState.data || {};
 
   useEffect(() => {
     dispatch(fetchAuthorList(authorId));
@@ -90,7 +92,7 @@ const Colection = ({ authorId }) => {
               <div className="de-flex-col">
                 <div className="profile_avatar">
                   {author.avatar && (
-                    <img src={api.baseUrl + author.avatar} alt={api.baseUrl + author.avatar} />
+                    <img src={author.avatar} alt={author.avatar} />
                   )}
                   <i className="fa fa-check"></i>
                   <div className="profile_name">

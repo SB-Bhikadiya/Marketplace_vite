@@ -11,22 +11,18 @@ import UserProfilePopup from "../components/UserProfilePopup";
 setDefaultBreakpoints([{ xs: 0 }, { l: 1199 }, { xl: 1200 }]);
 
 const NavLink = (props) => (
-  <Link {...props} activeClassName="active" className="non-active" />
+  <Link {...props} activeclassname="active" className="non-active" />
 );
 
 const Header = function () {
   const [openExploreMenu, setOpenExploreMenu] = React.useState(false);
   const [openPagesMenu, setOpenPagesMenu] = React.useState(false);
-  const [openIconsMenu, setOpenIconsMenu] = React.useState(false);
 
   const handleExploreMenuBtnClick = () => {
     setOpenExploreMenu(!openExploreMenu);
   };
   const handlePagesMenuBtnClick = () => {
     setOpenPagesMenu(!openPagesMenu);
-  };
-  const handleIconsMenuBtnClick = () => {
-    setOpenIconsMenu(!openIconsMenu);
   };
 
   const closeExploreMenu = () => {
@@ -35,18 +31,12 @@ const Header = function () {
   const closePagesMenu = () => {
     setOpenPagesMenu(false);
   };
-  const closeIconsMenu = () => {
-    setOpenIconsMenu(false);
-  };
 
   const refExploreMenu = useOnclickOutside(() => {
     closeExploreMenu();
   });
   const refPagesMenu = useOnclickOutside(() => {
     closePagesMenu();
-  });
-  const refIconsMenu = useOnclickOutside(() => {
-    closeIconsMenu();
   });
 
   const [showmenu, btn_icon] = useState(false);

@@ -9,24 +9,36 @@ import { BrowserProvider } from "ethers";
 
 import { createContext, useEffect } from "react";
 import { ADDRESS_KEY, CHAIN_ID_KEY, CONNECTION_KEY } from "../constants/keys";
+import { useAuth } from "./auth";
 
 export const MarketplaceContext = createContext({});
 
 export const MarketplaceProvider = ({ children }) => {
   const { address, chainId, isConnected } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
+  const { fetchUser } = useAuth();
   const { open } = useWeb3Modal();
 
   useEffect(() => {
     if (!localStorage.getItem(ADDRESS_KEY)) {
-      open();
+      open().then(() => {
+        fetchUser(address);
+      });
     }
-    localStorage.setItem(ADDRESS_KEY, address);
-    localStorage.setItem(CHAIN_ID_KEY, `${chainId}`);
-    localStorage.setItem(CONNECTION_KEY, `${isConnected}`);
+    address && localStorage.setItem(ADDRESS_KEY, address);
+    chainId && localStorage.setItem(CHAIN_ID_KEY, `${chainId}`);
+    isConnected && localStorage.setItem(CONNECTION_KEY, `${isConnected}`);
+
     console.log("MARKETPLACE USE EFFECTED");
+
     return () => {};
-  }, [address, chainId, isConnected, open]);
+  }, [address, chainId, isConnected, open, fetchUser]);
+
+  useEffect(() => {
+    fetchUser(address).then(() => {
+      console.log("WALLET FETCHED");
+    });
+  }, [address]);
 
   const contextValue = {
     marketplace: undefined,

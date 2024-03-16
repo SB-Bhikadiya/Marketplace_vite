@@ -41,9 +41,11 @@ import { PAGE_ROUTES } from "../constants/routes";
 import { AuthProvider } from "../core/auth";
 import { MarketplaceProvider } from "../core/marketplace";
 import Web3ModalProvider from "../core/modal";
+import "../core/sweet-alert";
 import CreateCollection from "./pages/CreateCollection";
 import CreateAuction from "./pages/createAuction";
 import CreateListing from "./pages/createListing";
+import Profile from "./pages/profile";
 
 const GlobalStyles = createGlobalStyle`
   :root {
@@ -61,8 +63,8 @@ const App = () => {
     <div className="wraper">
       <BrowserRouter basename="/">
         <Web3ModalProvider>
-          <MarketplaceProvider>
-            <AuthProvider>
+          <AuthProvider>
+            <MarketplaceProvider>
               <GlobalStyles />
               <Header />
               <ScrollTop path={PAGE_ROUTES.ROOT_PATH}>
@@ -73,6 +75,11 @@ const App = () => {
                     element={<Home />}
                   />
                   <Route path={PAGE_ROUTES.LOGIN_PATH} element={<Login />} />
+                  <Route
+                    path={PAGE_ROUTES.PROFILE_PATH}
+                    element={<Profile />}
+                  />
+
                   <Route
                     path={PAGE_ROUTES.REGISTER_PATH}
                     element={<Register />}
@@ -171,9 +178,9 @@ const App = () => {
                   <Route path={PAGE_ROUTES.MINTER_PATH} element={<Minter />} />
                 </Routes>
               </ScrollTop>
-            </AuthProvider>
-            <ScrollToTopBtn />
-          </MarketplaceProvider>
+              <ScrollToTopBtn />
+            </MarketplaceProvider>
+          </AuthProvider>
         </Web3ModalProvider>
       </BrowserRouter>
     </div>

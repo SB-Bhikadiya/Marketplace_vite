@@ -1,7 +1,14 @@
 import { jwtDecode } from "jwt-decode";
-import { createContext, useContext, useEffect, useState } from "react";
-import { LOGIN_ENDPOINT, REGISTER_ENDPOINT } from "../constants/endpoints";
+import { createContext, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import {
+  LOGIN_ENDPOINT,
+  REGISTER_ENDPOINT,
+  USER_ENDPOINT,
+} from "../constants/endpoints";
 import { MARKETPLACE_TOKEN, USER_KEY } from "../constants/keys";
+import { PAGE_ROUTES } from "../constants/routes";
 import { AxiosInstance } from "./axios";
 
 const AuthContext = createContext();
@@ -9,6 +16,7 @@ const AuthContext = createContext();
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const navigate = useNavigate();
 
   const register = async (userData) => {
     setLoading(true);
@@ -35,7 +43,20 @@ export const AuthProvider = ({ children }) => {
       throw error;
     }
   };
-
+  const fetchUser = async (address) => {
+    const { data } = await AxiosInstance.get(USER_ENDPOINT, {
+      params: { wallet: address },
+    });
+    if (data.message) {
+      console.log("Message received");
+      Swal.fire(data.message);
+      navigate(PAGE_ROUTES.REGISTER_PATH);
+      return;
+    }
+    setUser(data.user);
+    localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+    localStorage.setItem(MARKETPLACE_TOKEN, data.token); // Store JWT in localStorage
+  };
   const isLoggedInCheck = () => {
     const token = localStorage.getItem(MARKETPLACE_TOKEN);
     if (token) {
@@ -63,7 +84,7 @@ export const AuthProvider = ({ children }) => {
   };
 
   // Check if there's a stored JWT and set the user accordingly
-  useEffect(isLoggedInCheck, []);
+  // useEffect(isLoggedInCheck, []);
 
   return (
     <AuthContext.Provider
@@ -71,6 +92,7 @@ export const AuthProvider = ({ children }) => {
         user,
         loading,
         register,
+        fetchUser,
         login,
         logout,
         getHeaders,

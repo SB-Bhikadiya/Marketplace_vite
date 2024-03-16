@@ -31,7 +31,6 @@ const CarouselCollectionRedux = () => {
               avatar={api.baseUrl + item.author.avatar}
               banner={api.baseUrl + item.banner}
               username={item.name}
-              uniqueId={item.unique_id}
               collectionId={item.id}
             />
           ))}

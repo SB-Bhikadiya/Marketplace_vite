@@ -37,6 +37,7 @@ export const PAGE_ROUTES = {
 
   WALLET_PATH: "/wallet",
   LOGIN_PATH: "/login",
+  PROFILE_PATH: "/profile",
   LOGIN_GREY_PATH: "/login-grey",
   LOGIN_2_PATH: "/login-two",
   GALLERY_PATH: "/gallery",
