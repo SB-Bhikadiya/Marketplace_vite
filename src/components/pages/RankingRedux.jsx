@@ -2,7 +2,6 @@ import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { createGlobalStyle } from "styled-components";
-import api from "../../core/api";
 import { fetchAuthorRanking } from "../../store/actions/thunks";
 import * as selectors from "../../store/selectors";
 import Footer from "../components/footer";
@@ -156,8 +155,8 @@ const RankingRedux = () => {
                           {author.avatar && (
                             <img
                               className="lazy"
-                              src={api.baseUrl + author.avatar}
-                              alt={api.baseUrl + author.avatar}
+                              src={author.avatar}
+                              alt={author.avatar}
                             />
                           )}
                           <i className="fa fa-check"></i>
