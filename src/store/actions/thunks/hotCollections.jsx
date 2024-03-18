@@ -8,17 +8,17 @@ export const fetchHotCollections = (collectionId) => async (dispatch) => {
 
   try {
     const { data } = await Axios.get(
-      `${api.baseUrl + api.nfts}`,
+      `${api.baseUrl + api.hotCollections}`,
       {
         cancelToken: Canceler.token,
         params: {
-          page:collectionId
+          address:collectionId
         },
         ...getHeaders(),
       }
     );
 
-    dispatch(actions.getHotCollections.success(data.data));
+    dispatch(actions.getHotCollections.success(data));
   } catch (err) {
     dispatch(actions.getHotCollections.failure(err));
   }

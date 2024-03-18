@@ -43,7 +43,6 @@ const GlobalStyles = createGlobalStyle`
 
 const ItemDetailRedux = () => {
   let { nftId, tokenId } = useParams();
-  console.log({ nftId, tokenId });
 
   const [openMenu0, setOpenMenu0] = React.useState(true);
   const [openMenu, setOpenMenu] = React.useState(false);
@@ -94,6 +93,8 @@ const ItemDetailRedux = () => {
         value: toWei(getEtherFromWei(nft.price)),
       });
       await tx.wait();
+      setOpenCheckout(false);
+      dispatch(fetchNftDetail(nftId, tokenId));
       Swal.fire("Bought Success", "The item is saved to your collection");
     } catch (error) {
       Swal.fire("error", "Couldn't Buy" + error.message);
@@ -170,14 +171,14 @@ const ItemDetailRedux = () => {
                       <span>
                         <img
                           className="lazy"
-                          src={nft.author && nft.author.avatar}
+                          src={nft.hot_collections && nft.hot_collections.banner}
                           alt=""
                         />
                         <i className="fa fa-check"></i>
                       </span>
                     </div>
                     <div className="author_list_info">
-                      <span>{nft.author && nft.author.username}</span>
+                      <span>{nft.hot_collections && nft.hot_collections.name}</span>
                     </div>
                   </div>
                 </div>
@@ -209,14 +210,14 @@ const ItemDetailRedux = () => {
                               <span>
                                 <img
                                   className="lazy"
-                                  src={nft.author && nft.author.avatar}
+                                  src={nft.author && nft.owner.avatar}
                                   alt=""
                                 />
                                 <i className="fa fa-check"></i>
                               </span>
                             </div>
                             <div className="author_list_info">
-                              <span>{nft.author && nft.author.username}</span>
+                              <span>{nft.author && nft.owner.username}</span>
                             </div>
                           </div>
                         </div>

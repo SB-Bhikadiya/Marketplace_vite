@@ -26,6 +26,11 @@ const ColumnNewRedux = ({
 
   useEffect(() => {
     dispatch(actions.fetchNftsBreakdown(authorId));
+
+    return () => {
+      dispatch(clearFilter());
+      dispatch(clearNfts());
+    }
   }, [dispatch, authorId]);
 
   //will run when component unmounted
@@ -42,7 +47,7 @@ const ColumnNewRedux = ({
 
   return (
     <div className="row">
-      {nfts &&
+      {nfts && nfts.length &&
         nfts.map((nft, index) => (
           <NftCard
             nft={nft}
@@ -51,7 +56,7 @@ const ColumnNewRedux = ({
             height={height}
           />
         ))}
-      {showLoadMore && nfts.length <= 20 && (
+      {showLoadMore && nfts.length <= 16 && (
         <div className="col-lg-12">
           <div className="spacer-single"></div>
           <span onClick={loadMore} className="btn-main lead m-auto">

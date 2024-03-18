@@ -9,8 +9,18 @@ function UserProfilePopup() {
   const navigate = useNavigate();
 
   return (
+    
     <div className="popshow">
       <div className="d-name">
+      {user && user.avatar ?
+                  <img
+                  src={user.avatar}
+                  alt=""
+                />:
+                <div className="de-menu-notification">
+                  <i className="fa fa-user" height={40} width={40}></i>
+                </div>
+                }
         <h4>{user && user.username}</h4>
         <span className="name" onClick={() => window.open("", "_self")}>
           Set display name

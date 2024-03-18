@@ -2,11 +2,14 @@ import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
-import api from "../../core/api";
 import { fetchAuthorList } from "../../store/actions/thunks";
 import * as selectors from "../../store/selectors";
 import ColumnNewRedux from "../components/ColumnNewRedux";
 import Footer from "../components/footer";
+import { AxiosInstance } from "../../core/axios";
+import { USER_ENDPOINT } from "../../constants/endpoints";
+import { Swal } from "../../core/sweet-alert";
+import { useWeb3ModalAccount } from "@web3modal/ethers/react";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.white {
@@ -67,10 +70,24 @@ const Colection = () => {
   const dispatch = useDispatch();
   const authorsState = useSelector(selectors.authorsState);
   const author = authorsState.data || {};
+  const { address } = useWeb3ModalAccount();
 
   useEffect(() => {
     dispatch(fetchAuthorList(authorId));
   }, [dispatch, authorId]);
+
+  async function followUser() {
+    try {
+      await AxiosInstance.post(
+        USER_ENDPOINT, {},
+        {params:{ from : address,to:authorId}}
+        );
+        dispatch(fetchAuthorList(authorId));
+
+      } catch (error) {
+        Swal.fire('Follow', `Something went wrong while following ${author.username}`)
+      }
+  }
 
   return (
     <div>
@@ -79,7 +96,7 @@ const Colection = () => {
         <section
           id="profile_banner"
           className="jumbotron breadcumb no-bg"
-          style={{ backgroundImage: `url(${api.baseUrl + author.banner})` }}
+          style={{ backgroundImage: `url(${author.banner})` }}
         >
           <div className="mainbreadcumb"></div>
         </section>
@@ -112,11 +129,11 @@ const Colection = () => {
               <div className="profile_follow de-flex">
                 <div className="de-flex-col">
                   <div className="profile_follower">
-                    {author.followers} followers
+                    {author.followers && author.followers.length} followers
                   </div>
                 </div>
-                <div className="de-flex-col">
-                  <span className="btn-main">Follow</span>
+                <div className="de-flex-col" onClick={followUser}>
+                  <span className="btn-main">{  author&& author.followers && author.followers.some(item => item.toLowerCase() === address.toLowerCase()) ? "Unfollow" : "Follow"} </span>
                 </div>
               </div>
             </div>

@@ -5,6 +5,7 @@ import { fetchHotCollections } from "../../store/actions/thunks";
 import * as selectors from "../../store/selectors";
 import ColumnNewRedux from "../components/ColumnNewRedux";
 import Footer from "../components/footer";
+import { useParams } from "react-router";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.white {
@@ -23,7 +24,8 @@ const GlobalStyles = createGlobalStyle`
   }
 `;
 
-const Collection = function ({ collectionId = 1 }) {
+const Collection = function () {
+  const {collectionId} = useParams();
   const [openMenu, setOpenMenu] = React.useState(true);
   const [openMenu1, setOpenMenu1] = React.useState(false);
   const handleBtnClick = () => {
@@ -42,8 +44,10 @@ const Collection = function ({ collectionId = 1 }) {
   const dispatch = useDispatch();
   const hotCollectionsState = useSelector(selectors.hotCollectionsState);
   const hotCollections = hotCollectionsState.data
-    ? hotCollectionsState.data[0]
+    ? hotCollectionsState.data
     : {};
+
+    console.log(hotCollections);
 
   useEffect(() => {
     dispatch(fetchHotCollections(collectionId));

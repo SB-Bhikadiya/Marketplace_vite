@@ -1,7 +1,7 @@
 
 import  { useContext } from "react";
 import { createGlobalStyle } from "styled-components";
-import { ADDRESS_KEY } from "../../constants/keys";
+import { ADDRESS_KEY, USER_KEY } from "../../constants/keys";
 import { PAGE_ROUTES } from "../../constants/routes";
 import { MarketplaceContext } from "../../core/marketplace";
 import { pinFileToIPFS } from "../../core/nft/pinata";
@@ -70,6 +70,8 @@ const CreateCollection = () => {
   const navigate = useNavigate();
 
   const { provideNFTFactory } = useContext(MarketplaceContext);
+  const user = JSON.parse(localStorage.getItem(USER_KEY));
+
 
   const createCollection = async () => {
     try {
@@ -250,11 +252,15 @@ const CreateCollection = () => {
                 </div>
                 <div className="nft_coll_pp">
                   <span>
-                    <img
-                      className="lazy"
-                      src={"./img/author/author-1.jpg"}
-                      alt=""
-                    />
+                  {user && user.avatar ?
+                  <img
+                  src={user.avatar}
+                  alt=""
+                />:
+                <div className="de-menu-notification">
+                  <i className="fa fa-user" height={40} width={40}></i>
+                </div>
+                }
                   </span>
                   <i className="fa fa-check"></i>
                 </div>

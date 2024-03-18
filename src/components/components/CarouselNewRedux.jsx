@@ -9,6 +9,7 @@ import { getEtherFromWei } from "../../constants/utils";
 import { fetchNftsBreakdown } from "../../store/actions/thunks";
 import * as selectors from "../../store/selectors";
 import Clock from "./Clock";
+import { clearFilter, clearNfts } from "../../store/actions";
 
 const Outer = styled.div`
   display: flex;
@@ -33,13 +34,17 @@ const CarouselNewRedux = () => {
 
   useEffect(() => {
     dispatch(fetchNftsBreakdown());
+    return () => {
+      dispatch(clearFilter());
+      dispatch(clearNfts());
+    };
   }, [dispatch]);
 
   return (
     <div className="nft">
+        {nfts && nfts.length &&
       <Slider {...carouselNew}>
-        {nfts &&
-          nfts.map((nft, index) => (
+          {nfts.map((nft, index) => (
             <div className="itm" index={index + 1} key={index}>
               <div className="d-item">
                 <div className="nft__item">
@@ -54,8 +59,8 @@ const CarouselNewRedux = () => {
                     <span onClick={() => window.open("/home1", "_self")}>
                       <img
                         className="lazy"
-                        src={nft.author.avatar}
-                        alt={nft.author.avatar}
+                        src={nft.hot_collections.banner}
+                        alt={nft.hot_collections.banner}
                       />
                       <i className="fa fa-check"></i>
                     </span>
@@ -100,6 +105,7 @@ const CarouselNewRedux = () => {
             </div>
           ))}
       </Slider>
+          }
     </div>
   );
 };

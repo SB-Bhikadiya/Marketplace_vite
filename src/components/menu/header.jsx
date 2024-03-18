@@ -7,6 +7,8 @@ import Breakpoint, {
 } from "react-socks";
 import { PAGE_ROUTES } from "../../constants/routes";
 import UserProfilePopup from "../components/UserProfilePopup";
+import { useAuth } from "../../core/auth";
+import { USER_KEY } from "../../constants/keys";
 
 setDefaultBreakpoints([{ xs: 0 }, { l: 1199 }, { xl: 1200 }]);
 
@@ -42,6 +44,7 @@ const Header = function () {
   const [showmenu, btn_icon] = useState(false);
   const [showpop, btn_icon_pop] = useState(false);
   const [shownot, btn_icon_not] = useState(false);
+  const user = JSON.parse(localStorage.getItem(USER_KEY));
   const closePop = () => {
     btn_icon_pop(false);
   };
@@ -482,10 +485,15 @@ const Header = function () {
                 onClick={() => btn_icon_pop(!showpop)}
                 ref={refpop}
               >
-                <img
-                  src="../../img/author_single/author_thumbnail.jpg"
+                {user && user.avatar ?
+                  <img
+                  src={user.avatar}
                   alt=""
-                />
+                />:
+                <div className="de-menu-notification">
+                  <i className="fa fa-user" height={40} width={40}></i>
+                </div>
+                }
                 {showpop && <UserProfilePopup />}
               </div>
             </div>

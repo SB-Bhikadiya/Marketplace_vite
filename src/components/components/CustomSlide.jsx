@@ -18,7 +18,7 @@ const CustomSlide = ({
         </div>
         <div className="nft_coll_pp">
           <span
-            onClick={() => window.open("/colection/" + collectionId, "_self")}
+            onClick={() => window.open("/collection/" + collectionId, "_self")}
           >
             <img className="lazy" src={avatar} alt="" />
           </span>
@@ -26,7 +26,7 @@ const CustomSlide = ({
         </div>
         <div className="nft_coll_info">
           <span
-            onClick={() => window.open("/colection/" + collectionId, "_self")}
+            onClick={() => window.open("/collection/" + collectionId, "_self")}
           >
             <h4>{username}</h4>
           </span>

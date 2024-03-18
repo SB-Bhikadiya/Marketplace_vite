@@ -26,7 +26,6 @@ export const MarketplaceProvider = ({ children }) => {
       });
     });
     address &&
-      address.match(ADDRESS_REGEX_KEY) &&
       localStorage.setItem(ADDRESS_KEY, address);
   }, [address]);
 

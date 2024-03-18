@@ -18,7 +18,7 @@ const AuthorList = () => {
   return (
     <div>
       <ol className="author_list">
-        {authors &&
+        {authors && authors.length &&
           authors.map((author, index) => (
             <Link key={index} to={PAGE_ROUTES.GET_AUTHOR_PATH(author.wallet)}>
               <li>

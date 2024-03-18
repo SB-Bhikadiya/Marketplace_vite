@@ -12,8 +12,7 @@ export const fetchNftsBreakdown = (authorId) => async (dispatch, getState) => {
   dispatch(actions.getNftBreakdown.request(Canceler.cancel));
 
   try {
-    let filter = authorId ? "author=" + authorId : "";
-    const { data } = await Axios.get(`${api.baseUrl}${api.nfts}?${filter}`, {
+    const { data } = await Axios.get(`${api.baseUrl}${api.nfts}`, {
       cancelToken: Canceler.token,
       params: {},
       ...getHeaders(),
