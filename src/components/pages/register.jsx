@@ -1,5 +1,5 @@
-
 import { useFormik } from "formik";
+import { useNavigate } from "react-router-dom";
 import { createGlobalStyle } from "styled-components";
 import * as Yup from "yup";
 import { ADDRESS_KEY } from "../../constants/keys";
@@ -8,7 +8,6 @@ import { useAuth } from "../../core/auth";
 import { pinFileToIPFS } from "../../core/nft/pinata";
 import { Swal } from "../../core/sweet-alert";
 import Footer from "../components/footer";
-import { useNavigate } from "react-router-dom";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -82,7 +81,7 @@ const Register = () => {
       try {
         await register(values);
         await Swal.fire("Account created successfully");
-        navigate(PAGE_ROUTES.LOGIN_PATH);
+        navigate(PAGE_ROUTES.ROOT_PATH);
       } catch (error) {
         Swal.fire({
           icon: "error",

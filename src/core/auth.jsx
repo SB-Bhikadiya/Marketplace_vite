@@ -7,7 +7,7 @@ import {
   REGISTER_ENDPOINT,
   USER_ENDPOINT,
 } from "../constants/endpoints";
-import { MARKETPLACE_TOKEN, USER_KEY } from "../constants/keys";
+import { ADDRESS_KEY, MARKETPLACE_TOKEN, USER_KEY } from "../constants/keys";
 import { PAGE_ROUTES } from "../constants/routes";
 import { AxiosInstance } from "./axios";
 
@@ -23,6 +23,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const response = await AxiosInstance.post(REGISTER_ENDPOINT, userData);
       setUser(response.data.user);
+      fetchUser(localStorage.getItem(ADDRESS_KEY));
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -33,10 +34,10 @@ export const AuthProvider = ({ children }) => {
   const login = async (userData) => {
     setLoading(true);
     try {
-      const response = await AxiosInstance.post(LOGIN_ENDPOINT, userData);
-      setUser(response.data.user);
-      localStorage.setItem(USER_KEY, JSON.stringify(response.data.user));
-      localStorage.setItem(MARKETPLACE_TOKEN, response.data.token); // Store JWT in localStorage
+      const { data } = await AxiosInstance.post(LOGIN_ENDPOINT, userData);
+      setUser(data.user);
+      data.user && localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+      data.token && localStorage.setItem(MARKETPLACE_TOKEN, data.token); // Store JWT in localStorage
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -54,8 +55,8 @@ export const AuthProvider = ({ children }) => {
       return;
     }
     setUser(data.user);
-    localStorage.setItem(USER_KEY, JSON.stringify(data.user));
-    localStorage.setItem(MARKETPLACE_TOKEN, data.token); // Store JWT in localStorage
+    data.user && localStorage.setItem(USER_KEY, JSON.stringify(data.user));
+    data.token && localStorage.setItem(MARKETPLACE_TOKEN, data.token); // Store JWT in localStorage
   };
   const isLoggedInCheck = () => {
     const token = localStorage.getItem(MARKETPLACE_TOKEN);

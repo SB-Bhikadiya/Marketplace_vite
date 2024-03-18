@@ -357,44 +357,50 @@ const Createpage = () => {
               {/* Attribute fields */}
               {formik.values.attributes.map((attribute, index) => (
                 <div key={index}>
-                  <div className="form-group">
-                    <h5>Trait Type</h5>
-                    <input
-                      className="form-control"
-                      type="text"
-                      name={`attributes[${index}].trait_type`}
-                      value={attribute.trait_type}
-                      onChange={(e) => handleChange(e, index)}
-                    />
-                    {formik.touched.attributes &&
-                      formik.errors.attributes &&
-                      formik.errors.attributes[index] &&
-                      formik.errors.attributes[index].trait_type && (
-                        <div className="error-message">
-                          {formik.errors.attributes[index].trait_type}
-                        </div>
-                      )}
-                  </div>
-                  <div className="form-group">
-                    <h5>Trait Value</h5>
-                    <input
-                      className="form-control"
-                      type="text"
-                      name={`attributes[${index}].value`}
-                      value={attribute.value}
-                      onChange={(e) => handleChange(e, index)}
-                    />
-                    {formik.touched.attributes &&
-                      formik.errors.attributes &&
-                      formik.errors.attributes[index] &&
-                      formik.errors.attributes[index].value && (
-                        <div className="error-message">
-                          {formik.errors.attributes[index].value}
-                        </div>
-                      )}
+                  <div className="row">
+                    <div className="col-sm-12 col-md-6 col-lg-6">
+                      <div className="form-group">
+                        <h5>Trait Type</h5>
+                        <input
+                          className="form-control"
+                          type="text"
+                          name={`attributes[${index}].trait_type`}
+                          value={attribute.trait_type}
+                          onChange={(e) => handleChange(e, index)}
+                        />
+                        {formik.touched.attributes &&
+                          formik.errors.attributes &&
+                          formik.errors.attributes[index] &&
+                          formik.errors.attributes[index].trait_type && (
+                            <div className="error-message">
+                              {formik.errors.attributes[index].trait_type}
+                            </div>
+                          )}
+                      </div>
+                    </div>
+                    <div className="col-sm-12 col-md-6 col-lg-6">
+                      <div className="form-group">
+                        <h5>Trait Value</h5>
+                        <input
+                          className="form-control"
+                          type="text"
+                          name={`attributes[${index}].value`}
+                          value={attribute.value}
+                          onChange={(e) => handleChange(e, index)}
+                        />
+                        {formik.touched.attributes &&
+                          formik.errors.attributes &&
+                          formik.errors.attributes[index] &&
+                          formik.errors.attributes[index].value && (
+                            <div className="error-message">
+                              {formik.errors.attributes[index].value}
+                            </div>
+                          )}
+                      </div>
+                    </div>
                   </div>
                   <button
-                    className="btn-main m-2"
+                    className="btn-main mb-2"
                     type="button"
                     onClick={() => handleRemoveAttribute(index)}
                   >
@@ -447,16 +453,16 @@ const Createpage = () => {
               </div>
               <div className="container">
                 <div className="nft my-4">
-                  <Slider {...settings}>
-                    {collections &&
-                      collections.map((collection, index) => {
+                  {collections && collections.length && (
+                    <Slider {...settings}>
+                      {collections.map((collection, index) => {
                         return (
                           <div
                             className="itm"
                             onClick={() => {
                               formik.setValues({
                                 ...formik.values,
-                                collection_address: collection.nft,
+                                collection_address: collection.id,
                                 collection_name: collection.name,
                               });
                             }}
@@ -473,7 +479,7 @@ const Createpage = () => {
                               <div className="nft_wrap">
                                 <span>
                                   <img
-                                    src={collection.image}
+                                    src={collection.banner}
                                     className="lazy img-fluid"
                                     alt=""
                                   />
@@ -491,7 +497,8 @@ const Createpage = () => {
                           </div>
                         );
                       })}
-                  </Slider>
+                    </Slider>
+                  )}
                 </div>
               </div>
 

@@ -149,14 +149,9 @@ const CreateListing = () => {
                 <h5>Select NFT to List</h5>
                 <div className="container">
                   <div className="nft my-4">
-                    <Slider
-                      {...settings}
-                      rows={1}
-                      slidesPerRow={1}
-                      slidesToShow={6}
-                    >
-                      {tokens &&
-                        tokens.map((token, index) => {
+                    {tokens && tokens.length && (
+                      <Slider {...settings}>
+                        {tokens.map((token, index) => {
                           return (
                             <NFTCard
                               onClick={() => {
@@ -168,7 +163,8 @@ const CreateListing = () => {
                             />
                           );
                         })}
-                    </Slider>
+                      </Slider>
+                    )}
                   </div>
                 </div>
 

@@ -1,7 +1,7 @@
 export const MARKETPLACE_TOKEN = "token";
 export const ADDRESS_KEY = "address";
 export const USER_KEY = "user";
-
+export const ADDRESS_REGEX_KEY = /(\b0x[a-f0-9]{40}\b)/g;
 export const CHAIN_ID_KEY = "chainId";
 export const CONNECTION_KEY = "connection";
 export const ALERT_PRIMARY = "primary";
