@@ -171,14 +171,18 @@ const ItemDetailRedux = () => {
                       <span>
                         <img
                           className="lazy"
-                          src={nft.hot_collections && nft.hot_collections.banner}
+                          src={
+                            nft.hot_collections && nft.hot_collections.banner
+                          }
                           alt=""
                         />
                         <i className="fa fa-check"></i>
                       </span>
                     </div>
                     <div className="author_list_info">
-                      <span>{nft.hot_collections && nft.hot_collections.name}</span>
+                      <span>
+                        {nft.hot_collections && nft.hot_collections.name}
+                      </span>
                     </div>
                   </div>
                 </div>
@@ -280,21 +284,19 @@ const ItemDetailRedux = () => {
                               <span>
                                 <img
                                   className="lazy"
-                                  src={bid.author.avatar}
-                                  alt={bid.author.avatar}
+                                  src={bid.author && bid.author.avatar}
+                                  alt={bid.author && bid.author.avatar}
                                 />
                                 <i className="fa fa-check"></i>
                               </span>
                             </div>
                             <div className="p_list_info">
-                              Bid{" "}
-                              {bid.author.id === nft.author.id && "Accepted"}{" "}
+                              Bid {bid.type.capitalize()}{" "}
                               <b>{getEtherFromWei(bid.value)} ETH</b>
                               <span>
                                 by <b>{bid.author.username}</b> at{" "}
                                 {moment(bid.created_at).format("L, LT")}
                               </span>
-                              {bid.author.avatar}
                             </div>
                           </div>
                         ))}

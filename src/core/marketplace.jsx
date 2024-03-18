@@ -8,7 +8,9 @@ import { NFT__factory } from "contracts/typechain-types";
 import { BrowserProvider } from "ethers";
 
 import { createContext, useEffect } from "react";
-import { ADDRESS_KEY, ADDRESS_REGEX_KEY } from "../constants/keys";
+import { useNavigate } from "react-router-dom";
+import { ADDRESS_KEY } from "../constants/keys";
+import { PAGE_ROUTES } from "../constants/routes";
 import { useAuth } from "./auth";
 
 export const MarketplaceContext = createContext({});
@@ -17,16 +19,20 @@ export const MarketplaceProvider = ({ children }) => {
   const { address, isConnected } = useWeb3ModalAccount();
   const { walletProvider } = useWeb3ModalProvider();
   const { fetchUser } = useAuth();
-  const { open } = useWeb3Modal();
+  const navigate = useNavigate();
+  const { open, close } = useWeb3Modal();
 
   useEffect(() => {
     open().then(() => {
-      fetchUser(address).then(() => {
-        console.log("WALLET FETCHED");
+      close().then(() => {
+        fetchUser(address).then((exist) => {
+          if (!exist) {
+            navigate(PAGE_ROUTES.ROOT_PATH);
+          }
+        });
       });
     });
-    address &&
-      localStorage.setItem(ADDRESS_KEY, address);
+    address && localStorage.setItem(ADDRESS_KEY, address);
   }, [address]);
 
   const contextValue = {

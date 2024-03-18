@@ -51,12 +51,14 @@ export const AuthProvider = ({ children }) => {
     if (data.message) {
       console.log("Message received");
       Swal.fire(data.message);
+      localStorage.clear();
       navigate(PAGE_ROUTES.REGISTER_PATH);
-      return;
+      return false;
     }
     setUser(data.user);
     data.user && localStorage.setItem(USER_KEY, JSON.stringify(data.user));
     data.token && localStorage.setItem(MARKETPLACE_TOKEN, data.token); // Store JWT in localStorage
+    return true;
   };
   const isLoggedInCheck = () => {
     const token = localStorage.getItem(MARKETPLACE_TOKEN);

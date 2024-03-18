@@ -5,10 +5,9 @@ import Breakpoint, {
   BreakpointProvider,
   setDefaultBreakpoints,
 } from "react-socks";
+import { USER_KEY } from "../../constants/keys";
 import { PAGE_ROUTES } from "../../constants/routes";
 import UserProfilePopup from "../components/UserProfilePopup";
-import { useAuth } from "../../core/auth";
-import { USER_KEY } from "../../constants/keys";
 
 setDefaultBreakpoints([{ xs: 0 }, { l: 1199 }, { xl: 1200 }]);
 
@@ -374,130 +373,134 @@ const Header = function () {
             </Breakpoint>
           </BreakpointProvider>
 
-          <div className="mainside">
-            <div className="connect-wal">
+          {user ? (
+            <div className="mainside">
+              <div className="d-flex">
+                <NavLink to={PAGE_ROUTES.CREATE_OPTIONS_PATH}>Create</NavLink>
+                <div
+                  id="de-click-menu-notification"
+                  className="de-menu-notification"
+                  onClick={() => btn_icon_not(!shownot)}
+                  ref={refpopnot}
+                >
+                  <div className="d-count">8</div>
+                  <i className="fa fa-bell"></i>
+                  {shownot && (
+                    <div className="popshow">
+                      <div className="de-flex">
+                        <h4>Notifications</h4>
+                        <span className="viewaall">Show all</span>
+                      </div>
+                      <ul>
+                        <li>
+                          <div className="mainnot">
+                            <img
+                              className="lazy"
+                              src="../../img/author/author-2.jpg"
+                              alt=""
+                            />
+
+                            <div className="d-desc">
+                              <span className="d-name">
+                                <b>Mamie Barnett</b> started following you
+                              </span>
+                              <span className="d-time">1 hour ago</span>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div className="mainnot">
+                            <img
+                              className="lazy"
+                              src="../../img/author/author-3.jpg"
+                              alt=""
+                            />
+
+                            <div className="d-desc">
+                              <span className="d-name">
+                                <b>Nicholas Daniels</b> liked your item
+                              </span>
+                              <span className="d-time">2 hours ago</span>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div className="mainnot">
+                            <img
+                              className="lazy"
+                              src="../../img/author/author-4.jpg"
+                              alt=""
+                            />
+
+                            <div className="d-desc">
+                              <span className="d-name">
+                                <b>Lori Hart</b> started following you
+                              </span>
+                              <span className="d-time">18 hours ago</span>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div className="mainnot">
+                            <img
+                              className="lazy"
+                              src="../../img/author/author-5.jpg"
+                              alt=""
+                            />
+
+                            <div className="d-desc">
+                              <span className="d-name">
+                                <b>Jimmy Wright</b> liked your item
+                              </span>
+                              <span className="d-time">1 day ago</span>
+                            </div>
+                          </div>
+                        </li>
+                        <li>
+                          <div className="mainnot">
+                            <img
+                              className="lazy"
+                              src="../../img/author/author-6.jpg"
+                              alt=""
+                            />
+
+                            <div className="d-desc">
+                              <span className="d-name">
+                                <b>Karla Sharp</b> started following you
+                              </span>
+                              <span className="d-time">3 days ago</span>
+                            </div>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  )}
+                </div>
+                <div
+                  id="de-click-menu-profile"
+                  className="de-menu-profile"
+                  onClick={() => btn_icon_pop(!showpop)}
+                  ref={refpop}
+                >
+                  {user && user.avatar ? (
+                    <img src={user.avatar} alt="" />
+                  ) : (
+                    <div className="de-menu-notification">
+                      <i className="fa fa-user" height={40} width={40}></i>
+                    </div>
+                  )}
+                  {showpop && <UserProfilePopup />}
+                </div>
+              </div>
+              <div className="logout">
+                <NavLink to={PAGE_ROUTES.WALLET_PATH}>Connect Wallet</NavLink>
+              </div>
+            </div>
+          ) : (
+            <div className="logout">
               <NavLink to={PAGE_ROUTES.WALLET_PATH}>Connect Wallet</NavLink>
             </div>
-            <div className="logout">
-              <NavLink to={PAGE_ROUTES.CREATE_OPTIONS_PATH}>Create</NavLink>
-              <div
-                id="de-click-menu-notification"
-                className="de-menu-notification"
-                onClick={() => btn_icon_not(!shownot)}
-                ref={refpopnot}
-              >
-                <div className="d-count">8</div>
-                <i className="fa fa-bell"></i>
-                {shownot && (
-                  <div className="popshow">
-                    <div className="de-flex">
-                      <h4>Notifications</h4>
-                      <span className="viewaall">Show all</span>
-                    </div>
-                    <ul>
-                      <li>
-                        <div className="mainnot">
-                          <img
-                            className="lazy"
-                            src="../../img/author/author-2.jpg"
-                            alt=""
-                          />
-
-                          <div className="d-desc">
-                            <span className="d-name">
-                              <b>Mamie Barnett</b> started following you
-                            </span>
-                            <span className="d-time">1 hour ago</span>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="mainnot">
-                          <img
-                            className="lazy"
-                            src="../../img/author/author-3.jpg"
-                            alt=""
-                          />
-
-                          <div className="d-desc">
-                            <span className="d-name">
-                              <b>Nicholas Daniels</b> liked your item
-                            </span>
-                            <span className="d-time">2 hours ago</span>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="mainnot">
-                          <img
-                            className="lazy"
-                            src="../../img/author/author-4.jpg"
-                            alt=""
-                          />
-
-                          <div className="d-desc">
-                            <span className="d-name">
-                              <b>Lori Hart</b> started following you
-                            </span>
-                            <span className="d-time">18 hours ago</span>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="mainnot">
-                          <img
-                            className="lazy"
-                            src="../../img/author/author-5.jpg"
-                            alt=""
-                          />
-
-                          <div className="d-desc">
-                            <span className="d-name">
-                              <b>Jimmy Wright</b> liked your item
-                            </span>
-                            <span className="d-time">1 day ago</span>
-                          </div>
-                        </div>
-                      </li>
-                      <li>
-                        <div className="mainnot">
-                          <img
-                            className="lazy"
-                            src="../../img/author/author-6.jpg"
-                            alt=""
-                          />
-
-                          <div className="d-desc">
-                            <span className="d-name">
-                              <b>Karla Sharp</b> started following you
-                            </span>
-                            <span className="d-time">3 days ago</span>
-                          </div>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
-                )}
-              </div>
-              <div
-                id="de-click-menu-profile"
-                className="de-menu-profile"
-                onClick={() => btn_icon_pop(!showpop)}
-                ref={refpop}
-              >
-                {user && user.avatar ?
-                  <img
-                  src={user.avatar}
-                  alt=""
-                />:
-                <div className="de-menu-notification">
-                  <i className="fa fa-user" height={40} width={40}></i>
-                </div>
-                }
-                {showpop && <UserProfilePopup />}
-              </div>
-            </div>
-          </div>
+          )}
         </div>
 
         <button className="nav-icon" onClick={() => btn_icon(!showmenu)}>
