@@ -1,10 +1,10 @@
-import { ethers } from "ethers";
 import { useContext, useEffect, useState } from "react";
 import Slider from "react-slick";
 import { createGlobalStyle } from "styled-components";
 import { settings } from "../../constants";
 import { TOKEN_ENDPOINT } from "../../constants/endpoints";
 import { ADDRESS_KEY } from "../../constants/keys";
+import { getEtherFromWei, toWei } from "../../constants/utils";
 import { useAuth } from "../../core/auth";
 import { AxiosInstance } from "../../core/axios";
 import { MarketplaceContext } from "../../core/marketplace";
@@ -12,7 +12,6 @@ import { Swal } from "../../core/sweet-alert";
 import Clock from "../components/Clock";
 import Footer from "../components/footer";
 import { NFTCard } from "./create";
-import { getEtherFromWei } from "../../constants/utils";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -90,7 +89,7 @@ const CreateListing = () => {
       const tx = await marketplace.listNft(
         selectedToken.address,
         selectedToken.tokenId,
-        ethers.parseEther(selectedToken.price.toString())
+        toWei(selectedToken.price)
       );
       await tx.wait();
       Swal.fire("Listed successfully");
@@ -109,13 +108,13 @@ const CreateListing = () => {
     async function fetchNFTs() {
       try {
         const response = await AxiosInstance.get(TOKEN_ENDPOINT, {
-          params: { owner: localStorage.getItem(ADDRESS_KEY),status:'none' },
+          params: { owner: localStorage.getItem(ADDRESS_KEY), status: "none" },
           ...getHeaders(),
         });
-        const tokensData = response.data.map(token => {
+        const tokensData = response.data.map((token) => {
           token.price = getEtherFromWei(token.price);
           return token;
-        })
+        });
         setTokens(tokensData);
       } catch (error) {
         Swal.fire({
@@ -126,7 +125,7 @@ const CreateListing = () => {
       }
     }
     fetchNFTs();
-  }, []);
+  }, [getHeaders]);
 
   return (
     <div>

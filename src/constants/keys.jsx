@@ -12,3 +12,4 @@ export const ALERT_WARNING = "warning";
 export const ALERT_INFO = "info";
 export const ALERT_LIGHT = "light";
 export const ALERT_DARK = "dark";
+export const THEME_COLOR = "#8364E2";

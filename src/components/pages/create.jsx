@@ -117,7 +117,7 @@ const Createpage = () => {
       ...base,
       padding: 0,
     }),
-    control: (base, state) => ({
+    control: (base) => ({
       ...base,
       padding: 2,
     }),
@@ -172,7 +172,7 @@ const Createpage = () => {
       });
     };
     getUsersCollections();
-  }, []);
+  }, [getHeaders]);
   const handleChange = (e, index) => {
     const { name, value } = e.target;
     if (name === "trait_type" || name === "value") {
