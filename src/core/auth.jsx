@@ -8,7 +8,6 @@ import {
   USER_ENDPOINT,
 } from "../constants/endpoints";
 import { ADDRESS_KEY, MARKETPLACE_TOKEN, USER_KEY } from "../constants/keys";
-import { PAGE_ROUTES } from "../constants/routes";
 import { AxiosInstance } from "./axios";
 
 const AuthContext = createContext();
@@ -52,7 +51,7 @@ export const AuthProvider = ({ children }) => {
       console.log("Message received");
       Swal.fire(data.message);
       localStorage.clear();
-      navigate(PAGE_ROUTES.REGISTER_PATH);
+      localStorage.setItem(ADDRESS_KEY, address);
       return false;
     }
     setUser(data.user);

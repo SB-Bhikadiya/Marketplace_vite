@@ -27,7 +27,7 @@ export const MarketplaceProvider = ({ children }) => {
       close().then(() => {
         fetchUser(address).then((exist) => {
           if (!exist) {
-            navigate(PAGE_ROUTES.ROOT_PATH);
+            navigate(PAGE_ROUTES.REGISTER_PATH);
           }
         });
       });

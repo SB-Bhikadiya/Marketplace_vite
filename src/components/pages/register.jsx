@@ -78,6 +78,7 @@ const Register = () => {
       wallet: Yup.string().required("Wallet is required"),
     }),
     onSubmit: async (values) => {
+      console.log(values);
       try {
         await register(values);
         await Swal.fire("Account created successfully");
