@@ -78,7 +78,7 @@ const Createpage = () => {
               <img src="./img/misc/coll-single.png" alt="" />
               <h3>Single</h3>
             </Link>
-            <Link to={PAGE_ROUTES.CREATE_3_PATH} className="opt-create">
+            <Link to={PAGE_ROUTES.CREATE_AUCTION_PATH} className="opt-create">
               <img src="./img/misc/coll-multiple.png" alt="" />
               <h3>Multiple</h3>
             </Link>

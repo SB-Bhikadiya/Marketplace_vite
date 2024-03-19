@@ -12,6 +12,7 @@ import { Swal } from "../../core/sweet-alert";
 import Clock from "../components/Clock";
 import Footer from "../components/footer";
 import { NFTCard } from "./create";
+import { getEtherFromWei } from "../../constants/utils";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -108,10 +109,14 @@ const CreateListing = () => {
     async function fetchNFTs() {
       try {
         const response = await AxiosInstance.get(TOKEN_ENDPOINT, {
-          params: { owner: localStorage.getItem(ADDRESS_KEY) },
+          params: { owner: localStorage.getItem(ADDRESS_KEY),status:'none' },
           ...getHeaders(),
         });
-        setTokens(response.data);
+        const tokensData = response.data.map(token => {
+          token.price = getEtherFromWei(token.price);
+          return token;
+        })
+        setTokens(tokensData);
       } catch (error) {
         Swal.fire({
           icon: "error",

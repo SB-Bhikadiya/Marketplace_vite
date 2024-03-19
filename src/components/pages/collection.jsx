@@ -47,8 +47,6 @@ const Collection = function () {
     ? hotCollectionsState.data
     : {};
 
-    console.log(hotCollections);
-
   useEffect(() => {
     dispatch(fetchHotCollections(collectionId));
   }, [dispatch, collectionId]);

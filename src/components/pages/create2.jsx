@@ -117,7 +117,7 @@ const Createpage = () => {
     async function fetchNFTs() {
       try {
         const response = await AxiosInstance.get(TOKEN_ENDPOINT, {
-          params: { owner: localStorage.getItem(ADDRESS_KEY) },
+          params: { owner: localStorage.getItem(ADDRESS_KEY),status:'none' },
           ...getHeaders(),
         });
         setTokens(response.data);

@@ -211,6 +211,10 @@ const Header = function () {
                             >
                               Create Listing
                             </NavLink>
+
+                            <NavLink to={PAGE_ROUTES.CREATE_AUCTION_PATH}>
+                              Create Auction
+                            </NavLink>
                             <NavLink
                               to={PAGE_ROUTES.CREATE_OPTIONS_PATH}
                               onClick={() => btn_icon(!showmenu)}
@@ -343,6 +347,9 @@ const Header = function () {
 
                             <NavLink to={PAGE_ROUTES.CREATE_LISTING_PATH}>
                               Create Listing
+                            </NavLink>
+                            <NavLink to={PAGE_ROUTES.CREATE_AUCTION_PATH}>
+                              Create Auction
                             </NavLink>
                             <NavLink to={PAGE_ROUTES.CREATE_OPTIONS_PATH}>
                               Create Option
@@ -493,7 +500,6 @@ const Header = function () {
                 </div>
               </div>
               <div className="logout">
-                <NavLink to={PAGE_ROUTES.WALLET_PATH}>Connect Wallet</NavLink>
               </div>
             </div>
           ) : (

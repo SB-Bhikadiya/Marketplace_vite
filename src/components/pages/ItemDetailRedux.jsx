@@ -94,8 +94,8 @@ const ItemDetailRedux = () => {
       });
       await tx.wait();
       setOpenCheckout(false);
+      await Swal.fire("Bought Success", "The item is saved to your collection");
       dispatch(fetchNftDetail(nftId, tokenId));
-      Swal.fire("Bought Success", "The item is saved to your collection");
     } catch (error) {
       Swal.fire("error", "Couldn't Buy" + error.message);
     }

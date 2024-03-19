@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Slider from "react-slick";
 import { createGlobalStyle } from "styled-components";
-import { TOKEN_ENDPOINT } from "../../constants/endpoints";
+import {  TOKEN_ENDPOINT } from "../../constants/endpoints";
 import { ADDRESS_KEY } from "../../constants/keys";
 import { useAuth } from "../../core/auth";
 import { AxiosInstance } from "../../core/axios";
@@ -9,6 +9,8 @@ import { Swal } from "../../core/sweet-alert";
 import Clock from "../components/Clock";
 import Footer from "../components/footer";
 import { NFTCard } from "./create";
+import { settings } from "../../constants";
+import { DateRangePicker } from "react-date-range";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -54,41 +56,8 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const CreateAuction = () => {
-  const [files, setFiles] = useState([]);
   const [isActive, setIsActive] = useState(false);
-
-  const onChange = (e) => {
-    const files = e.target.files;
-    const filesArr = Array.prototype.slice.call(files);
-    document.getElementById("file_name").style.display = "none";
-    setFiles([...filesArr]);
-  };
-
-  const handleShowFixedPrice = () => {
-    document.getElementById("tab_opt_1").classList.add("show");
-    document.getElementById("tab_opt_1").classList.remove("hide");
-    document.getElementById("tab_opt_2").classList.remove("show");
-    document.getElementById("btn1").classList.add("active");
-    document.getElementById("btn2").classList.remove("active");
-    document.getElementById("btn3").classList.remove("active");
-  };
-
-  const handleShowAuction = () => {
-    document.getElementById("tab_opt_1").classList.add("hide");
-    document.getElementById("tab_opt_1").classList.remove("show");
-    document.getElementById("tab_opt_2").classList.add("show");
-    document.getElementById("btn1").classList.remove("active");
-    document.getElementById("btn2").classList.add("active");
-    document.getElementById("btn3").classList.remove("active");
-  };
-
-  const unlockClick = () => {
-    setIsActive(true);
-  };
-
-  const unlockHide = () => {
-    setIsActive(false);
-  };
+ 
   const [tokens, setTokens] = useState([]);
   const [selectedToken, setSelectedToken] = useState({
     address: "",
@@ -111,12 +80,22 @@ const CreateAuction = () => {
     tokenURI: "",
   });
   const { getHeaders } = useAuth();
+  
+  const [selectionRange, setSelectionRange] = useState({
+    startDate: new Date(),
+    endDate: new Date(),
+    key: "selection",
+  });
+
+  function handleSelectDate(ranges) {
+    setSelectionRange(ranges.selection);
+  }
 
   useEffect(() => {
     async function fetchNFTs() {
       try {
         const response = await AxiosInstance.get(TOKEN_ENDPOINT, {
-          params: { owner: localStorage.getItem(ADDRESS_KEY) },
+          params: { owner: localStorage.getItem(ADDRESS_KEY),status:'none' },
           ...getHeaders(),
         });
         setTokens(response.data);
@@ -157,9 +136,9 @@ const CreateAuction = () => {
                 <h5>Select NFT to List</h5>
                 <div className="container">
                   <div className="nft my-4">
-                    <Slider slidesPerRow={2} slidesToShow={4}>
-                      {tokens &&
-                        tokens.map((token, index) => {
+                    {tokens && tokens.length && (
+                      <Slider {...settings}>
+                        {tokens.map((token, index) => {
                           return (
                             <NFTCard
                               onClick={() => {
@@ -171,7 +150,8 @@ const CreateAuction = () => {
                             />
                           );
                         })}
-                    </Slider>
+                      </Slider>
+                    )}
                   </div>
                 </div>
 
@@ -179,22 +159,10 @@ const CreateAuction = () => {
 
                 <h5>Select method</h5>
                 <div className="de_tab tab_methods">
-                  <ul className="de_nav">
-                    <li
-                      id="btn1"
-                      className="active"
-                      onClick={handleShowFixedPrice}
-                    >
-                      <span>
-                        <i className="fa fa-tag"></i>Fixed price
-                      </span>
-                    </li>
-                    <li id="btn2" onClick={handleShowAuction}>
                       <span>
                         <i className="fa fa-hourglass-1"></i>Timed auction
                       </span>
-                    </li>
-                  </ul>
+     
 
                   <div className="de_tab_content pt-3">
                     <div id="tab_opt_1">
@@ -221,33 +189,22 @@ const CreateAuction = () => {
                     <div id="tab_opt_2" className="hide">
                       <h5>Minimum bid</h5>
                       <input
-                        type="text"
+                        type="number"
                         name="item_price_bid"
                         id="item_price_bid"
+                        value={selectedToken.price}
+                        onChange={(event)=>setSelectedToken({...selectedToken,price:event.target.value})}
                         className="form-control"
                         placeholder="enter minimum bid"
                       />
 
                       <div className="spacer-20"></div>
 
-                      <div className="row">
-                        <div className="col-md-6">
-                          <h5>Starting date</h5>
-                          <input
-                            type="date"
-                            name="bid_starting_date"
-                            id="bid_starting_date"
-                            className="form-control"
-                            min="1997-01-01"
-                          />
-                        </div>
-                        <div className="col-md-6">
-                          <h5>Expiration date</h5>
-                          <input
-                            type="date"
-                            name="bid_expiration_date"
-                            id="bid_expiration_date"
-                            className="form-control"
+                      <div className="d-flex card justify-content-center align-content-center align-items-center">
+                        <div className="p-3">
+                          <DateRangePicker
+                            ranges={[selectionRange]}
+                            onChange={handleSelectDate}
                           />
                         </div>
                       </div>
@@ -270,17 +227,6 @@ const CreateAuction = () => {
                       id="switch-unlock"
                       className="checkbox"
                     />
-                    {isActive ? (
-                      <label
-                        htmlFor="switch-unlock"
-                        onClick={unlockHide}
-                      ></label>
-                    ) : (
-                      <label
-                        htmlFor="switch-unlock"
-                        onClick={unlockClick}
-                      ></label>
-                    )}
                   </div>
                   <div className="clearfix"></div>
                   <p className="p-info pb-3">
@@ -299,48 +245,6 @@ const CreateAuction = () => {
                   ) : null}
                 </div>
 
-                <h5>Title</h5>
-                <input
-                  type="text"
-                  name="item_title"
-                  id="item_title"
-                  className="form-control"
-                  placeholder="e.g. 'Crypto Funk"
-                />
-
-                <div className="spacer-10"></div>
-
-                <h5>Description</h5>
-                <textarea
-                  data-autoresize
-                  name="item_desc"
-                  id="item_desc"
-                  className="form-control"
-                  placeholder="e.g. 'This is very limited item'"
-                ></textarea>
-
-                <div className="spacer-10"></div>
-
-                <h5>Price</h5>
-                <input
-                  type="text"
-                  name="item_price"
-                  id="item_price"
-                  className="form-control"
-                  placeholder="enter price for one item (ETH)"
-                />
-
-                <div className="spacer-10"></div>
-
-                <h5>Royalties</h5>
-                <input
-                  type="text"
-                  name="item_royalties"
-                  id="item_royalties"
-                  className="form-control"
-                  placeholder="suggested: 0, 10%, 20%, 30%. Maximum is 70%"
-                />
-
                 <div className="spacer-10"></div>
 
                 <input
@@ -353,65 +257,69 @@ const CreateAuction = () => {
             </form>
           </div>
 
-          <div className="col-lg-3 col-sm-6 col-xs-12">
-            <h5>Preview item</h5>
-            <div className="nft__item m-0">
-              <div className="de_countdown">
-                <Clock deadline="December, 30, 2024" />
-              </div>
+          
+                <div className="col-lg-3 col-sm-6 col-xs-12">
+          <div className="spacer-single"></div>
+                  <h5>Preview item</h5>
+                  <div className="nft__item m-0">
+                    <div className="de_countdown">
+                      <Clock deadline="December, 30, 2024" />
+                    </div>
 
-              {selectedToken &&
-                selectedToken.metadata &&
-                selectedToken.metadata.image && (
-                  <div className="nft__item_wrap">
-                    <span>
-                      <img
-                        src={selectedToken.metadata.image}
-                        id="get_file_2"
-                        className="lazy nft__item_preview"
-                        alt=""
-                      />
-                    </span>
+                    {selectedToken &&
+                      selectedToken.metadata &&
+                      selectedToken.metadata.image && (
+                        <div className="nft__item_wrap">
+                          <span>
+                            <img
+                              src={selectedToken.metadata.image}
+                              id="get_file_2"
+                              className="lazy nft__item_preview"
+                              alt=""
+                            />
+                          </span>
+                        </div>
+                      )}
+                    <div className="nft__item_info">
+                      <span>
+                        <h4>
+                          {selectedToken &&
+                            selectedToken.metadata &&
+                            selectedToken.metadata.name}
+                        </h4>
+                        <h5>
+                          {selectedToken &&
+                            selectedToken.metadata &&
+                            selectedToken.metadata.collection_name}
+                        </h5>
+                      </span>
+                      <div className="nft__item_price">
+                        {selectedToken && selectedToken.price} ETH
+                      </div>
+                      <div className="nft__item_price text-break">
+                        {selectedToken &&
+                          selectedToken.metadata &&
+                          selectedToken.metadata.collection_address}
+                        <br />
+                        Token Id
+                        <span>
+                          {selectedToken &&
+                            selectedToken.metadata &&
+                            selectedToken.metadata.tokenId}
+                        </span>
+                      </div>
+                      <div className="nft__item_action">
+                        <span>Place a bid</span>
+                      </div>
+                      <div className="nft__item_like">
+                        <i className="fa fa-heart"></i>
+                        <span>0</span>
+                      </div>
+                    </div>
                   </div>
-                )}
-              <div className="nft__item_info">
-                <span>
-                  <h4>
-                    {selectedToken &&
-                      selectedToken.metadata &&
-                      selectedToken.metadata.name}
-                  </h4>
-                  <h5>
-                    {selectedToken &&
-                      selectedToken.metadata &&
-                      selectedToken.metadata.collection_name}
-                  </h5>
-                </span>
-                <div className="nft__item_price">
-                  {selectedToken && selectedToken.price} ETH
                 </div>
-                <div className="nft__item_price text-break">
-                  {selectedToken &&
-                    selectedToken.metadata &&
-                    selectedToken.metadata.collection_address}
-                  <br />
-                  Token Id
-                  <span>
-                    {selectedToken &&
-                      selectedToken.metadata &&
-                      selectedToken.metadata.tokenId}
-                  </span>
-                </div>
-                <div className="nft__item_action">
-                  <span>Place a bid</span>
-                </div>
-                <div className="nft__item_like">
-                  <i className="fa fa-heart"></i>
-                  <span>0</span>
-                </div>
-              </div>
-            </div>
-          </div>
+                <div className="spacer-single"></div>
+
         </div>
       </section>
       <Footer />

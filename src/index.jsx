@@ -2,6 +2,8 @@ import React from "react";
 import { createRoot } from "react-dom/client";
 
 import "bootstrap";
+import 'react-date-range/dist/styles.css'; // main style file
+import 'react-date-range/dist/theme/default.css'; // theme css file
 import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
 import "../node_modules/elegant-icons/style.css";
 import "../node_modules/et-line/style.css";
