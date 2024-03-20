@@ -1,11 +1,11 @@
 import React, { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
 import { createGlobalStyle } from "styled-components";
 import { fetchHotCollections } from "../../store/actions/thunks";
 import * as selectors from "../../store/selectors";
 import ColumnNewRedux from "../components/ColumnNewRedux";
 import Footer from "../components/footer";
-import { useParams } from "react-router";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.white {
@@ -25,7 +25,7 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const Collection = function () {
-  const {collectionId} = useParams();
+  const { collectionId } = useParams();
   const [openMenu, setOpenMenu] = React.useState(true);
   const [openMenu1, setOpenMenu1] = React.useState(false);
   const handleBtnClick = () => {
@@ -54,12 +54,12 @@ const Collection = function () {
   return (
     <div>
       <GlobalStyles />
-      {hotCollections.author && hotCollections.author.banner && (
+      {hotCollections && hotCollections.banner && (
         <section
           id="profile_banner"
           className="jumbotron breadcumb no-bg"
           style={{
-            backgroundImage: `url(${hotCollections.author.banner})`,
+            backgroundImage: `url(${hotCollections.banner})`,
           }}
         >
           <div className="mainbreadcumb"></div>
@@ -71,11 +71,11 @@ const Collection = function () {
           <div className="col-md-12">
             <div className="d_profile">
               <div className="profile_avatar">
-                {hotCollections.author && hotCollections.author.avatar && (
+                {hotCollections && hotCollections.banner && (
                   <div className="d_profile_img">
                     <img
-                      src={hotCollections.author.avatar}
-                      alt={hotCollections.author.avatar}
+                      src={hotCollections.banner}
+                      alt={hotCollections.banner}
                     />
                     <i className="fa fa-check"></i>
                   </div>

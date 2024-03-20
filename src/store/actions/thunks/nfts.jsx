@@ -14,7 +14,9 @@ export const fetchNftsBreakdown = (authorId) => async (dispatch, getState) => {
   try {
     const { data } = await Axios.get(`${api.baseUrl}${api.nfts}`, {
       cancelToken: Canceler.token,
-      params: {},
+      params: {
+        owner: authorId,
+      },
       ...getHeaders(),
     });
 
@@ -23,6 +25,29 @@ export const fetchNftsBreakdown = (authorId) => async (dispatch, getState) => {
     dispatch(actions.getNftBreakdown.failure(err));
   }
 };
+
+export const fetchNftsCollectionBreakdown =
+  (collectionId) => async (dispatch, getState) => {
+    //access the state
+    const state = getState();
+    console.log(state);
+
+    dispatch(actions.getNftBreakdown.request(Canceler.cancel));
+
+    try {
+      const { data } = await Axios.get(`${api.baseUrl}${api.nfts}`, {
+        cancelToken: Canceler.token,
+        params: {
+          collection: collectionId,
+        },
+        ...getHeaders(),
+      });
+
+      dispatch(actions.getNftBreakdown.success(data.data));
+    } catch (err) {
+      dispatch(actions.getNftBreakdown.failure(err));
+    }
+  };
 
 export const fetchNftShowcase = () => async (dispatch) => {
   dispatch(actions.getNftShowcase.request(Canceler.cancel));
@@ -40,20 +65,17 @@ export const fetchNftShowcase = () => async (dispatch) => {
   }
 };
 
-export const fetchNftDetail = (nftId,tokenId) => async (dispatch) => {
+export const fetchNftDetail = (nftId, tokenId) => async (dispatch) => {
   dispatch(actions.getNftDetail.request(Canceler.cancel));
 
   try {
-    const { data } = await Axios.get(
-      `${api.baseUrl}${NFTS_ENDPOINT}`,
-      {
-        cancelToken: Canceler.token,
-        params: {
-          id:`${nftId}/${tokenId}`
-        },
-        ...getHeaders(),
-      }
-    );
+    const { data } = await Axios.get(`${api.baseUrl}${NFTS_ENDPOINT}`, {
+      cancelToken: Canceler.token,
+      params: {
+        id: `${nftId}/${tokenId}`,
+      },
+      ...getHeaders(),
+    });
 
     dispatch(actions.getNftDetail.success(data));
   } catch (err) {

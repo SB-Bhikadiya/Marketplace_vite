@@ -11,6 +11,7 @@ const ColumnNewRedux = ({
   showLoadMore = true,
   shuffle = false,
   authorId = null,
+  collectionId = null,
 }) => {
   const dispatch = useDispatch();
   const nftItems = useSelector(selectors.nftItems);
@@ -30,7 +31,7 @@ const ColumnNewRedux = ({
     return () => {
       dispatch(clearFilter());
       dispatch(clearNfts());
-    }
+    };
   }, [dispatch, authorId]);
 
   //will run when component unmounted
@@ -47,7 +48,8 @@ const ColumnNewRedux = ({
 
   return (
     <div className="row">
-      {nfts && nfts.length &&
+      {nfts &&
+        nfts.length &&
         nfts.map((nft, index) => (
           <NftCard
             nft={nft}
