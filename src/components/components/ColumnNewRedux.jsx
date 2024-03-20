@@ -5,18 +5,23 @@ import * as actions from "../../store/actions/thunks";
 import * as selectors from "../../store/selectors";
 import { shuffleArray } from "../../store/utils";
 import NftCard from "./NftCard";
+import NotFound from "./NotFound";
 
 //react functional component
 const ColumnNewRedux = ({
   showLoadMore = true,
   shuffle = false,
+  explore = false,
   authorId = null,
   collectionId = null,
+  pageNo = 1
 }) => {
+
   const dispatch = useDispatch();
   const nftItems = useSelector(selectors.nftItems);
   const nfts = nftItems ? (shuffle ? shuffleArray(nftItems) : nftItems) : [];
   const [height, setHeight] = useState(0);
+  const [page, setPage] = useState(pageNo)
 
   const onImgLoad = ({ target: img }) => {
     let currentHeight = height;
@@ -26,13 +31,37 @@ const ColumnNewRedux = ({
   };
 
   useEffect(() => {
-    dispatch(actions.fetchNftsBreakdown(authorId));
+    if (explore) {
+      dispatch(actions.fetchNftsBreakdown(pageNo));
+      dispatch(actions.fetchNftsBreakdown(pageNo+1));
+      dispatch(actions.fetchNftsBreakdown(pageNo+2));
+      setPage(pageNo+2)
+    }
+    return () => {
+      dispatch(clearFilter());
+      dispatch(clearNfts());
+    };
+  }, [dispatch, pageNo,explore]);
 
+  useEffect(() => {
+    if (authorId) {
+      dispatch(actions.fetchNftsAuthorBreakdown(authorId));
+    }
     return () => {
       dispatch(clearFilter());
       dispatch(clearNfts());
     };
   }, [dispatch, authorId]);
+
+  useEffect(() => {
+    if (collectionId) {
+      dispatch(actions.fetchNftsCollectionBreakdown(collectionId));
+    }
+    return () => {
+      dispatch(clearFilter());
+      dispatch(clearNfts());
+    };
+  }, [dispatch, collectionId]);
 
   //will run when component unmounted
   useEffect(() => {
@@ -43,13 +72,14 @@ const ColumnNewRedux = ({
   }, [dispatch]);
 
   const loadMore = () => {
-    dispatch(actions.fetchNftsBreakdown(authorId));
+    dispatch(actions.fetchNftsBreakdown(page+1));
+    setPage(page+1)
   };
 
   return (
     <div className="row">
       {nfts &&
-        nfts.length &&
+        nfts.length > 0  ?
         nfts.map((nft, index) => (
           <NftCard
             nft={nft}
@@ -57,8 +87,9 @@ const ColumnNewRedux = ({
             onImgLoad={onImgLoad}
             height={height}
           />
-        ))}
-      {showLoadMore && nfts.length <= 16 && (
+        )):<NotFound/>}
+      {showLoadMore && nfts.length <= page*16 && (
+        
         <div className="col-lg-12">
           <div className="spacer-single"></div>
           <span onClick={loadMore} className="btn-main lead m-auto">

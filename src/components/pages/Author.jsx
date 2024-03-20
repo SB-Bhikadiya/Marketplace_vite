@@ -159,14 +159,14 @@ const Colection = () => {
             </div>
           </div>
         </div>
-        {openMenu && author.id && (
+        {openMenu && author.wallet && (
           <div id="zero1" className="onStep fadeIn">
-            <ColumnNewRedux shuffle showLoadMore={false} authorId={author.id} />
+            <ColumnNewRedux shuffle showLoadMore={false} authorId={author.wallet} />
           </div>
         )}
-        {openMenu1 && author.id && (
+        {openMenu1 && author.wallet && (
           <div id="zero2" className="onStep fadeIn">
-            <ColumnNewRedux shuffle showLoadMore={false} authorId={author.id} />
+            <ColumnNewRedux shuffle showLoadMore={false} authorId={author.wallet} />
           </div>
         )}
         {openMenu2 && (

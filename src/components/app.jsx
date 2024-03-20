@@ -88,6 +88,7 @@ const App = () => {
                   <Route path={PAGE_ROUTES.HOME_2_PATH} element={<Home2 />} />
                   <Route path={PAGE_ROUTES.HOME_3_PATH} element={<Home3 />} />
                   <Route
+                    exact
                     path={PAGE_ROUTES.EXPLORE_PATH}
                     element={<Explore />}
                   />

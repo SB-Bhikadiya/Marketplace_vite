@@ -120,13 +120,16 @@ const Collection = function () {
             <ColumnNewRedux
               shuffle
               showLoadMore={false}
-              authorId={hotCollections.author ? hotCollections.author.id : 1}
-            />
+              collectionId={collectionId}
+              />
           </div>
         )}
         {openMenu1 && (
           <div id="zero2" className="onStep fadeIn">
-            <ColumnNewRedux shuffle showLoadMore={false} />
+            <ColumnNewRedux shuffle showLoadMore={false}
+              collectionId={collectionId}
+            
+            />
           </div>
         )}
       </section>

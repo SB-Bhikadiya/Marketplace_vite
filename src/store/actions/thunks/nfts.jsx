@@ -4,7 +4,7 @@ import { Axios, Canceler } from "../../../core/axios";
 import * as actions from "../../actions";
 import { getHeaders } from "../helper";
 
-export const fetchNftsBreakdown = (authorId) => async (dispatch, getState) => {
+export const fetchNftsBreakdown = (page) => async (dispatch, getState) => {
   //access the state
   const state = getState();
   console.log(state);
@@ -15,7 +15,7 @@ export const fetchNftsBreakdown = (authorId) => async (dispatch, getState) => {
     const { data } = await Axios.get(`${api.baseUrl}${api.nfts}`, {
       cancelToken: Canceler.token,
       params: {
-        owner: authorId,
+        page: page
       },
       ...getHeaders(),
     });
@@ -25,6 +25,29 @@ export const fetchNftsBreakdown = (authorId) => async (dispatch, getState) => {
     dispatch(actions.getNftBreakdown.failure(err));
   }
 };
+
+export const fetchNftsAuthorBreakdown =
+  (authorId) => async (dispatch, getState) => {
+    //access the state
+    const state = getState();
+    console.log(state);
+
+    dispatch(actions.getNftBreakdown.request(Canceler.cancel));
+
+    try {
+      const { data } = await Axios.get(`${api.baseUrl}${api.nfts}`, {
+        cancelToken: Canceler.token,
+        params: {
+          owner: authorId,
+        },
+        ...getHeaders(),
+      });
+
+      dispatch(actions.getNftBreakdown.success(data));
+    } catch (err) {
+      dispatch(actions.getNftBreakdown.failure(err));
+    }
+  };
 
 export const fetchNftsCollectionBreakdown =
   (collectionId) => async (dispatch, getState) => {
@@ -43,7 +66,7 @@ export const fetchNftsCollectionBreakdown =
         ...getHeaders(),
       });
 
-      dispatch(actions.getNftBreakdown.success(data.data));
+      dispatch(actions.getNftBreakdown.success(data));
     } catch (err) {
       dispatch(actions.getNftBreakdown.failure(err));
     }

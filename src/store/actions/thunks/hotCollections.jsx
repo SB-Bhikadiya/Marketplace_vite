@@ -17,7 +17,6 @@ export const fetchHotCollections = (collectionId) => async (dispatch) => {
         ...getHeaders(),
       }
     );
-      console.log(data);
     dispatch(actions.getHotCollections.success(data));
   } catch (err) {
     console.log(err);

@@ -1,4 +1,4 @@
-export const BASE_URL = 'http://127.0.0.1:3000';
+export const BASE_URL = 'http://192.168.1.14:3000';
 export const REGISTER_ENDPOINT = "/users";
 export const LOGIN_ENDPOINT = "/users/login";
 

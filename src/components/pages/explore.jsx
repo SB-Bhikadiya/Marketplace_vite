@@ -60,7 +60,7 @@ const explore= () => (
               <TopFilterBar />
           </div>
         </div>
-       <ColumnNewRedux/>
+       <ColumnNewRedux explore={true}/>
       </section>
 
 
