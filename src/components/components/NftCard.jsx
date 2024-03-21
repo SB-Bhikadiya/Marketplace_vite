@@ -28,7 +28,6 @@ const NftCard = ({
   };
 
   useEffect(() => {
-    console.log(nft);
     return () => { }
   }, [nft])
   
@@ -47,7 +46,7 @@ const NftCard = ({
         )}
         {nft.deadline && nft.start && clockTop && (Date.parse(nft.deadline) !== 0 && Date.parse(nft.start) !== 0) ? (
           <div className="de_countdown">
-            <Clock deadline={Date.parse(nft.deadline) / 1000} />
+            <Clock deadline={nft.deadline} />
           </div>
         ) : (
           <></>
@@ -99,7 +98,7 @@ const NftCard = ({
               {getEtherFromWei(nft.price)} ETH
               {nft.status === "on_auction" && (
                 <span>
-                  {nft.bid}/{nft.max_bid}
+                  {nft.bids && nft.bids.length}/{getEtherFromWei(nft.max_bid)}
                 </span>
               )}
             </div>

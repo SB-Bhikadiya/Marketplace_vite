@@ -1,4 +1,4 @@
-import React, { memo, useContext, useEffect } from "react";
+import React, { memo, useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { createGlobalStyle } from "styled-components";
 import { fetchNftDetail } from "../../store/actions/thunks";
@@ -47,7 +47,6 @@ const ItemDetailRedux = () => {
   const [openMenu0, setOpenMenu0] = React.useState(true);
   const [openMenu, setOpenMenu] = React.useState(false);
   const [openMenu1, setOpenMenu1] = React.useState(false);
-
   const handleBtnClick0 = () => {
     setOpenMenu0(!openMenu0);
     setOpenMenu(false);
@@ -76,6 +75,7 @@ const ItemDetailRedux = () => {
   const dispatch = useDispatch();
   const nftDetailState = useSelector(selectors.nftDetailState);
   const nft = nftDetailState.data ? nftDetailState.data : [];
+  const [bidValue, setBidValue] = useState(0);
 
   const [openCheckout, setOpenCheckout] = React.useState(false);
   const [openCheckoutbid, setOpenCheckoutbid] = React.useState(false);
@@ -100,6 +100,26 @@ const ItemDetailRedux = () => {
       Swal.fire("error", "Couldn't Buy" + error.message);
     }
   }
+
+  async function placeBid() {
+    try {if (bidValue > getEtherFromWei(nft.max_bid)) {
+      
+      const marketplace = await provideNFTMarketplace();
+      
+      const tx = await marketplace.bidPlace(nftId, tokenId, {
+        value: toWei(bidValue),
+      });
+      await tx.wait();
+      await Swal.fire("Bid Place", "Bid Placed wait till auction result is announced");
+      setOpenCheckoutbid(false);
+      dispatch(fetchNftDetail(nftId, tokenId));
+    }else{
+      Swal.fire("error", "Bid price should be greater than minimum bid" );
+    }
+    } catch (error) {
+      Swal.fire("error", "Couldn't Buy" + error.message);
+    }
+  }
   return (
     <div>
       <GlobalStyles />
@@ -114,7 +134,7 @@ const ItemDetailRedux = () => {
           </div>
           <div className="col-md-6">
             <div className="item_info">
-              {nft.item_type === "on_auction" && (
+              {nft.status === "on_auction" && (
                 <>
                   Auctions ends in
                   <div className="de_countdown">
@@ -255,16 +275,15 @@ const ItemDetailRedux = () => {
                               <span>
                                 <img
                                   className="lazy"
-                                  src={bid.author.avatar}
-                                  alt={bid.author.avatar}
+                                  src={bid.author && bid.author.avatar}
+                                  alt={bid.author && bid.author.avatar}
                                 />
                                 <i className="fa fa-check"></i>
                               </span>
                             </div>
                             <div className="p_list_info">
-                              Bid{" "}
-                              {bid.author.id === nft.author.id && "accepted"}{" "}
-                              <b>{bid.value} ETH</b>
+                              Bid {bid.type.capitalize()}{" "}
+                              <b>{getEtherFromWei(bid.value)} ETH</b>
                               <span>
                                 by <b>{bid.author.username}</b> at{" "}
                                 {moment(bid.created_at).format("L, LT")}
@@ -305,20 +324,20 @@ const ItemDetailRedux = () => {
 
                   {/* button for checkout */}
                   <div className="d-flex flex-row mt-5">
-                    <button
-                      className="btn-main lead mb-5 mr15"
-                      onClick={() => setOpenCheckout(true)}
-                    >
-                      Buy Now
-                    </button>
-                    {nft.deadline && Date.parse(nft.deadline) !== 0 && (
+                    
+                    {nft.deadline && Date.parse(nft.deadline) !== 0 ?  (
                       <button
                         className="btn-main btn2 lead mb-5"
                         onClick={() => setOpenCheckoutbid(true)}
                       >
                         Place Bid
                       </button>
-                    )}
+                    ) : <button
+                    className="btn-main lead mb-5 mr15"
+                    onClick={() => setOpenCheckout(true)}
+                  >
+                    Buy Now
+                  </button>}
                   </div>
                 </div>
               </div>
@@ -350,17 +369,12 @@ const ItemDetailRedux = () => {
                   Enter quantity
                   <span className="color"> 1 available</span>
                 </h6>
-                {/* <input
-                  type="text"
-                  name="buy_now_qty"
-                  id="buy_now_qty"
-                  className="form-control"
-                /> */}
+                
               </div>
             </div>
             <div className="heading mt-3">
               <p>Required balance</p>
-              <div className="subtotal">{getEtherFromWei(nft.price)} ETH</div>
+              <div className="subtotal">{(getEtherFromWei(nft.price) - (getEtherFromWei(nft.price) * 0.02)).toFixed(5)} ETH</div>
             </div>
             <div className="heading">
               <p>Service fee 2%</p>
@@ -371,7 +385,7 @@ const ItemDetailRedux = () => {
             <div className="heading">
               <p>You will pay</p>
               <div className="subtotal">
-                {getEtherFromWei(nft.price) + getEtherFromWei(nft.price) * 0.02}{" "}
+                {getEtherFromWei(nft.price)}{" "}
                 ETH
               </div>
             </div>
@@ -395,42 +409,34 @@ const ItemDetailRedux = () => {
             </div>
             <p>
               You are about to purchase a{" "}
-              <span className="bold">AnimeSailorClub #304</span>
-              <span className="bold">from Monica Lucas</span>
+              <span className="bold">{nft.title} #{nft.tokenId}</span>
+              {" "}from{" "}
+              <span className="bold"> {nft.hot_collections.name}</span>
+            </p>
+            <p>Minimum bid should be 
+            <span className="bold"> {getEtherFromWei(nft.max_bid)}</span>
+
             </p>
             <div className="detailcheckout mt-4">
               <div className="listcheckout">
                 <h6>Your bid (ETH)</h6>
-                <input type="text" className="form-control" />
+                <input type="number" className="form-control" min={getEtherFromWei(nft.max_bid)} value={bidValue} onChange={(event) => setBidValue(event.target.value)}/>
               </div>
             </div>
-            <div className="detailcheckout mt-3">
-              <div className="listcheckout">
-                <h6>
-                  Enter quantity.
-                  <span className="color">10 available</span>
-                </h6>
-                <input
-                  type="text"
-                  name="buy_now_qty"
-                  id="buy_now_qty"
-                  className="form-control"
-                />
-              </div>
-            </div>
+           
             <div className="heading mt-3">
-              <p>Your balance</p>
-              <div className="subtotal">10.67856 ETH</div>
+              <p>Your required balance for place bid</p>
+              <div className="subtotal">{getEtherFromWei(nft.max_bid)} ETH</div>
             </div>
             <div className="heading">
-              <p>Service fee 2.5%</p>
-              <div className="subtotal">0.00325 ETH</div>
+              <p>Service fee 2%</p>
+              <div className="subtotal">{bidValue*0.02} ETH</div>
             </div>
             <div className="heading">
               <p>You will pay</p>
-              <div className="subtotal">0.013325 ETH</div>
+              <div className="subtotal">{bidValue} ETH</div>
             </div>
-            <button className="btn-main lead mb-5">Checkout</button>
+            <button className="btn-main lead mb-5" onClick={placeBid}>Place Bid</button>
           </div>
         </div>
       )}

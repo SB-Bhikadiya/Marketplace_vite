@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 
 const Clock = ({ deadline }) => {
-  console.log(new Date(deadline));
   const [timeLeft, setTimeLeft] = useState({
     days: 0,
     hours: 0,
@@ -15,7 +14,7 @@ const Clock = ({ deadline }) => {
 
   useEffect(() => {
     const getTimeUntil = () => {
-      const time = deadline - Date.now();
+      const time = new Date(deadline).getTime() - Date.now();
       if (time < 0) {
         setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       } else {

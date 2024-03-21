@@ -5,7 +5,7 @@ import { createGlobalStyle } from "styled-components";
 import { settings } from "../../constants";
 import { TOKEN_ENDPOINT } from "../../constants/endpoints";
 import { ADDRESS_KEY, THEME_COLOR } from "../../constants/keys";
-import { toWei } from "../../constants/utils";
+import { getEtherFromWei, toWei } from "../../constants/utils";
 import { useAuth } from "../../core/auth";
 import { AxiosInstance } from "../../core/axios";
 import { MarketplaceContext } from "../../core/marketplace";
@@ -13,6 +13,8 @@ import { Swal } from "../../core/sweet-alert";
 import Clock from "../components/Clock";
 import Footer from "../components/footer";
 import { NFTCard } from "./create";
+import { useNavigate } from "react-router-dom";
+import { PAGE_ROUTES } from "../../constants/routes";
 
 const GlobalStyles = createGlobalStyle`
   header#myHeader.navbar.sticky.white {
@@ -58,6 +60,11 @@ const GlobalStyles = createGlobalStyle`
 `;
 
 const CreateAuction = () => {
+  const navigate = useNavigate();
+
+  const navigateTo = (link) => {
+    navigate(link);
+  };
   const [tokens, setTokens] = useState([]);
   const [selectedToken, setSelectedToken] = useState({
     address: "",
@@ -85,7 +92,7 @@ const CreateAuction = () => {
     useContext(MarketplaceContext);
 
   const [selectionRange, setSelectionRange] = useState({
-    startDate: new Date(),
+    startDate: Date.now(),
     endDate: new Date(),
     key: "selection",
   });
@@ -101,7 +108,10 @@ const CreateAuction = () => {
           params: { owner: localStorage.getItem(ADDRESS_KEY), status: "none" },
           ...getHeaders(),
         });
-        setTokens(response.data);
+        setTokens(response.data.map(token => {
+          token.price = getEtherFromWei(token.price);
+          return token;
+        }));
       } catch (error) {
         Swal.fire({
           icon: "error",
@@ -135,8 +145,13 @@ const CreateAuction = () => {
         selectionRange.startDate.getTime() / 1000,
         selectionRange.endDate.getTime() / 1000
       );
-      const receipt = await tx.wait();
-      console.log(receipt);
+      await tx.wait();
+      Swal.fire({
+        icon: "info",
+        title: "Auction Created",
+        text: "Auction Created Successfully",
+      });
+      navigateTo(PAGE_ROUTES.EXPLORE_PATH)
     } catch (error) {
       console.log(error);
       Swal.fire({
