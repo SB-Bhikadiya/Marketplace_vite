@@ -37,6 +37,7 @@ const CustomSlide = ({
           >
             <h4>{username}</h4>
           </span>
+          
         </div>
       </div>
     </div>

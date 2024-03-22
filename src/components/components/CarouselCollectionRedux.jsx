@@ -22,7 +22,7 @@ const CarouselCollectionRedux = () => {
   return (
     <div className="nft">
         {hotCollections && hotCollections.length &&
-      <Slider {...settings}>
+      <Slider {...settings} slidesToShow={5}>
           {hotCollections.map((item, index) => (
             <CustomSlide
               key={index}
