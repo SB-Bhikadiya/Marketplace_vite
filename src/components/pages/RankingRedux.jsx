@@ -1,7 +1,8 @@
-import React, { memo, useEffect } from "react";
+import { memo, useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Select from "react-select";
 import { createGlobalStyle } from "styled-components";
+import { getEtherFromWei } from "../../constants/utils";
 import { fetchAuthorRanking } from "../../store/actions/thunks";
 import * as selectors from "../../store/selectors";
 import Footer from "../components/footer";
@@ -60,7 +61,7 @@ const customStyles = {
     ...base,
     padding: 0,
   }),
-  control: (base, state) => ({
+  control: (base) => ({
     ...base,
     padding: 2,
   }),
@@ -163,28 +164,32 @@ const RankingRedux = () => {
                         </div>
                         {author.username}
                       </th>
-                      <td>{author.author_sale.volume}</td>
+                      <td>{getEtherFromWei(author.author_sale.volume)}</td>
                       <td
                         className={
                           author.author_sale.daily_sales < 0
                             ? "d-min"
                             : "d-plus"
                         }
-                      >{`${author.author_sale.daily_sales < 0 ? "" : "+"}${
+                      >{`${
+                        author.author_sale.daily_sales < 0 ? "" : "+"
+                      }${getEtherFromWei(
                         author.author_sale.daily_sales
-                      }%`}</td>
+                      )} ETH`}</td>
                       <td
                         className={
                           author.author_sale.weekly_sales < 0
                             ? "d-min"
                             : "d-plus"
                         }
-                      >{`${author.author_sale.weekly_sales < 0 ? "" : "+"}${
+                      >{`${
+                        author.author_sale.weekly_sales < 0 ? "" : "+"
+                      }${getEtherFromWei(
                         author.author_sale.weekly_sales
-                      }%`}</td>
-                      <td>{author.author_sale.floor_price}</td>
-                      <td>{author.author_sale.owners}k</td>
-                      <td>{author.author_sale.assets}k</td>
+                      )} ETH`}</td>
+                      <td>{getEtherFromWei(author.author_sale.floor_price)}</td>
+                      <td>{author.author_sale.owners}</td>
+                      <td>{author.author_sale.assets}</td>
                     </tr>
                   ))}
               </tbody>
