@@ -9,7 +9,6 @@ import { useAuth } from "../../core/auth";
 import { AxiosInstance } from "../../core/axios";
 import { MarketplaceContext } from "../../core/marketplace";
 import { Swal } from "../../core/sweet-alert";
-import Clock from "../components/Clock";
 import Footer from "../components/footer";
 import { NFTCard } from "./create";
 
@@ -125,7 +124,7 @@ const CreateListing = () => {
       }
     }
     fetchNFTs();
-  }, [getHeaders]);
+  }, [getHeaders,]);
 
   return (
     <div>
@@ -176,10 +175,6 @@ const CreateListing = () => {
                 <div className="col-lg-3 col-sm-6 col-xs-12">
                   <h5>Preview item</h5>
                   <div className="nft__item m-0">
-                    <div className="de_countdown">
-                      <Clock deadline="December, 30, 2024" />
-                    </div>
-
                     {selectedToken &&
                       selectedToken.metadata &&
                       selectedToken.metadata.image && (
@@ -223,7 +218,7 @@ const CreateListing = () => {
                         </span>
                       </div>
                       <div className="nft__item_action">
-                        <span>Place a bid</span>
+                        <span>Buy now</span>
                       </div>
                       <div className="nft__item_like">
                         <i className="fa fa-heart"></i>

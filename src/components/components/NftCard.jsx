@@ -1,5 +1,5 @@
 import React, { memo, useEffect } from "react";
-import { Link, redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import { getEtherFromWei } from "../../constants/utils";
 import Clock from "./Clock";
@@ -28,9 +28,8 @@ const NftCard = ({
   };
 
   useEffect(() => {
-    return () => { }
-  }, [nft])
-  
+    return () => {};
+  }, [nft]);
 
   return (
     <div className={className}>
@@ -44,25 +43,35 @@ const NftCard = ({
             <i className="fa fa-shopping-basket"></i>
           </div>
         )}
-        {nft.deadline && nft.start && clockTop && (Date.parse(nft.deadline) !== 0 && Date.parse(nft.start) !== 0) ? (
-          <div className="de_countdown">
-            <Clock deadline={nft.deadline} />
-          </div>
+        {nft.deadline &&
+        nft.start &&
+        clockTop &&
+        Date.parse(nft.deadline) !== 0 &&
+        Date.parse(nft.start) !== 0 ? (
+          Date.parse(nft.start) > Date.now() ? (
+            <div className="de_countdown">
+              <div className="text-center">Will start in</div>
+              <Clock deadline={nft.start} />
+            </div>
+          ) : Date.parse(nft.deadline) < Date.now() ? (
+            <></>
+          ) : (
+            <div className="de_countdown">
+              <Clock deadline={nft.deadline} />
+            </div>
+          )
         ) : (
           <></>
         )}
         <div className="author_list_pp">
-
-          <span 
+          <span
             onClick={() => navigateTo(`/collection/${nft.hot_collections.id}`)}
-          
           >
-            
             <img
               className="lazy"
               src={nft.hot_collections.banner}
               alt={nft.hot_collections.banner}
-              />
+            />
             <i className="fa fa-check"></i>
           </span>
         </div>
@@ -78,7 +87,10 @@ const NftCard = ({
             </span>
           </Outer>
         </div>
-        {nft.deadline && nft.start && !clockTop && Date.parse(nft.deadline) !== 0 ? (
+        {nft.deadline &&
+        nft.start &&
+        !clockTop &&
+        Date.parse(nft.deadline) !== 0 ? (
           <div className="de_countdown">
             <Clock deadline={nft.deadline} />
           </div>
@@ -105,7 +117,11 @@ const NftCard = ({
           )}
           <div className="nft__item_action">
             <span onClick={() => navigateTo(nft.bid_link)}>
-              {nft.status === "on_auction" ? "Place a bid" : "Buy Now"}
+              {nft.status === "none"
+                ? "View"
+                : nft.status === "on_auction"
+                ? "Place a bid"
+                : "Buy Now"}
             </span>
           </div>
           <div className="nft__item_like">

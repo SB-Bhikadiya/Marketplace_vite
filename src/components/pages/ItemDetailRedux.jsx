@@ -102,20 +102,23 @@ const ItemDetailRedux = () => {
   }
 
   async function placeBid() {
-    try {if (bidValue > getEtherFromWei(nft.max_bid)) {
-      
-      const marketplace = await provideNFTMarketplace();
-      
-      const tx = await marketplace.bidPlace(nftId, tokenId, {
-        value: toWei(bidValue),
-      });
-      await tx.wait();
-      await Swal.fire("Bid Place", "Bid Placed wait till auction result is announced");
-      setOpenCheckoutbid(false);
-      dispatch(fetchNftDetail(nftId, tokenId));
-    }else{
-      Swal.fire("error", "Bid price should be greater than minimum bid" );
-    }
+    try {
+      if (bidValue > getEtherFromWei(nft.max_bid)) {
+        const marketplace = await provideNFTMarketplace();
+
+        const tx = await marketplace.bidPlace(nftId, tokenId, {
+          value: toWei(bidValue),
+        });
+        await tx.wait();
+        await Swal.fire(
+          "Bid Place",
+          "Bid Placed wait till auction result is announced"
+        );
+        setOpenCheckoutbid(false);
+        dispatch(fetchNftDetail(nftId, tokenId));
+      } else {
+        Swal.fire("error", "Bid price should be greater than minimum bid");
+      }
     } catch (error) {
       Swal.fire("error", "Couldn't Buy" + error.message);
     }
@@ -134,19 +137,38 @@ const ItemDetailRedux = () => {
           </div>
           <div className="col-md-6">
             <div className="item_info">
-              {nft.status === "on_auction" && (
-                <>
-                  Auctions ends in
-                  <div className="de_countdown">
-                    {nft.deadline && Date.parse(nft.deadline) !== 0 ? (
-                      <div className="de_countdown">
-                        <Clock deadline={nft.deadline} />
-                      </div>
-                    ) : (
-                      <></>
-                    )}
-                  </div>
-                </>
+              {nft.status === "on_auction" ? (
+                nft.start &&
+                nft.deadline &&
+                Date.parse(nft.start) > Date.now() ? (
+                  <>
+                    Auctions will start after
+                    <div className="de_countdown">
+                      {nft.start && Date.parse(nft.start) !== 0 ? (
+                        <div className="de_countdown">
+                          <Clock deadline={Date.parse(nft.start)} />
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    Auctions ends in
+                    <div className="de_countdown">
+                      {nft.deadline && Date.parse(nft.deadline) !== 0 ? (
+                        <div className="de_countdown">
+                          <Clock deadline={nft.deadline} />
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
+                  </>
+                )
+              ) : (
+                <></>
               )}
               <h2>{nft.title}</h2>
               <div className="item_info_counts">
@@ -324,20 +346,27 @@ const ItemDetailRedux = () => {
 
                   {/* button for checkout */}
                   <div className="d-flex flex-row mt-5">
-                    
-                    {nft.deadline && Date.parse(nft.deadline) !== 0 ?  (
+                    {nft.deadline && Date.parse(nft.deadline) !== 0 ? (
+                      Date.parse(nft.start) > Date.now() ? (
+                        <h3>Auction is not started Yet</h3>
+                      ) : (
+                        <button
+                          className="btn-main btn2 lead mb-5"
+                          onClick={() => setOpenCheckoutbid(true)}
+                        >
+                          Place Bid
+                        </button>
+                      )
+                    ) : nft.status === "none" ? (
+                      <h3>This item is not listed for purchase</h3>
+                    ) : (
                       <button
-                        className="btn-main btn2 lead mb-5"
-                        onClick={() => setOpenCheckoutbid(true)}
+                        className="btn-main lead mb-5 mr15"
+                        onClick={() => setOpenCheckout(true)}
                       >
-                        Place Bid
+                        Buy Now
                       </button>
-                    ) : <button
-                    className="btn-main lead mb-5 mr15"
-                    onClick={() => setOpenCheckout(true)}
-                  >
-                    Buy Now
-                  </button>}
+                    )}
                   </div>
                 </div>
               </div>
@@ -369,12 +398,17 @@ const ItemDetailRedux = () => {
                   Enter quantity
                   <span className="color"> 1 available</span>
                 </h6>
-                
               </div>
             </div>
             <div className="heading mt-3">
               <p>Required balance</p>
-              <div className="subtotal">{(getEtherFromWei(nft.price) - (getEtherFromWei(nft.price) * 0.02)).toFixed(5)} ETH</div>
+              <div className="subtotal">
+                {(
+                  getEtherFromWei(nft.price) -
+                  getEtherFromWei(nft.price) * 0.02
+                ).toFixed(5)}{" "}
+                ETH
+              </div>
             </div>
             <div className="heading">
               <p>Service fee 2%</p>
@@ -384,10 +418,7 @@ const ItemDetailRedux = () => {
             </div>
             <div className="heading">
               <p>You will pay</p>
-              <div className="subtotal">
-                {getEtherFromWei(nft.price)}{" "}
-                ETH
-              </div>
+              <div className="subtotal">{getEtherFromWei(nft.price)} ETH</div>
             </div>
             <button className="btn-main lead mb-5" onClick={buyItem}>
               Checkout
@@ -409,34 +440,43 @@ const ItemDetailRedux = () => {
             </div>
             <p>
               You are about to purchase a{" "}
-              <span className="bold">{nft.title} #{nft.tokenId}</span>
-              {" "}from{" "}
-              <span className="bold"> {nft.hot_collections.name}</span>
+              <span className="bold">
+                {nft.title} #{nft.tokenId}
+              </span>{" "}
+              from <span className="bold"> {nft.hot_collections.name}</span>
             </p>
-            <p>Minimum bid should be 
-            <span className="bold"> {getEtherFromWei(nft.max_bid)}</span>
-
+            <p>
+              Minimum bid should be
+              <span className="bold"> {getEtherFromWei(nft.max_bid)}</span>
             </p>
             <div className="detailcheckout mt-4">
               <div className="listcheckout">
                 <h6>Your bid (ETH)</h6>
-                <input type="number" className="form-control" min={getEtherFromWei(nft.max_bid)} value={bidValue} onChange={(event) => setBidValue(event.target.value)}/>
+                <input
+                  type="number"
+                  className="form-control"
+                  min={getEtherFromWei(nft.max_bid)}
+                  value={bidValue}
+                  onChange={(event) => setBidValue(event.target.value)}
+                />
               </div>
             </div>
-           
+
             <div className="heading mt-3">
               <p>Your required balance for place bid</p>
               <div className="subtotal">{getEtherFromWei(nft.max_bid)} ETH</div>
             </div>
             <div className="heading">
               <p>Service fee 2%</p>
-              <div className="subtotal">{bidValue*0.02} ETH</div>
+              <div className="subtotal">{bidValue * 0.02} ETH</div>
             </div>
             <div className="heading">
               <p>You will pay</p>
               <div className="subtotal">{bidValue} ETH</div>
             </div>
-            <button className="btn-main lead mb-5" onClick={placeBid}>Place Bid</button>
+            <button className="btn-main lead mb-5" onClick={placeBid}>
+              Place Bid
+            </button>
           </div>
         </div>
       )}

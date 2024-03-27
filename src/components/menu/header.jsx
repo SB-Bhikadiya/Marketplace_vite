@@ -187,13 +187,6 @@ const Header = function () {
                         <div className="item-dropdown">
                           <div className="dropdown" onClick={closePagesMenu}>
                             <NavLink
-                              to={`${PAGE_ROUTES.GET_AUTHOR_PATH(1)}`}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Author
-                            </NavLink>
-
-                            <NavLink
                               to={PAGE_ROUTES.WALLET_PATH}
                               onClick={() => btn_icon(!showmenu)}
                             >
@@ -227,19 +220,25 @@ const Header = function () {
                             >
                               News
                             </NavLink>
-                            <NavLink
-                              to={PAGE_ROUTES.LOGIN_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Login
-                            </NavLink>
 
-                            <NavLink
-                              to={PAGE_ROUTES.REGISTER_PATH}
-                              onClick={() => btn_icon(!showmenu)}
-                            >
-                              Register
-                            </NavLink>
+                            {!user ? (
+                              <>
+                                <NavLink
+                                  to={PAGE_ROUTES.LOGIN_PATH}
+                                  onClick={() => btn_icon(!showmenu)}
+                                >
+                                  Login
+                                </NavLink>
+                                <NavLink
+                                  to={PAGE_ROUTES.REGISTER_PATH}
+                                  onClick={() => btn_icon(!showmenu)}
+                                >
+                                  Register
+                                </NavLink>
+                              </>
+                            ) : (
+                              <></>
+                            )}
                             <NavLink
                               to={PAGE_ROUTES.CONTACT_PATH}
                               onClick={() => btn_icon(!showmenu)}
@@ -331,10 +330,6 @@ const Header = function () {
                       {openPagesMenu && (
                         <div className="item-dropdown">
                           <div className="dropdown" onClick={closePagesMenu}>
-                            <NavLink to={`${PAGE_ROUTES.GET_AUTHOR_PATH(1)}`}>
-                              Author
-                            </NavLink>
-
                             <NavLink to={PAGE_ROUTES.WALLET_PATH}>
                               Wallet
                             </NavLink>
@@ -355,12 +350,18 @@ const Header = function () {
                               Create Option
                             </NavLink>
                             <NavLink to={PAGE_ROUTES.NEWS_PATH}>News</NavLink>
-
-                            <NavLink to={PAGE_ROUTES.LOGIN_PATH}>Login</NavLink>
-
-                            <NavLink to={PAGE_ROUTES.REGISTER_PATH}>
-                              Register
-                            </NavLink>
+                            {!user ? (
+                              <>
+                                <NavLink to={PAGE_ROUTES.LOGIN_PATH}>
+                                  Login
+                                </NavLink>
+                                <NavLink to={PAGE_ROUTES.REGISTER_PATH}>
+                                  Register
+                                </NavLink>
+                              </>
+                            ) : (
+                              <></>
+                            )}
                             <NavLink to={PAGE_ROUTES.CONTACT_PATH}>
                               Contact Us
                             </NavLink>
@@ -499,8 +500,7 @@ const Header = function () {
                   {showpop && <UserProfilePopup />}
                 </div>
               </div>
-              <div className="logout">
-              </div>
+              <div className="logout"></div>
             </div>
           ) : (
             <div className="logout">
